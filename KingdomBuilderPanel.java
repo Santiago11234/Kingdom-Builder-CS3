@@ -27,10 +27,12 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
 		addMouseListener(this);
 	}
 
-	public void draw(Graphics g) {
+	public void paint(Graphics g) {
+		super.paint(g);
 		g.drawImage(back, 0, 0,getWidth(), getHeight(), null);
+		System.out.println("hello");
 	}
-
+    
 
 
 

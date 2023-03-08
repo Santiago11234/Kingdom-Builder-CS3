@@ -9,7 +9,7 @@ public class KingdomBuilder extends JFrame {
         super(title);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(WIDTH, HEIGHT);       
-        add(new Panel());
+        add(new KingdomBuilderPanel());
         setVisible(true);
         
     }
