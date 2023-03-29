@@ -6,7 +6,7 @@ public class KingdomBuilder extends JFrame {
     private static final int HEIGHT = 960;
     
     public KingdomBuilder(String title) {
-        super(title);
+        super(title); 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(WIDTH, HEIGHT);       
         add(new KingdomBuilderPanel());
