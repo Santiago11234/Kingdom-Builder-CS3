@@ -1,3 +1,4 @@
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 
@@ -5,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.Dimension;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
 
 public class StartPanel extends JPanel implements ActionListener {
     private KingdomBuilder frame;
@@ -29,12 +29,12 @@ public class StartPanel extends JPanel implements ActionListener {
         add(startButton);
 
         try {
+            //All image stuff should occur here (tiles and power ups too)
+            Tile.setImages();
             startImage = ImageIO.read(StartPanel.class.getResource("/Images/start.png"));
         } catch (Exception e) {
-            // TODO: handle exception
-            System.out.println("Exception Error");
+            System.out.println("Start panel error");
         }
-
     }
     
     public void paintComponent(Graphics g) {
