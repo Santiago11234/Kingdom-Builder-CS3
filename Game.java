@@ -3,5 +3,11 @@ public class Game {
 
     public Game() {
         board = new Board();
+
+        init();
+    }
+
+    public void init() {
+        board.createBoard();
     }
 }
