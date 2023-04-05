@@ -18,12 +18,16 @@ public class StartPanel extends JPanel implements ActionListener {
         setPreferredSize(new Dimension(KingdomBuilder.WIDTH, KingdomBuilder.HEIGHT));
         frame = kb;   
 
-        startButton = new JButton("Start");
-        startButton.setSize(100, 100);
-        startButton.setLocation(100, 100);
+        startButton = new JButton("");
+        startButton.setOpaque(false);
+        startButton.setContentAreaFilled(false);
+        startButton.setBorderPainted(false);
+        startButton.setSize(300, 120);
+        startButton.setLocation(650, 515);
         startButton.setFocusable(false);
         startButton.addActionListener(this);
         add(startButton);
+
         try {
             startImage = ImageIO.read(StartPanel.class.getResource("/Images/start.png"));
         } catch (Exception e) {
@@ -34,7 +38,7 @@ public class StartPanel extends JPanel implements ActionListener {
     }
     
     public void paintComponent(Graphics g) {
-        g.drawImage(startImage, KingdomBuilder.WIDTH, KingdomBuilder.HEIGHT, null);
+        g.drawImage(startImage, 0, 0, KingdomBuilder.WIDTH, KingdomBuilder.HEIGHT, null);
     }
 
     public void actionPerformed(ActionEvent e) {
