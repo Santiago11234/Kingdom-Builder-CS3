@@ -26,7 +26,7 @@ public class StartPanel extends JPanel implements ActionListener {
         add(startButton);
 
         try {
-            test = ImageIO.read(StartPanel.class.getResource("/Images/Forest Tile.png"));
+            test = ImageIO.read(StartPanel.class.getResource("/Images/Canyon Tile.png"));
         }
         catch(Exception e) {
             System.out.println("Tile error");
@@ -34,8 +34,8 @@ public class StartPanel extends JPanel implements ActionListener {
     }
     
     public void paintComponent(Graphics g) {
-        g.clearRect(0, 0, getWidth(), getHeight());
-        g.drawImage(test, 0, 0, 100, 100, null);
+        g.fillRect(0, 0, getWidth(), getHeight());
+        g.drawImage(test, 0, 0, 50, 58, null);
     }
 
     public void actionPerformed(ActionEvent e) {
