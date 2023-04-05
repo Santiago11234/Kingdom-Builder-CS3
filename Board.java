@@ -1,20 +1,11 @@
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Polygon;
-import java.awt.RenderingHints;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.JPanel;
-import java.util.*;
-import java.awt.*;
+
 public class Board {
     private static String[][][] smallBoards;    //Collection of 10-by-10 Tile arrays. All inputted manually
     
     //Top left coordinate
     public static int X = 20;
-    public static int Y = 20;
+    public static int Y = 63;
     
     public Tile[][] board; //20-by-40 array of Tiles
     
@@ -39,7 +30,13 @@ public class Board {
         }
     }
     
-    public void createBoard(){}
+    public void createBoard() {
+        for(int i = 0; i < board.length; i++) {
+            for(int j = i % 2; j < board[i].length; j += 2) {
+                //board[i][j].setType("forest");
+            }
+        }
+    }
     
     private Tile[][] rotated(Tile[][] arr){ return arr;}
 
