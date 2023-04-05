@@ -1,9 +1,13 @@
-import java.util.*;
-import java.awt.*;
+import java.util.Queue;
+import java.util.LinkedList;
+
+import java.awt.Polygon;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+
 import javax.imageio.ImageIO;
+import javax.swing.text.html.HTMLDocument.HTMLReader.SpecialAction;
 
 public class Tile {
     private static String[] terrainTypes = {"canyon", "desert", "flowers", "forest", "grass", "mountain", "water"};   
@@ -28,13 +32,13 @@ public class Tile {
     public static void setImages() {
         try {
             //Richard: will this work with the school computers? For some reason, the school computers didn't work with getResource
-            images[0] = ImageIO.read(Tile.class.getResourceAsStream("/Images/Canyon Tile.png"));
-            images[1] = ImageIO.read(Tile.class.getResourceAsStream("/Images/Desert Tile.png"));
-            images[2] = ImageIO.read(Tile.class.getResourceAsStream("/Images/Flower Tile.png"));
-            images[3] = ImageIO.read(Tile.class.getResourceAsStream("/Images/Forest Tile.png"));
-            images[4] = ImageIO.read(Tile.class.getResourceAsStream("/Images/Grassland Tile.png"));
-            images[5] = ImageIO.read(Tile.class.getResourceAsStream("/Images/Mountain Tile.png"));
-            images[6] = ImageIO.read(Tile.class.getResourceAsStream("/Images/Water Tile.png"));
+            images[0] = ImageIO.read(Tile.class.getResource("/Images/Canyon Tile.png"));
+            images[1] = ImageIO.read(Tile.class.getResource("/Images/Desert Tile.png"));
+            images[2] = ImageIO.read(Tile.class.getResource("/Images/Flower Tile.png"));
+            images[3] = ImageIO.read(Tile.class.getResource("/Images/Forest Tile.png"));
+            images[4] = ImageIO.read(Tile.class.getResource("/Images/Grassland Tile.png"));
+            images[5] = ImageIO.read(Tile.class.getResource("/Images/Mountain Tile.png"));
+            images[6] = ImageIO.read(Tile.class.getResource("/Images/Water Tile.png"));
 
         }
         catch(Exception e) {
@@ -46,7 +50,6 @@ public class Tile {
         row = i;
         column = j;
     } 
-
 
     public int getRow() {return row;}
 
@@ -69,27 +72,72 @@ public class Tile {
         hitbox = new Polygon(xArray, yArray, 6);
     }
 
-    public String getType() {return "yes";}
+    public String getType() {
+        return type;
+    }
 
-    public void setType(String t) {}
+    public void setType(String t) {
+        type = t;
+
+        if(isPowerupTile()) {
+            powerups = new LinkedList<PowerUp>();
+        }
+    }
 
 
     public boolean isOccupied() {return occupied;}
         
-    public void setOccupied(boolean b) {}
+    public void setOccupied(boolean b) {occupied = b;}
 
-    public boolean isSpecialTile() {return true;}
+    public boolean isSpecialTile() {
+        for(String s: specialTypes) {
+            if(s.equals(type)) {
+                return true;
+            }
+        }
 
+        return false;
+    }
 
-    public boolean isPowerupTile() {return true;}
+    public boolean isPowerupTile() {
+        return isSpecialTile() && !type.equals("castle");
+    }
 
     public boolean clicked(int x, int y) {return hitbox.contains(x, y);}
 
-
     public void draw(Graphics g) {
-        //switch(type) {
-        //
-        //}
+        switch(type) {
+            case "canyon":
+                g.drawImage(images[0], x, y, WIDTH, HEIGHT, null);
+                break;
+
+            case "desert":
+                g.drawImage(images[1], x, y, WIDTH, HEIGHT, null);
+                break;
+
+            case "flowers":
+                g.drawImage(images[2], x, y, WIDTH, HEIGHT, null);
+                break;
+
+            case "forest":
+                g.drawImage(images[3], x, y, WIDTH, HEIGHT, null);
+                break;
+
+            case "grass":
+                g.drawImage(images[4], x, y, WIDTH, HEIGHT, null);
+                break;
+
+            case "mountain":
+                g.drawImage(images[5], x, y, WIDTH, HEIGHT, null);
+                break;
+
+            case "water":
+                g.drawImage(images[6], x, y, WIDTH, HEIGHT, null);
+                break;
+
+            default:
+                System.out.println("Tile draw has a problem");
+        }
     }
 
     public void bold(Graphics2D g) {}
