@@ -11,7 +11,6 @@ public class StartPanel extends JPanel implements ActionListener {
     private KingdomBuilder frame;
 
     private JButton startButton;
-    private BufferedImage test;
 
     public StartPanel(KingdomBuilder kb) {
         setLayout(null);
@@ -26,16 +25,16 @@ public class StartPanel extends JPanel implements ActionListener {
         add(startButton);
 
         try {
-            test = ImageIO.read(StartPanel.class.getResource("/Images/Canyon Tile.png"));
+            //All image stuff should occur here (tiles and power ups too)
+            Tile.setImages();
         }
         catch(Exception e) {
-            System.out.println("Tile error");
+            System.out.println("Start panel error");
         }
     }
     
     public void paintComponent(Graphics g) {
-        g.fillRect(0, 0, getWidth(), getHeight());
-        g.drawImage(test, 0, 0, 50, 58, null);
+        g.clearRect(0, 0, getWidth(), getHeight());
     }
 
     public void actionPerformed(ActionEvent e) {
