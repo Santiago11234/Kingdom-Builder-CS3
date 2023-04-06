@@ -12,7 +12,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
     private KingdomBuilder frame;
     private Game game;
 
-    private BufferedImage blurBG,wood; 
+    private BufferedImage blurBG, playerWood; 
 
     public KingdomBuilderPanel(KingdomBuilder kb) {
        setSize(getPreferredSize());
@@ -21,14 +21,18 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
        try {
             blurBG = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/blurred BG.jpg"));
-            wood = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/wood.png"));
+            playerWood = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/playerWood.png"));
        } catch (Exception e) {
             System.out.println("Kingdom Builder panel error");
        }
 
        addMouseListener(this);
 
-       game = new Game();
+       game = new Game(this);
+    }
+
+    public void setSettlementButton(boolean b) {
+
     }
 
     public void paintComponent(Graphics l) {
@@ -37,7 +41,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         g.clearRect(0, 0, getWidth(), getHeight());
 
         g.drawImage(blurBG, 0, 0, getWidth(), getHeight(), null);
-        g.drawImage(wood, 1100, 60, 450, 840, null);
+        g.drawImage(playerWood, 1100, 60, 450, 840, null);
         
         game.board.drawBoard(g);
     }
