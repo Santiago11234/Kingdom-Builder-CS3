@@ -10,9 +10,8 @@ public class Game {
         board = new Board();
 
         players = new Player[4];
-        System.out.println(players[0]);
-        for(Player player: players) {
-            player = new Player();
+        for(int i = 0; i < players.length; i++) {
+            players[i] = new Player();
         }
 
         init();
