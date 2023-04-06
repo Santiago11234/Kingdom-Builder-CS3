@@ -33,7 +33,7 @@ public class Board {
     public void createBoard() {
         for(int i = 0; i < board.length; i++) {
             for(int j = i % 2; j < board[i].length; j += 2) {
-                //board[i][j].setType("forest");
+                board[i][j].setType("forest");
             }
         }
     }
