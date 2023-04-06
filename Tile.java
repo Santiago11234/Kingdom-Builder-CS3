@@ -7,15 +7,17 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
-import javax.swing.text.html.HTMLDocument.HTMLReader.SpecialAction;
+//import javax.swing.text.html.HTMLDocument.HTMLReader.SpecialAction;
 
 public class Tile {
     private static String[] terrainTypes = {"canyon", "desert", "flowers", "forest", "grass", "mountain", "water"};   
     private static String[] specialTypes = {"castle", "oracle", "farm", "oasis", "tower", "tavern", "barn", "harbor", "paddock"};
-    public static final int WIDTH = 48;
+    public static final int WIDTH = 46;
     public static final int HEIGHT = (int)Math.round(WIDTH * 2 / Math.sqrt(3));
     public static final int PARTICULAR_POINT = (int)Math.round(41.0 / 55 * HEIGHT);
-    private static final Polygon sharedHitbox = new Polygon(new int[] {0, WIDTH / 2, WIDTH, WIDTH, WIDTH / 2, 0}, new int[] {(int)Math.round(14.0 / 55 * HEIGHT), 0, (int)Math.round(14.0 / 55 * HEIGHT), PARTICULAR_POINT, HEIGHT, PARTICULAR_POINT}, 6); //Richard: this is probably easier to hardcode, but the big boi here provides... some... adaptability
+    
+    //Richard: this is probably easier to hardcode, but the big boi here provides... some... adaptability
+    private static final Polygon sharedHitbox = new Polygon(new int[] {0, WIDTH / 2, WIDTH, WIDTH, WIDTH / 2, 0}, new int[] {(int)Math.round(14.0 / 55 * HEIGHT), 0, (int)Math.round(14.0 / 55 * HEIGHT), PARTICULAR_POINT, HEIGHT, PARTICULAR_POINT}, 6); 
     private static final BufferedImage[] images = new BufferedImage[terrainTypes.length + specialTypes.length];
 
     private String type;
