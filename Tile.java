@@ -5,6 +5,7 @@ import java.awt.Polygon;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.awt.BasicStroke;
 
 import javax.imageio.ImageIO;
 //import javax.swing.text.html.HTMLDocument.HTMLReader.SpecialAction;
@@ -142,5 +143,26 @@ public class Tile {
         }
     }
 
-    public void bold(Graphics2D g) {}
+    public void bold(int playerTurn, Graphics2D g) {
+        g.setStroke(new BasicStroke(3));
+
+        switch(playerTurn) {
+            case 0:
+                break;
+
+            case 1:
+                break;
+
+            case 2:
+                break;
+
+            case 3:
+                break;
+
+            default:
+                System.out.println("Player turn: " + playerTurn);
+        }
+
+        g.drawPolygon(hitbox);
+    }
 }
