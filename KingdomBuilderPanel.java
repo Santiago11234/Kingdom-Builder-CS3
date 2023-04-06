@@ -30,7 +30,11 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
        addMouseListener(this);
 
-       game = new Game();
+       game = new Game(this);
+    }
+
+    public void setSettlementButton(boolean b) {
+
     }
 
     public void paintComponent(Graphics l) {

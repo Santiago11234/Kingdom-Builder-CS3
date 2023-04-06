@@ -4,8 +4,8 @@ public class Board {
     private static String[][][] smallBoards;    //Collection of 10-by-10 Tile arrays. All inputted manually
     
     //Top left coordinate
-    public static int X = 20;
-    public static int Y = 63;
+    public static final int X = 20;
+    public static final int Y = (KingdomBuilder.HEIGHT - 19 * Tile.PARTICULAR_POINT - Tile.HEIGHT) / 2;
     
     public Tile[][] board; //20-by-40 array of Tiles
     
