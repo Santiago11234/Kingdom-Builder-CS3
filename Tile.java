@@ -165,4 +165,8 @@ public class Tile {
 
         g.drawPolygon(hitbox);
     }
+
+    public String toString() {
+        return type;
+    }
 }
