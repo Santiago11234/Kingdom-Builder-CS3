@@ -13,11 +13,34 @@ public class Game {
         for(int i = 0; i < players.length; i++) {
             players[i] = new Player();
         }
+        System.out.println(players[0]);
 
         init();
     }
 
+    private boolean objectivesContain(String s) {
+        for(String card: objectiveCards) {
+            if(s.equals(card)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public void init() {
         board.createBoard();
+    }
+
+    public void score() {
+        if(objectivesContain("fishermen")) {
+
+        }
+        if(objectivesContain("miners")) {
+
+        }
+        if(objectivesContain("workers")) {
+            
+        }
     }
 }
