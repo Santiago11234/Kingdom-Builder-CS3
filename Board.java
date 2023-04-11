@@ -33,12 +33,24 @@ public class Board {
     public void createBoard() {
         for(int i = 0; i < board.length; i++) {
             for(int j = i % 2; j < board[i].length; j += 2) {
+                //Richard: placeholder
                 board[i][j].setType("forest");
             }
         }
     }
     
-    private Tile[][] rotated(Tile[][] arr){ return arr;}
+    //Richard: should work. Tested this once
+    private Tile[][] rotated(Tile[][] arr) { 
+        Tile[][] ret = new Tile[arr.length][arr[0].length];
+        
+        for(int i = 0; i < arr.length; i++) {
+            for(int j = 0; j < arr[0].length; j++) {
+                ret[i][j] = arr[arr.length - i - 1][arr[0].length - j - 1];
+            }
+        }
+
+        return ret;
+    }
 
     public Tile tileClicked(int x, int y) { 
         for(int i = 0; i < board.length; i++) {
@@ -51,6 +63,17 @@ public class Board {
         }
 
         return null;
+    }
+
+    //Not finished
+    public Tile[] getNeighbors(int i, int j) {
+        if(board[i][j] == null) {
+            System.out.println("Uh oh, Board thinks something is fuc-");
+        }
+
+        Tile[] ret = new Tile[6];
+
+        return ret;
     }
 
     public void drawBoard(Graphics g) {
