@@ -33,7 +33,7 @@ private boolean gameOver;
         terrainDeck = new ArrayList<>();
         discard = new ArrayList<>();
         objectiveDeck = new String[3];
-
+        eligibleTiles = new TreeSet<>();
         init();
     }
 
