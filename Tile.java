@@ -167,6 +167,6 @@ public class Tile {
     }
 
     public String toString() {
-        return type;
+        return row + ", " + column + ". " + type;
     }
 }
