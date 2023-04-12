@@ -31,6 +31,12 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
             player4NameBlock = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/player4NameBlock.png"));
             addSettlementButton = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/addSettlementButton.png"));
             endTurnButton = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/endTurnButton.png"));
+            terrainCardCanyon = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Terrain Card Canyon.png"));
+            terrainCardDesert = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Terrain Card Desert.png"));
+            terrainCardFlowers = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Terrain Card Flowers.png"));
+            terrainCardForest = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Terrain Card Forest.png"));
+            terrainCardGrass = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Terrain Card Grass.png"));
+            terrainCardBack = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Terrain Card Back.png"));
 
         } catch (Exception e) {
             System.out.println("Kingdom Builder panel error");
@@ -60,6 +66,14 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         //g.drawImage(player4NameBlock, 1117, 71, 436, 75, null);
         g.drawImage(addSettlementButton, 1409, 652, 114, 110, null);
         g.drawImage(endTurnButton, 1144, 840, 381, 49, null);
+        g.drawImage(terrainCardCanyon, 1392, 379, 161, 248, null);
+        //g.drawImage(terrainCardDesert, 1392, 379, 161, 248, null);
+        //g.drawImage(terrainCardFlowers, 1392, 379, 161, 248, null);
+        //g.drawImage(terrainCardForest, 1392, 379, 161, 248, null);
+        //g.drawImage(terrainCardGrass, 1392, 379, 161, 248, null);
+        //g.drawImage(terrainCardBack, 1392, 379, 161, 248, null);
+
+
         game.board.drawBoard(g);
     }
 
