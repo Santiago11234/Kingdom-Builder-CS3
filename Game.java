@@ -88,11 +88,11 @@ private boolean gameOver;
     }
 
     private boolean objectivesContain(String s){
-
+        return false;
     }
 
     public void startSettlementPlay(){
-        
+
     }
 
     public void mostMoves(int x, int y){
@@ -105,7 +105,7 @@ private boolean gameOver;
     }
 
     private boolean addSettlement(Tile t){
-
+        return false;
     }
 
     private void powerUpMethod(Tile t){
@@ -118,15 +118,15 @@ private boolean gameOver;
     }
 
     private TreeSet<Tile> findTilesTavern(){
-
+        return eligibleTiles;
     }
 
     private TreeSet<Tile> findTilesPaddock(){
-
+        return eligibleTiles;
     }
 
     private TreeSet<Tile> twoTilesAway(Tile t){ 
-
+        return eligibleTiles;
     }
     private void score(){
 
@@ -137,7 +137,7 @@ private boolean gameOver;
 
     }
     private ArrayList<Integer> settlementAreas(){
-
+        return null;
     }
     private void addOrRemovePowerUps(Tile t, boolean added){
 
