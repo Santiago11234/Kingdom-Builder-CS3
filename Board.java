@@ -1,4 +1,5 @@
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 public class Board {
     private static String[][][] smallBoards;    //Collection of 10-by-10 Tile arrays. All inputted manually
@@ -9,6 +10,8 @@ public class Board {
     
     public Tile[][] board; //20-by-40 array of Tiles
     
+    private Tile[] arr;
+
     public Board() {
         board = new Tile[20][40];
         
@@ -56,7 +59,6 @@ public class Board {
         for(int i = 0; i < board.length; i++) {
             for(int j = i % 2; j < board[i].length; j += 2) {
                 if(board[i][j].clicked(x, y)) {
-                    System.out.println(i + " " + j);
                     return board[i][j];
                 }
             }
@@ -65,13 +67,46 @@ public class Board {
         return null;
     }
 
-    //Not finished
+    //Richard: not finished
     public Tile[] getNeighbors(int i, int j) {
+        //Richard: shouldn't happen
+        if(i > board.length || i < 0 && j > board[0].length || j < 0) {
+            System.out.println("Out of bounds. i: " + i + ". j: " + j);
+        }
+
+        //Richard: also should happen
         if(board[i][j] == null) {
-            System.out.println("Uh oh, Board thinks something is fuc-");
+            System.out.println("How did this happen?");
         }
 
         Tile[] ret = new Tile[6];
+
+        //Richard: no other checks should be necessary
+        //  1  2
+        //3      4
+        //  5  6
+        if(i - 1 >= 0) {
+            if(j - 1 >= 0) {
+                ret[0] = board[i - 1][j - 1];
+            }
+            if(j + 1 < board[0].length) {
+                ret[1] = board[i - 1][j + 1];
+            }
+        }
+        if(j - 2 >= 0) {
+            ret[2] = board[i][j - 2];
+        }
+        if(j + 2 < board[0].length) {
+            ret[3] = board[i][j + 2];
+        }
+        if(i + 1 < board.length) {
+            if(j - 1 >= 0) {
+                ret[4] = board[i + 1][j - 1];
+            }
+            if(j + 1 < board[0].length) {
+                ret[5] = board[i + 1][j + 1];
+            }
+        }
 
         return ret;
     }
