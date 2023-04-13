@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.awt.Graphics2D;
 
 public class Game {
-
     private KingdomBuilderPanel panel;
     private CardDrawer cardDrawer;
 
@@ -92,6 +91,13 @@ public class Game {
     }
 
     private boolean objectivesContain(String s) {
+        private boolean objectivesContain(String s) {
+        for(String card: objectiveCards) {
+           if(s.equals(card)) {
+               return true;
+           }
+        }
+
         return false;
     }
 
@@ -102,7 +108,6 @@ public class Game {
     public void mostMoves(int x, int y) {
 
     }
-
 
     private void findEligibleTiles(String terrain, boolean adjacent) {
 
@@ -151,10 +156,10 @@ public class Game {
     private ArrayList<Integer> settlementAreas() {
         return null;
     }
+    
     private void addOrRemovePowerUps(Tile t, boolean added) {
-
+    
     }
-
 
     private void enableOrDisablePowerUps() {
 
@@ -163,7 +168,6 @@ public class Game {
     public void switchTurn() {
 
     }
-
 
     public void drawAll(Graphics2D g) {
 
