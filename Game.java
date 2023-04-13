@@ -80,6 +80,7 @@ public class Game {
         powerupSelected = null;
         tileToRemove = null;
         gameOver = false;
+        System.out.println(terrainDeck);
         board.createBoard();
     }
 
@@ -91,8 +92,7 @@ public class Game {
     }
 
     private boolean objectivesContain(String s) {
-        private boolean objectivesContain(String s) {
-        for(String card: objectiveCards) {
+        for(String card: objectiveDeck) {
            if(s.equals(card)) {
                return true;
            }
