@@ -31,6 +31,7 @@ public class StartPanel extends JPanel implements ActionListener {
         try {
             //All image stuff should occur here (tiles and power ups too)
             Tile.setImages();
+            Player.setImages();
             startImage = ImageIO.read(StartPanel.class.getResource("/Images/start.png"));
         } catch (Exception e) {
             System.out.println("Start panel error");
