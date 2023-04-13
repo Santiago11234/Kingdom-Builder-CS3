@@ -67,7 +67,6 @@ public class Board {
         return null;
     }
 
-    //Richard: not finished
     public Tile[] getNeighbors(int i, int j) {
         //Richard: shouldn't happen
         if(i > board.length || i < 0 && j > board[0].length || j < 0) {
