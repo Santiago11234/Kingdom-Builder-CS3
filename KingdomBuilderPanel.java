@@ -13,7 +13,8 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
     private Game game;
 
     private BufferedImage blurBG, playerWood,mapWood, settlementWood, player1NameBlock, player2NameBlock, player3NameBlock, player4NameBlock, addSettlementButton,
-            endTurnButton, terrainCardCanyon, terrainCardDesert, terrainCardFlowers, terrainCardForest, terrainCardGrass, terrainCardBack; 
+            endTurnButton, terrainCardCanyon, terrainCardDesert, terrainCardFlowers, terrainCardForest, terrainCardGrass, terrainCardBack,
+            settlementCountBlock, deckTextBlock, discardTextBlock; 
 
     public KingdomBuilderPanel(KingdomBuilder kb) {
        setSize(getPreferredSize());
@@ -37,6 +38,9 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
             terrainCardForest = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Terrain Card Forest.png"));
             terrainCardGrass = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Terrain Card Grass.png"));
             terrainCardBack = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Terrain Card Back.png"));
+            settlementCountBlock = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/settlementCountBlock.png"));
+            deckTextBlock = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/deckTextBlock.png"));
+            discardTextBlock = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/discardTextBlock.png"));
 
         } catch (Exception e) {
             System.out.println("Kingdom Builder panel error");
@@ -60,20 +64,28 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         g.drawImage(playerWood, 1091, 42, 487, 882, null);
         g.drawImage(mapWood, 70, 90, 985, 858, null);
         g.drawImage(settlementWood, 69, 18, 988, 62, null);
+        //Main player name blocks
         g.drawImage(player1NameBlock, 1117, 71, 436, 75, null);
         //g.drawImage(player2NameBlock, 1117, 71, 436, 75, null);
         //g.drawImage(player3NameBlock, 1117, 71, 436, 75, null);
         //g.drawImage(player4NameBlock, 1117, 71, 436, 75, null);
         g.drawImage(addSettlementButton, 1409, 652, 114, 110, null);
         g.drawImage(endTurnButton, 1144, 840, 381, 49, null);
+        //Terrain Cards
         g.drawImage(terrainCardCanyon, 1392, 379, 161, 248, null);
         //g.drawImage(terrainCardDesert, 1392, 379, 161, 248, null);
         //g.drawImage(terrainCardFlowers, 1392, 379, 161, 248, null);
         //g.drawImage(terrainCardForest, 1392, 379, 161, 248, null);
         //g.drawImage(terrainCardGrass, 1392, 379, 161, 248, null);
         //g.drawImage(terrainCardBack, 1392, 379, 161, 248, null);
-
-
+        //Discard Pile
+        g.drawImage(terrainCardCanyon, 1267, 416, 106, 154, null);
+        //Deck Pile
+        g.drawImage(terrainCardBack, 1130, 416, 106, 154, null);
+        //TextBlocks on player section
+        g.drawImage(settlementCountBlock, 1418, 772, 102, 32, null);
+        g.drawImage(deckTextBlock, 1143, 581, 81, 32, null);
+        g.drawImage(discardTextBlock, 1270, 581, 102, 32, null);
         game.board.drawBoard(g);
     }
 
