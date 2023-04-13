@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import javax.swing.JButton;
 
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
@@ -11,6 +12,7 @@ import java.awt.Graphics2D;
 public class KingdomBuilderPanel extends JPanel implements ActionListener, MouseListener {
     private KingdomBuilder frame;
     private Game game;
+    private JButton startButton;
 
     private BufferedImage blurBG, playerWood,mapWood, settlementWood, player1NameBlock, player2NameBlock, player3NameBlock, player4NameBlock, addSettlementButton,
             endTurnButton, terrainCardCanyon, terrainCardDesert, terrainCardFlowers, terrainCardForest, terrainCardGrass, terrainCardBack; 
@@ -19,6 +21,15 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
        setSize(getPreferredSize());
        setLayout(null);
        frame = kb;
+       startButton = new JButton("skip to end button");
+        startButton.setOpaque(false);
+        startButton.setContentAreaFilled(true);
+        startButton.setBorderPainted(false);
+        startButton.setSize(200, 50);
+        startButton.setLocation(1117, 0);
+        startButton.setFocusable(false);
+        startButton.addActionListener(this);
+        add(startButton);
 
        try {
             blurBG = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/blurred BG.jpg"));
@@ -87,6 +98,6 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
     }
 
     public void actionPerformed(ActionEvent e) {
-
+        frame.nextScreen();
     }
 }
