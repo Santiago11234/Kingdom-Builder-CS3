@@ -1,26 +1,29 @@
-import java.util.*;
-import java.awt.*;
+import java.util.TreeSet;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.awt.Graphics2D;
+
 public class Game {
-private KingdomBuilderPanel panel;
-private CardDrawer cardDrawer;
+    private KingdomBuilderPanel panel;
+    private CardDrawer cardDrawer;
 
-public Player[] players;
-public Board board;
-private ArrayList<String> terrainDeck;
-private ArrayList<String> discard;
-public String[] objectiveDeck;
-public CardDrawer c;
+    public Player[] players;
+    public Board board;
+    private ArrayList<String> terrainDeck;
+    private ArrayList<String> discard;
+    public String[] objectiveDeck;
+    public CardDrawer c;
 
-private int firstPlayer;
-private int turn;
-private int settlementPlaying;    //A state variable. 0 (not started), 1 (playing), 2 (finished)
-private int powerupPlaying;    //Another state variable. 0 (not started), 1 (starting to play but not committed), 2 (committed to playing), 3 (finished)
-private TreeSet<Tile> eligibleTiles;
-private int settlementCount;    //Stores number of settlements placed
-private int powerupCount;    //Stores number of clicks a power up has been used for
-private PowerUp powerupSelected;
-private Tile tileToRemove;
-private boolean gameOver;
+    private int firstPlayer;
+    private int turn;
+    private int settlementPlaying;    //A state variable. 0 (not started), 1 (playing), 2 (finished)
+    private int powerupPlaying;    //Another state variable. 0 (not started), 1 (starting to play but not committed), 2 (committed to playing), 3 (finished)
+    private TreeSet<Tile> eligibleTiles;
+    private int settlementCount;    //Stores number of settlements placed
+    private int powerupCount;    //Stores number of clicks a power up has been used for
+    private PowerUp powerupSelected;
+    private Tile tileToRemove;
+    private boolean gameOver;
 
     public Game(KingdomBuilderPanel p){
         c = new CardDrawer();
@@ -77,84 +80,96 @@ private boolean gameOver;
         powerupSelected = null;
         tileToRemove = null;
         gameOver = false;
+        System.out.println(terrainDeck);
         board.createBoard();
     }
 
-    public boolean firstPlayerPlaying(){
+    public boolean firstPlayerPlaying() {
         if(turn == firstPlayer){
             return true;
         }
         return false;
     }
 
-    private boolean objectivesContain(String s){
+    private boolean objectivesContain(String s) {
+        for(String card: objectiveDeck) {
+           if(s.equals(card)) {
+               return true;
+           }
+        }
+
         return false;
     }
 
-    public void startSettlementPlay(){
+    public void startSettlementPlay() {
 
     }
 
-    public void mostMoves(int x, int y){
+    public void mostMoves(int x, int y) {
 
     }
 
-
-    private void findEligibleTiles(String terrain, boolean adjacent){
+    private void findEligibleTiles(String terrain, boolean adjacent) {
 
     }
 
-    private boolean addSettlement(Tile t){
+    private boolean addSettlement(Tile t) {
         return false;
     }
 
-    private void powerUpMethod(Tile t){
+    private void powerUpMethod(Tile t) {
 
     }
 
-
-    private void powerUpUsed(){
+    private void powerUpUsed() {
 
     }
 
-    private TreeSet<Tile> findTilesTavern(){
+    private TreeSet<Tile> findTilesTavern() {
         return eligibleTiles;
     }
 
-    private TreeSet<Tile> findTilesPaddock(){
+    private TreeSet<Tile> findTilesPaddock() {
         return eligibleTiles;
     }
 
-    private TreeSet<Tile> twoTilesAway(Tile t){ 
+    private TreeSet<Tile> twoTilesAway(Tile t) { 
         return eligibleTiles;
     }
-    private void score(){
+    
+    private void score() {
+        if(objectivesContain("fishermen")) {
 
+        }
+        if(objectivesContain("miners")) {
+
+        }
+        if(objectivesContain("workers")) {
+            
+        }
     }
 
-
-    private void scoreConnectedSpecialTiles(){
-
-    }
-    private ArrayList<Integer> settlementAreas(){
-        return null;
-    }
-    private void addOrRemovePowerUps(Tile t, boolean added){
-
-    }
-
-
-    private void enableOrDisablePowerUps(){
-
-    }
-
-    public void switchTurn(){
-
-    }
-
-
-    public void drawAll(Graphics2D g){
+    private void scoreConnectedSpecialTiles() {
 
     }
     
+    private ArrayList<Integer> settlementAreas() {
+        return null;
+    }
+    
+    private void addOrRemovePowerUps(Tile t, boolean added) {
+    
+    }
+
+    private void enableOrDisablePowerUps() {
+
+    }
+
+    public void switchTurn() {
+
+    }
+
+    public void drawAll(Graphics2D g) {
+
+    }
 }
