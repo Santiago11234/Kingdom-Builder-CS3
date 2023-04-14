@@ -138,15 +138,41 @@ public class Game {
     }
     
     private void score() {
-        if(objectivesContain("fishermen")) {
+        int score = 0;
 
+        if(objectivesContain("fishermen")) {
+            for(Tile t: players[turn].settlements) {
+                if(neighborsInclude(t, "water")) {
+                    score++;
+                }
+            }
         }
         if(objectivesContain("miners")) {
-
+            for(Tile t: players[turn].settlements){
+                if(neighborsInclude(t, "mountain")){
+                    score++;
+                }
+            }
         }
         if(objectivesContain("workers")) {
-            
+            for(Tile t: players[turn].settlements){
+                if(neighborsInclude(t, "castle")||neighborsInclude(t, "oracle")||neighborsInclude(t, "farm")||neighborsInclude(t, "oasis")||neighborsInclude(t, "tower")||neighborsInclude(t, "tavern")||neighborsInclude(t, "barn")||neighborsInclude(t, "harbor")||neighborsInclude(t, "paddock")){
+                    score++;
+                }
+            }
         }
+    }
+
+    private boolean neighborsInclude(Tile t, String terrain) {
+        Tile[] arr = board.getNeighbors(t);
+        
+        for(Tile ti: arr) {
+            if(ti != null && t.getType().equals(terrain)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void scoreConnectedSpecialTiles() {
@@ -166,7 +192,7 @@ public class Game {
     }
 
     public void switchTurn() {
-
+        turn = (turn + 1) % 4;
     }
 
     public void drawAll(Graphics2D g) {
