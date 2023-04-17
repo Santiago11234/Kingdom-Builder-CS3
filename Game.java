@@ -148,10 +148,18 @@ public class Game {
             }
         }
         if(objectivesContain("miners")) {
-
+            for(Tile t: players[turn].settlements){
+                if(neighborsInclude(t, "mountain")){
+                    score++;
+                }
+            }
         }
         if(objectivesContain("workers")) {
-            
+            for(Tile t: players[turn].settlements){
+                if(neighborsInclude(t, "castle")||neighborsInclude(t, "oracle")||neighborsInclude(t, "farm")||neighborsInclude(t, "oasis")||neighborsInclude(t, "tower")||neighborsInclude(t, "tavern")||neighborsInclude(t, "barn")||neighborsInclude(t, "harbor")||neighborsInclude(t, "paddock")){
+                    score++;
+                }
+            }
         }
     }
 
