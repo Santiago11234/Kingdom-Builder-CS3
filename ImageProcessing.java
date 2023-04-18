@@ -11,23 +11,22 @@ public class ImageProcessing {
    
     
     public static void main(String[] args) throws IOException {
-        final int[] mountainRGB = {121, 89, 71};
-        final int[] desertRGB = {238, 232, 170};
-        final int[] forestRGB = {0, 100, 0};
-        final int[] grasslandRGB = {85, 107, 47};
-        final double colorThreshold = 100.0;
+        final int[] mountainRGB = {121,107,95};
+        final int[] desertRGB = {252,212,53};
+        final int[] forestRGB = {3,50,11};
+        final int[] grasslandRGB = {105,152,60};
+        final double colorThreshold = 30.0;
 
         BufferedImage boardImage = ImageIO.read(ImageProcessing.class.getResource("/Images/Board1.png"));
         int width = boardImage.getWidth();
         int height = boardImage.getHeight();
         Board board = new Board();
-        int x = 0;
-        int y =0;
+       
 
 
 
-        for (int i = 30; i < width; i+=30) {
-            for (int j = 30; j < height; j += 50) {
+        for (int i = 30, x= 0; i < width; i+=width / 10.5, x++) {
+            for (int j = 30, y =x%2; j < height; j += height / 10, y+=2) {
                 
                 int rgb = boardImage.getRGB(i, j);
                 int red = (rgb >> 16) & 0xFF;
@@ -39,9 +38,7 @@ public class ImageProcessing {
                 double distToForest = Math.sqrt(Math.pow(red - forestRGB[0], 2) + Math.pow(green - forestRGB[1], 2) + Math.pow(blue - forestRGB[2], 2));
                 double distToGrassland = Math.sqrt(Math.pow(red - grasslandRGB[0], 2) + Math.pow(green - grasslandRGB[1], 2) + Math.pow(blue - grasslandRGB[2], 2));
                 
-                y++;
-                if(y == 40)
-                    x++;
+               
 
                 if (distToMountain < colorThreshold) {
                     board.setTileType(x, y, "mountain");
@@ -57,6 +54,10 @@ public class ImageProcessing {
                 }
 
                 System.out.println(board.board[x][y].getType());
+
+                System.out.println(x + " " + y);
+                
+               
             }
         }
 
