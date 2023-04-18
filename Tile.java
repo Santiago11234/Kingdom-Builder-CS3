@@ -71,7 +71,7 @@ public class Tile {
     public void setPosition(int x, int y) {
         this.x = x;
         this.y = y;
-
+        
         int[] xArray = new int[6];
         int[] yArray = new int[6];
 
@@ -90,8 +90,15 @@ public class Tile {
     public void setType(String t) {
         type = t;
 
+        //Richard: awaiting Power Ups
         if(isPowerupTile()) {
             powerups = new LinkedList<PowerUp>();
+            for(int i = 0; i < 2; i++) {
+
+            }
+        }
+        else {
+            powerups = null;
         }
     }
 
@@ -148,6 +155,10 @@ public class Tile {
 
             default:
                 System.out.println("Tile draw has a problem");
+        }
+
+        if(powerups != null && !powerups.isEmpty()) {
+            powerups.peek().draw(true, g);
         }
     }
 
