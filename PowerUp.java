@@ -5,10 +5,11 @@ import java.awt.Graphics;
 import javax.imageio.ImageIO;
 
 public class PowerUp {
-    private static final int WIDTH = 35; //Richard: test this later
+    private static final int WIDTH = 40; //Richard: test this later
     private static final int HEIGHT = (int)Math.round(WIDTH * 2 / Math.sqrt(3));
+    private static final int SECOND_HIGHEST_POINT_Y = (int)Math.round(14.0 / 55 * HEIGHT);
 
-    private static final Polygon sharedHitbox = new Polygon(new int[] {0, WIDTH / 2, WIDTH, WIDTH, WIDTH / 2, 0}, new int[] {(int)Math.round(14.0 / 55 * HEIGHT), 0, (int)Math.round(14.0 / 55 * HEIGHT), Tile.PARTICULAR_POINT / Tile.HEIGHT * HEIGHT, HEIGHT, Tile.PARTICULAR_POINT / Tile.HEIGHT * HEIGHT}, 6); 
+    private static final Polygon sharedHitbox = new Polygon(new int[] {0, WIDTH / 2, WIDTH, WIDTH, WIDTH / 2, 0}, new int[] {SECOND_HIGHEST_POINT_Y, 0, SECOND_HIGHEST_POINT_Y, HEIGHT - SECOND_HIGHEST_POINT_Y, HEIGHT, HEIGHT - SECOND_HIGHEST_POINT_Y}, 6); 
     private static final BufferedImage[] images = new BufferedImage[9]; 
 
     private String type;
@@ -56,6 +57,7 @@ public class PowerUp {
         return hitbox.contains(x, y);
     }
 
+    //Richard: hitboxes now scuffed. If you want to, you can crop the images
     public void draw(boolean up, Graphics g) {
         if(!up) {
             g.drawImage(images[8], x, y, WIDTH, HEIGHT, null);
