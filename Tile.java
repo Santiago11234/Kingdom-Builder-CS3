@@ -121,6 +121,10 @@ public class Tile {
         return isSpecialTile() && !type.equals("castle");
     }
 
+    public PowerUp getPowerUp() {
+        return powerups.poll();
+    }
+
     public boolean clicked(int x, int y) {return hitbox.contains(x, y);}
 
     public void draw(Graphics g) {
