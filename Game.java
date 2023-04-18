@@ -114,6 +114,19 @@ public class Game {
     }
 
     private boolean addSettlement(Tile t) {
+        if(eligibleTiles.contains(t)) {
+            players[turn].settlements.add(t);
+            t.setOccupied(true);
+            score();
+            addOrRemovePowerUps(t, true);
+            enableOrDisablePowerUps();
+
+            if(players[turn].getSettlementsLeft() == 0) {
+                settlementPlaying = 2;
+                gameOver = true;
+            }
+        }
+        
         return false;
     }
 
