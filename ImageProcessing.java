@@ -25,10 +25,8 @@ public class ImageProcessing {
 
 
         for (int i = 30, x= 0; i < 571; i+=60, x++) {
-            if (x%2 == 0)
-                add = 30;
-            else
-                add = 0;
+            add = (x%2 == 0) ? 30 : 0;
+               
             for (int j = 30 + add, y =x%2; j < height; j += 50, y+=2) {
                 
                 int rgb = boardImage.getRGB(i, j);
