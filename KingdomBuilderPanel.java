@@ -97,6 +97,8 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         g.drawImage(settlementCountBlock, 1418, 772, 102, 32, null);
         g.drawImage(deckTextBlock, 1143, 581, 81, 32, null);
         g.drawImage(discardTextBlock, 1270, 581, 102, 32, null);
+        //Objective Cards
+        
         game.board.drawBoard(g);
     }
 
