@@ -16,7 +16,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
     private BufferedImage blurBG, playerWood,mapWood, settlementWood, player1NameBlock, player2NameBlock, player3NameBlock, player4NameBlock, addSettlementButton,
             endTurnButton, terrainCardCanyon, terrainCardDesert, terrainCardFlowers, terrainCardForest, terrainCardGrass, terrainCardBack,
-            settlementCountBlock, deckTextBlock, discardTextBlock; 
+            settlementCountBlock, deckTextBlock, discardTextBlock,purpleSettlement,yellowSettlement,blueSettlement,redSettlement; 
 
     public KingdomBuilderPanel(KingdomBuilder kb) {
        setSize(getPreferredSize());
@@ -52,6 +52,10 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
             settlementCountBlock = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/settlementCountBlock.png"));
             deckTextBlock = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/deckTextBlock.png"));
             discardTextBlock = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/discardTextBlock.png"));
+            purpleSettlement = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Purple Settlement.png"));
+            yellowSettlement = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Yellow Settlement.png"));
+            blueSettlement = ImageIO.read(KingdomBuilderPanel.class.getResource("Images/Blue Settlement.png"));
+            redSettlement =ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Red Settlement.png"));
 
         } catch (Exception e) {
             System.out.println("Kingdom Builder panel error");
@@ -73,15 +77,59 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
         g.drawImage(blurBG, 0, 0, getWidth(), getHeight(), null);
         g.drawImage(playerWood, 1091, 42, 487, 882, null);
-        g.drawImage(mapWood, 70, 90, 985, 858, null);
-        g.drawImage(settlementWood, 69, 18, 988, 62, null);
-        //Main player name blocks
-        g.drawImage(player1NameBlock, 1117, 71, 436, 75, null);
+        g.drawImage(mapWood, 70, 90, 990, 858, null);
+        g.drawImage(settlementWood, 70, 18, 990, 62, null);
+
+        //TextBlocks on player section
+        g.drawImage(settlementCountBlock, 1418, 772, 102, 32, null);
+        g.drawImage(deckTextBlock, 1143, 581, 81, 32, null);
+        g.drawImage(discardTextBlock, 1270, 581, 102, 32, null);
+        //buttons on player section
+        g.drawImage(addSettlementButton, 1409, 652, 114, 110, null);
+        g.drawImage(endTurnButton, 1144, 840, 381, 49, null);
+
+        //Player 2, 3, 4 info
+        int temp = game.turn();
+        int height = 50;
+        int width = 60;
+        if(temp == 0){
+            //settlements images that will go by player's name
+            g.drawImage(yellowSettlement, 350, 23, width, height, null);
+            g.drawImage(blueSettlement, 660, 23, width, height, null);
+            g.drawImage(redSettlement, 970, 23, width, height, null);
+
+            //player's name on player board and the settlement ontop of the add settlement button
+            g.drawImage(player1NameBlock, 1117, 71, 436, 75, null);
+            //idea to put settlement house ontop of addSettlement button
+            //g.drawImage(purpleSettlement, 1436, 682, width, height, null);
+        }
+        if(temp == 1){
+            g.drawImage(blueSettlement, 350, 23, width, height, null);
+            g.drawImage(redSettlement, 660, 23, width, height, null);
+            g.drawImage(purpleSettlement, 970, 23, width, height, null);
+
+            g.drawImage(player2NameBlock, 1117, 71, 436, 75, null);
+        }
+        if(temp == 2){
+            g.drawImage(redSettlement, 350, 23, width, height, null);
+            g.drawImage(purpleSettlement, 660, 23, width, height, null);
+            g.drawImage(yellowSettlement, 970, 23, width, height, null);
+
+            g.drawImage(player3NameBlock, 1117, 71, 436, 75, null);
+        }
+        if(temp == 3){
+            g.drawImage(purpleSettlement, 350, 23, width, height, null);
+            g.drawImage(yellowSettlement, 660, 23, width, height, null);
+            g.drawImage(blueSettlement, 970, 23, width, height, null);
+
+            g.drawImage(player4NameBlock, 1117, 71, 436, 75, null);
+        }
+
+        //Main player name ------- blocks moved above
+        //g.drawImage(player1NameBlock, 1117, 71, 436, 75, null);
         //g.drawImage(player2NameBlock, 1117, 71, 436, 75, null);
         //g.drawImage(player3NameBlock, 1117, 71, 436, 75, null);
         //g.drawImage(player4NameBlock, 1117, 71, 436, 75, null);
-        g.drawImage(addSettlementButton, 1409, 652, 114, 110, null);
-        g.drawImage(endTurnButton, 1144, 840, 381, 49, null);
         //Terrain Cards
         g.drawImage(terrainCardCanyon, 1392, 379, 161, 248, null);
         //g.drawImage(terrainCardDesert, 1392, 379, 161, 248, null);
@@ -93,10 +141,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         g.drawImage(terrainCardCanyon, 1267, 416, 106, 154, null);
         //Deck Pile
         g.drawImage(terrainCardBack, 1130, 416, 106, 154, null);
-        //TextBlocks on player section
-        g.drawImage(settlementCountBlock, 1418, 772, 102, 32, null);
-        g.drawImage(deckTextBlock, 1143, 581, 81, 32, null);
-        g.drawImage(discardTextBlock, 1270, 581, 102, 32, null);
+        
         game.board.drawBoard(g);
     }
 
