@@ -15,7 +15,7 @@ public class ImageProcessing {
         final int[] desertRGB = {252,212,53};
         final int[] forestRGB = {3,50,11};
         final int[] grasslandRGB = {105,152,60};
-        final double colorThreshold = 30.0;
+        final double colorThreshold = 150.0;
 
         BufferedImage boardImage = ImageIO.read(ImageProcessing.class.getResource("/Images/Board1.png"));
         int width = boardImage.getWidth();
@@ -61,6 +61,12 @@ public class ImageProcessing {
             }
         }
 
+        for(int i = 0; i < board.board.length; i++) {
+            for(int j = i%2; j < board.board[i].length; j+=2) {
+                System.out.print(board.board[i][j].getType() + " ");
+            }
+            System.out.println();
+        }
 
      
     }
