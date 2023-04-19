@@ -15,18 +15,21 @@ public class ImageProcessing {
         final int[] desertRGB = {252,212,53};
         final int[] forestRGB = {3,50,11};
         final int[] grasslandRGB = {105,152,60};
-        final double colorThreshold = 150.0;
+        final double colorThreshold = 50.0;
 
         BufferedImage boardImage = ImageIO.read(ImageProcessing.class.getResource("/Images/Board1.png"));
         int width = boardImage.getWidth();
         int height = boardImage.getHeight();
         Board board = new Board();
-       
+       int add = 0;
 
 
-
-        for (int i = 30, x= 0; i < width; i+=width / 10.5, x++) {
-            for (int j = 30, y =x%2; j < height; j += height / 10, y+=2) {
+        for (int i = 30, x= 0; i < 571; i+=60, x++) {
+            if (x%2 == 0)
+                add = 30;
+            else
+                add = 0;
+            for (int j = 30 + add, y =x%2; j < height; j += 50, y+=2) {
                 
                 int rgb = boardImage.getRGB(i, j);
                 int red = (rgb >> 16) & 0xFF;
