@@ -5,8 +5,7 @@ import java.awt.Graphics2D;
 
 public class Game {
     private KingdomBuilderPanel panel;
-    private CardDrawer cardDrawer;
-
+    
     public Player[] players;
     public Board board;
     private ArrayList<String> terrainDeck;
@@ -26,7 +25,6 @@ public class Game {
     private boolean gameOver;
 
     public Game(KingdomBuilderPanel p){
-        c = new CardDrawer();
         panel = p;
         board = new Board();
         players = new Player[4];
@@ -37,6 +35,8 @@ public class Game {
         discard = new ArrayList<>();
         objectiveDeck = new String[3];
         eligibleTiles = new TreeSet<>();
+
+        c = new CardDrawer();
         init();
     }
 
@@ -200,6 +200,11 @@ public class Game {
     }
 
     public void drawAll(Graphics2D g) {
-
+        board.drawBoard(g);
+        c.draw(g);
+    }
+    //return terrain deck
+    public ArrayList<String> getTerrainDeck(){
+        return terrainDeck;
     }
 }
