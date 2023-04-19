@@ -41,6 +41,9 @@ public class Board {
             }
         }
     }
+    public void setTileType(int i, int j, String type) {
+        board[i][j].setType(type);
+    }
     
     //Richard: should work. Tested this once
     private Tile[][] rotated(Tile[][] arr) { 
@@ -67,7 +70,10 @@ public class Board {
         return null;
     }
 
-    public Tile[] getNeighbors(int i, int j) {
+    public Tile[] getNeighbors(Tile t) {
+        int i = t.getRow();
+        int j = t.getColumn();
+
         //Richard: shouldn't happen
         if(i > board.length || i < 0 && j > board[0].length || j < 0) {
             System.out.println("Out of bounds. i: " + i + ". j: " + j);

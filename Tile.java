@@ -6,13 +6,16 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.awt.BasicStroke;
+import java.awt.Color;
 
 import javax.imageio.ImageIO;
 //import javax.swing.text.html.HTMLDocument.HTMLReader.SpecialAction;
 
 public class Tile {
-    private static String[] terrainTypes = {"canyon", "desert", "flowers", "forest", "grass", "mountain", "water"};   
-    private static String[] specialTypes = {"castle", "oracle", "farm", "oasis", "tower", "tavern", "barn", "harbor", "paddock"};
+    private static final String[] terrainTypes = {"canyon", "desert", "flowers", "forest", "grass", "mountain", "water"};   
+    private static final String[] specialTypes = {"castle", "oracle", "farm", "oasis", "tower", "tavern", "barn", "harbor", "paddock"};
+    private static final Color[] playerColors = new Color[4];
+    
     public static final int WIDTH = 46;
     public static final int HEIGHT = (int)Math.round(WIDTH * 2 / Math.sqrt(3));
     public static final int PARTICULAR_POINT = (int)Math.round(41.0 / 55 * HEIGHT);
@@ -33,6 +36,11 @@ public class Tile {
     private int column;
 
     public static void setImages() {
+        playerColors[0] = new Color(135, 57, 230); //Purple
+        playerColors[1] = new Color(237, 223, 19); //Yellow
+        playerColors[2] = new Color(0, 11, 227); //Blue
+        playerColors[3] = new Color(232, 32, 9); //Red
+
         try {
             //Richard: will this work with the school computers? For some reason, the school computers didn't work with getResource
             images[0] = ImageIO.read(Tile.class.getResource("/Images/Canyon Tile.png"));
@@ -144,25 +152,40 @@ public class Tile {
     }
 
     public void bold(int playerTurn, Graphics2D g) {
-        g.setStroke(new BasicStroke(3));
+        g.setStroke(new BasicStroke(5));
 
-        switch(playerTurn) {
-            case 0:
-                break;
+        //Richard: really scuffed infill way. Perhaps a bad place to put this
+        int[] goddamnitX = new int[6];
+        int[] goddamnitY = new int[6];
 
-            case 1:
-                break;
+        goddamnitX[0] = hitbox.xpoints[0] + 3;
+        goddamnitX[1] = hitbox.xpoints[1];
+        goddamnitX[2] = hitbox.xpoints[2] - 3;
+        goddamnitX[3] = hitbox.xpoints[3] - 3;
+        goddamnitX[4] = hitbox.xpoints[4];
+        goddamnitX[5] = hitbox.xpoints[5] + 3;
 
-            case 2:
-                break;
+        goddamnitY[0] = hitbox.ypoints[0] + 1;
+        goddamnitY[1] = hitbox.ypoints[1] + 3;
+        goddamnitY[2] = hitbox.ypoints[2] + 1;
+        goddamnitY[3] = hitbox.ypoints[3] - 1;
+        goddamnitY[4] = hitbox.ypoints[4] - 3;
+        goddamnitY[5] = hitbox.ypoints[5] - 1;
 
-            case 3:
-                break;
 
-            default:
-                System.out.println("Player turn: " + playerTurn);
-        }
+        Polygon idfk = new Polygon(goddamnitX, goddamnitY, 6);
 
+        //Outline
+        g.setColor(playerColors[playerTurn]);
+        g.drawPolygon(idfk);
+
+        //Fill
+        g.setColor(new Color(playerColors[playerTurn].getRed(), playerColors[playerTurn].getGreen(), playerColors[playerTurn].getBlue(), 90));
+        g.fillPolygon(idfk);
+
+        //Outline?
+        g.setColor(Color.BLACK);
+        g.setStroke(new BasicStroke(1.3f));
         g.drawPolygon(hitbox);
     }
 

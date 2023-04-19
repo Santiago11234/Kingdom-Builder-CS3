@@ -151,7 +151,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
     public void mouseExited(MouseEvent e) {}
 
     public void mouseClicked(MouseEvent e) {
-    
+        
     }
 
     public void actionPerformed(ActionEvent e) {
