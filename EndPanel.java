@@ -28,8 +28,8 @@ public class EndPanel extends JPanel implements ActionListener{
         newGameButton.setOpaque(false);
         newGameButton.setContentAreaFilled(false);
         newGameButton.setBorderPainted(false);
-        newGameButton.setSize(150, 50);
-        newGameButton.setLocation(1400, 870);
+        newGameButton.setSize(242, 93);
+        newGameButton.setLocation(1300, 860);
         newGameButton.setFocusable(false);
         newGameButton.addActionListener(this);
         add(newGameButton);
@@ -45,16 +45,17 @@ public class EndPanel extends JPanel implements ActionListener{
     }
 
     public void paintComponent(Graphics g) {
-        g.clearRect(0, 0, getWidth(), getHeight());
+        //g.clearRect(0, 0, getWidth(), getHeight());
         g.drawImage(woodBG, 0, 0, 1600, 960, null);
-        g.drawImage(leaderboard, 250, 50, 1100, 130, null);
-        g.drawImage(viewBoard, 1400, 800, 150, 50, null);
-        g.drawImage(newGame, 1400, 870, 150, 50, null);
+        g.drawImage(leaderboard, 206, 18, 1288, 178, null);
+        g.drawImage(viewBoard, 1300, 760, 242, 93, null);
+        g.drawImage(newGame, 1300, 860, 242, 93, null);
     }
 
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==newGameButton){
-            frame.restart();
+            frame.nextScreen();
+            //frame.restart();
         }
         if(e.getSource()==viewBoardButton){
             
