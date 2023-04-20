@@ -88,10 +88,6 @@ public class Game {
         return turn;
     }
 
-    public int turn(){
-        return turn;
-    }
-
     public boolean firstPlayerPlaying() {
         if(turn == firstPlayer){
             return true;
