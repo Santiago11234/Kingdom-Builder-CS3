@@ -84,6 +84,10 @@ public class Game {
         board.createBoard();
     }
 
+    public int turn() {
+        return turn;
+    }
+
     public boolean firstPlayerPlaying() {
         if(turn == firstPlayer){
             return true;
@@ -102,11 +106,60 @@ public class Game {
     }
 
     public void startSettlementPlay() {
-
+        findEligibleTiles(players[turn].getCard(), true);
+        settlementPlaying = 1;
+        panel.setSettlementButton(false);
     }
 
     public void mostMoves(int x, int y) {
+        //Checking power ups
+        boolean thingClicked = false;
+        boolean unusedPowerUp = false;
+        for(PowerUp p: players[turn].powerups.keySet()) {
+            if(p.clicked(x, y)) {
+                thingClicked = true;
 
+                if(players[turn].powerups.get(p)) {
+                    powerupSelected = p;
+                    unusedPowerUp = true;
+                }
+                
+                break;
+            }
+        }
+
+        if(unusedPowerUp) {
+            //Richard: testing purposes. Should never happen
+            if(powerupPlaying == 2) {
+                System.out.println("no");
+            }
+
+            if(settlementPlaying == 1 && settlementCount == 0) {
+                eligibleTiles.clear(); //Richard: unnecessary
+                settlementPlaying = 0;
+            }
+
+            if(powerupPlaying == 0) {
+                powerupPlaying = 1;
+            }
+
+            powerUpMethod(null);
+        }
+        if(thingClicked) {
+            return;
+        }
+
+
+        //Eligible tiles
+        thingClicked = false; //Richard: should already be
+        Tile tileClicked;
+        for(Tile t: eligibleTiles) {
+            if(t.clicked(x, y)) {
+                thingClicked = true;
+                tileClicked = t;
+                break;
+            }
+        }
     }
 
     private void findEligibleTiles(String terrain, boolean adjacent) {
@@ -155,6 +208,7 @@ public class Game {
 
         if(objectivesContain("fishermen")) {
             for(Tile t: players[turn].settlements) {
+                //Richard: what about things on water?
                 if(neighborsInclude(t, "water")) {
                     score++;
                 }
