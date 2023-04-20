@@ -118,6 +118,11 @@ public class Tile {
 
     public void draw(Graphics g) {
         switch(type) {
+            case "red":
+                g.setColor(playerColors[3]);
+                g.fillPolygon(hitbox);
+                break;
+                
             case "canyon":
                 g.drawImage(images[0], x, y, WIDTH, HEIGHT, null);
                 break;
