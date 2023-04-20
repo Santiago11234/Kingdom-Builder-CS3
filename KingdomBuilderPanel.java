@@ -8,6 +8,7 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+//ima push so hard itll make your head spin
 
 public class KingdomBuilderPanel extends JPanel implements ActionListener, MouseListener {
     private KingdomBuilder frame;
