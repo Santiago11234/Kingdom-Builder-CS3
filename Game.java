@@ -121,6 +121,11 @@ public class Game {
 
     }
 
+    //return turn method
+    public int turn() {
+        return turn;
+    }
+
     private void powerUpUsed() {
 
     }
