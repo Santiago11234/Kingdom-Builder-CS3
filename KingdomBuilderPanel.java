@@ -8,7 +8,6 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-//ima push so hard itll make your head spin
 
 public class KingdomBuilderPanel extends JPanel implements ActionListener, MouseListener {
     private KingdomBuilder frame;
@@ -17,7 +16,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
     private BufferedImage blurBG, playerWood,mapWood, settlementWood, player1NameBlock, player2NameBlock, player3NameBlock, player4NameBlock, addSettlementButton,
             endTurnButton, terrainCardCanyon, terrainCardDesert, terrainCardFlowers, terrainCardForest, terrainCardGrass, terrainCardBack,
-            settlementCountBlock, deckTextBlock, discardTextBlock,purpleSettlement,yellowSettlement,blueSettlement,redSettlement; 
+            settlementCountBlock, deckTextBlock, discardTextBlock,purpleSettlement,yellowSettlement,blueSettlement,redSettlement,player1Small,player2Small,player3Small,player4Small; 
 
     public KingdomBuilderPanel(KingdomBuilder kb) {
        setSize(getPreferredSize());
@@ -34,29 +33,33 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         add(startButton);
 
        try {
-        blurBG = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/blurred BG.jpg"));
-        playerWood = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/playerWood.png"));
-        mapWood = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/mapWood.png"));
-        settlementWood = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/settlementWood.png"));
-        player1NameBlock = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/player1NameBlock.png"));
-        player2NameBlock = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/player2NameBlock.png"));
-        player3NameBlock = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/player3NameBlock.png"));
-        player4NameBlock = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/player4NameBlock.png"));
-        addSettlementButton = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/addSettlementButton.png"));
-        endTurnButton = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/endTurnButton.png"));
-        terrainCardCanyon = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Terrain Card Canyon.png"));
-        terrainCardDesert = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Terrain Card Desert.png"));
-        terrainCardFlowers = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Terrain Card Flowers.png"));
-        terrainCardForest = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Terrain Card Forest.png"));
-        terrainCardGrass = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Terrain Card Grass.png"));
-        terrainCardBack = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Terrain Card Back.png"));
-        settlementCountBlock = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/settlementCountBlock.png"));
-        deckTextBlock = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/deckTextBlock.png"));
-        discardTextBlock = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/discardTextBlock.png"));
-        purpleSettlement = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Purple Settlement.png"));
-        yellowSettlement = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Yellow Settlement.png"));
-        blueSettlement = ImageIO.read(KingdomBuilderPanel.class.getResource("Images/Blue Settlement.png"));
-        redSettlement =ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Red Settlement.png"));
+            blurBG = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/blurred BG.jpg"));
+            playerWood = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/playerWood.png"));
+            mapWood = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/mapWood.png"));
+            settlementWood = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/settlementWood.png"));
+            player1NameBlock = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/player1NameBlock.png"));
+            player2NameBlock = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/player2NameBlock.png"));
+            player3NameBlock = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/player3NameBlock.png"));
+            player4NameBlock = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/player4NameBlock.png"));
+            addSettlementButton = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/addSettlementButton.png"));
+            endTurnButton = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/endTurnButton.png"));
+            terrainCardCanyon = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Terrain Card Canyon.png"));
+            terrainCardDesert = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Terrain Card Desert.png"));
+            terrainCardFlowers = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Terrain Card Flowers.png"));
+            terrainCardForest = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Terrain Card Forest.png"));
+            terrainCardGrass = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Terrain Card Grass.png"));
+            terrainCardBack = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Terrain Card Back.png"));
+            settlementCountBlock = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/settlementCountBlock.png"));
+            deckTextBlock = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/deckTextBlock.png"));
+            discardTextBlock = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/discardTextBlock.png"));
+            purpleSettlement = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Purple Settlement.png"));
+            yellowSettlement = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Yellow Settlement.png"));
+            blueSettlement = ImageIO.read(KingdomBuilderPanel.class.getResource("Images/Blue Settlement.png"));
+            redSettlement =ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Red Settlement.png"));
+            player1Small = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/player1NameBlockSmall.png"));
+            player2Small = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/player2NameBlockSmall.png"));
+            player3Small = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/player3NameBlockSmall.png"));
+            player4Small = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/player4NameBlockSmall.png"));
 
         } catch (Exception e) {
             System.out.println("Kingdom Builder panel error");
@@ -96,8 +99,14 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         if(temp == 0){
             //settlements images that will go by player's name
             g.drawImage(yellowSettlement, 350, 23, width, height, null);
+            g.drawImage(player2Small,125,31,200,33,null);
+
             g.drawImage(blueSettlement, 660, 23, width, height, null);
+            g.drawImage(player3Small,435,31,200,33,null);
+
             g.drawImage(redSettlement, 970, 23, width, height, null);
+            g.drawImage(player4Small,745,31,200,33,null);
+
 
             //player's name on player board and the settlement ontop of the add settlement button
             g.drawImage(player1NameBlock, 1117, 71, 436, 75, null);
@@ -105,23 +114,46 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
             //g.drawImage(purpleSettlement, 1436, 682, width, height, null);
         }
         if(temp == 1){
+            //player3
             g.drawImage(blueSettlement, 350, 23, width, height, null);
+            g.drawImage(player3Small,125,31,200,33,null);
+            //player4
             g.drawImage(redSettlement, 660, 23, width, height, null);
+            g.drawImage(player4Small,435,31,200,33,null);
+
+
+            //player1 stuff
+            g.drawImage(player1Small,745,31,200,33,null);
             g.drawImage(purpleSettlement, 970, 23, width, height, null);
 
             g.drawImage(player2NameBlock, 1117, 71, 436, 75, null);
         }
         if(temp == 2){
             g.drawImage(redSettlement, 350, 23, width, height, null);
+            g.drawImage(player4Small,125,31,200,33,null);
+
+
             g.drawImage(purpleSettlement, 660, 23, width, height, null);
+            g.drawImage(player1Small,435,31,200,33,null);
+
+
             g.drawImage(yellowSettlement, 970, 23, width, height, null);
+            g.drawImage(player2Small,745,31,200,33,null);
+
 
             g.drawImage(player3NameBlock, 1117, 71, 436, 75, null);
         }
         if(temp == 3){
             g.drawImage(purpleSettlement, 350, 23, width, height, null);
+            g.drawImage(player1Small,125,31,200,33,null);
+
             g.drawImage(yellowSettlement, 660, 23, width, height, null);
+            g.drawImage(player2Small,435,31,200,33,null);
+
+
             g.drawImage(blueSettlement, 970, 23, width, height, null);
+            g.drawImage(player3Small,745,31,200,33,null);
+
 
             g.drawImage(player4NameBlock, 1117, 71, 436, 75, null);
         }
@@ -143,8 +175,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         //Deck Pile
         g.drawImage(terrainCardBack, 1130, 416, 106, 154, null);
         
-        //Objective Cards
-        game.drawAll(g);
+        game.board.drawBoard(g);
     }
 
     public void mousePressed(MouseEvent e) {}
@@ -153,7 +184,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
     public void mouseExited(MouseEvent e) {}
 
     public void mouseClicked(MouseEvent e) {
-        
+    
     }
 
     public void actionPerformed(ActionEvent e) {

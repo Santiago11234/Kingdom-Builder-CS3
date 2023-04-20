@@ -83,6 +83,10 @@ public class Game {
         System.out.println(terrainDeck);
         board.createBoard();
     }
+    
+    public int turn(){
+        return turn;
+    }
 
     public int turn(){
         return turn;
