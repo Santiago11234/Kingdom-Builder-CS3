@@ -92,7 +92,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         g.drawImage(addSettlementButton, 1409, 652, 114, 110, null);
         g.drawImage(endTurnButton, 1144, 840, 381, 49, null);
 
-        //Player 2, 3, 4 info
+        //Player not main people info
         int temp = game.turn();
         int height = 50;
         int width = 60;
