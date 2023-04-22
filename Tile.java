@@ -30,6 +30,7 @@ public class Tile {
     private int x;
     private int y;
     private Polygon hitbox;
+    public int house;
 
     //Row and column of Tile in board
     private int row;
@@ -60,6 +61,7 @@ public class Tile {
     public Tile(int i, int j) {
         row = i;
         column = j;
+        house = 0;
     } 
 
     public int getRow() {return row;}
@@ -116,7 +118,32 @@ public class Tile {
 
     public boolean clicked(int x, int y) {return hitbox.contains(x, y);}
 
+
+    public void placeHouse(String player) {
+        setType("water");
+    }
+
     public void draw(Graphics g) {
+
+        switch(house) {
+            case 0:
+                g.setColor(playerColors[0]);
+                g.fillPolygon(hitbox);
+                break;
+            case 1:
+                g.setColor(playerColors[1]);
+                g.fillPolygon(hitbox);
+                break;
+            case 2:
+                g.setColor(playerColors[2]);
+                g.fillPolygon(hitbox);
+                break;
+            case 3:
+                g.setColor(playerColors[3]);
+                g.fillPolygon(hitbox);
+                break;
+        }
+
         switch(type) {
             case "red":
                 g.setColor(playerColors[3]);
@@ -198,3 +225,5 @@ public class Tile {
         return row + ", " + column + ". " + type;
     }
 }
+
+

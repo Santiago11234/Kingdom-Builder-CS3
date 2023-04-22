@@ -12,6 +12,7 @@ public class Board {
     
     private Tile[] arr;
 
+
     public Board() {
         board = new Tile[20][40];
         
@@ -28,6 +29,18 @@ public class Board {
                 else {
                     board[i][j + 1] = new Tile(i, j + 1);
                     board[i][j + 1].setPosition(X + Tile.WIDTH / 2 + j / 2 * Tile.WIDTH, Y + i * Tile.PARTICULAR_POINT);
+                }
+            }
+        }
+    }
+
+    public void findTileClicked(int x, int y, int player) {
+        for(int i = 0; i < board.length; i++) {
+            for(int j = i % 2; j < board[i].length; j += 2) {
+                if(board[i][j].clicked(x, y)) {
+                    System.out.println("Tile clicked: " + i + ", " + j);
+                    board[i][j].placeHouse(player);
+                    
                 }
             }
         }
