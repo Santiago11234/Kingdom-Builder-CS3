@@ -13,10 +13,11 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
     private KingdomBuilder frame;
     private Game game;
     private JButton startButton;
+    private Board board;
 
     private BufferedImage blurBG, playerWood,mapWood, settlementWood, player1NameBlock, player2NameBlock, player3NameBlock, player4NameBlock, addSettlementButton,
             endTurnButton, terrainCardCanyon, terrainCardDesert, terrainCardFlowers, terrainCardForest, terrainCardGrass, terrainCardBack,
-            settlementCountBlock, deckTextBlock, discardTextBlock,purpleSettlement,yellowSettlement,blueSettlement,redSettlement; 
+            settlementCountBlock, deckTextBlock, discardTextBlock,purpleSettlement,yellowSettlement,blueSettlement,redSettlement,player1Small,player2Small,player3Small,player4Small; 
 
     public KingdomBuilderPanel(KingdomBuilder kb) {
        setSize(getPreferredSize());
@@ -31,6 +32,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         startButton.setFocusable(false);
         startButton.addActionListener(this);
         add(startButton);
+        board = new Board();
 
        try {
             blurBG = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/blurred BG.jpg"));
@@ -56,6 +58,10 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
             yellowSettlement = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Yellow Settlement.png"));
             blueSettlement = ImageIO.read(KingdomBuilderPanel.class.getResource("Images/Blue Settlement.png"));
             redSettlement =ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Red Settlement.png"));
+            player1Small = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/player1NameBlockSmall.png"));
+            player2Small = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/player2NameBlockSmall.png"));
+            player3Small = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/player3NameBlockSmall.png"));
+            player4Small = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/player4NameBlockSmall.png"));
 
         } catch (Exception e) {
             System.out.println("Kingdom Builder panel error");
@@ -88,15 +94,21 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         g.drawImage(addSettlementButton, 1409, 652, 114, 110, null);
         g.drawImage(endTurnButton, 1144, 840, 381, 49, null);
 
-        //Player 2, 3, 4 info
+        //Player not main people info
         int temp = game.turn();
         int height = 50;
         int width = 60;
         if(temp == 0){
             //settlements images that will go by player's name
             g.drawImage(yellowSettlement, 350, 23, width, height, null);
+            g.drawImage(player2Small,125,31,200,33,null);
+
             g.drawImage(blueSettlement, 660, 23, width, height, null);
+            g.drawImage(player3Small,435,31,200,33,null);
+
             g.drawImage(redSettlement, 970, 23, width, height, null);
+            g.drawImage(player4Small,745,31,200,33,null);
+
 
             //player's name on player board and the settlement ontop of the add settlement button
             g.drawImage(player1NameBlock, 1117, 71, 436, 75, null);
@@ -104,23 +116,46 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
             //g.drawImage(purpleSettlement, 1436, 682, width, height, null);
         }
         if(temp == 1){
+            //player3
             g.drawImage(blueSettlement, 350, 23, width, height, null);
+            g.drawImage(player3Small,125,31,200,33,null);
+            //player4
             g.drawImage(redSettlement, 660, 23, width, height, null);
+            g.drawImage(player4Small,435,31,200,33,null);
+
+
+            //player1 stuff
+            g.drawImage(player1Small,745,31,200,33,null);
             g.drawImage(purpleSettlement, 970, 23, width, height, null);
 
             g.drawImage(player2NameBlock, 1117, 71, 436, 75, null);
         }
         if(temp == 2){
             g.drawImage(redSettlement, 350, 23, width, height, null);
+            g.drawImage(player4Small,125,31,200,33,null);
+
+
             g.drawImage(purpleSettlement, 660, 23, width, height, null);
+            g.drawImage(player1Small,435,31,200,33,null);
+
+
             g.drawImage(yellowSettlement, 970, 23, width, height, null);
+            g.drawImage(player2Small,745,31,200,33,null);
+
 
             g.drawImage(player3NameBlock, 1117, 71, 436, 75, null);
         }
         if(temp == 3){
             g.drawImage(purpleSettlement, 350, 23, width, height, null);
+            g.drawImage(player1Small,125,31,200,33,null);
+
             g.drawImage(yellowSettlement, 660, 23, width, height, null);
+            g.drawImage(player2Small,435,31,200,33,null);
+
+
             g.drawImage(blueSettlement, 970, 23, width, height, null);
+            g.drawImage(player3Small,745,31,200,33,null);
+
 
             g.drawImage(player4NameBlock, 1117, 71, 436, 75, null);
         }
@@ -147,11 +182,15 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
     public void mousePressed(MouseEvent e) {}
     public void mouseReleased(MouseEvent e) {}
-    public void mouseEntered(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {
+        int x = e.getX();
+        int y = e.getY();
+        board.tileClicked(x,y).setType("red");
+    }
     public void mouseExited(MouseEvent e) {}
 
     public void mouseClicked(MouseEvent e) {
-        
+    
     }
 
     public void actionPerformed(ActionEvent e) {

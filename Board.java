@@ -41,6 +41,7 @@ public class Board {
             }
         }
     }
+
     public void setTileType(int i, int j, String type) {
         board[i][j].setType(type);
     }
