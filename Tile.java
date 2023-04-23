@@ -30,7 +30,6 @@ public class Tile {
     private int x;
     private int y;
     private Polygon hitbox;
-    public int house;
 
     //Row and column of Tile in board
     private int row;
@@ -61,19 +60,20 @@ public class Tile {
     public Tile(int i, int j) {
         row = i;
         column = j;
-        house = 0;
     } 
 
     public int getRow() {return row;}
 
     public int getColumn() {return column;}
 
-    public Polygon getPolygon() {return hitbox;}
+    public int getX() {return x;}
+
+    public int getY() {return y;}
 
     public void setPosition(int x, int y) {
         this.x = x;
         this.y = y;
-
+        
         int[] xArray = new int[6];
         int[] yArray = new int[6];
 
@@ -85,15 +85,20 @@ public class Tile {
         hitbox = new Polygon(xArray, yArray, 6);
     }
 
-    public String getType() {
-        return type;
-    }
+    public String getType() {return type;}
 
     public void setType(String t) {
         type = t;
 
+        //Richard: awaiting Power Ups
         if(isPowerupTile()) {
             powerups = new LinkedList<PowerUp>();
+            for(int i = 0; i < 2; i++) {
+
+            }
+        }
+        else {
+            powerups = null;
         }
     }
 
@@ -116,40 +121,14 @@ public class Tile {
         return isSpecialTile() && !type.equals("castle");
     }
 
-    public boolean clicked(int x, int y) {return hitbox.contains(x, y);}
-
-
-    public void placeHouse(int player) {
-        setType("water");
+    public PowerUp getPowerUp() {
+        return powerups.poll();
     }
 
+    public boolean clicked(int x, int y) {return hitbox.contains(x, y);}
+
     public void draw(Graphics g) {
-
-        switch(house) {
-            case 0:
-                g.setColor(playerColors[0]);
-                g.fillPolygon(hitbox);
-                break;
-            case 1:
-                g.setColor(playerColors[1]);
-                g.fillPolygon(hitbox);
-                break;
-            case 2:
-                g.setColor(playerColors[2]);
-                g.fillPolygon(hitbox);
-                break;
-            case 3:
-                g.setColor(playerColors[3]);
-                g.fillPolygon(hitbox);
-                break;
-        }
-
         switch(type) {
-            case "red":
-                g.setColor(playerColors[3]);
-                g.fillPolygon(hitbox);
-                break;
-                
             case "canyon":
                 g.drawImage(images[0], x, y, WIDTH, HEIGHT, null);
                 break;
@@ -181,6 +160,10 @@ public class Tile {
             default:
                 System.out.println("Tile draw has a problem");
         }
+
+        if(powerups != null && !powerups.isEmpty()) {
+            powerups.peek().draw(true, g);
+        }
     }
 
     public void bold(int playerTurn, Graphics2D g) {
@@ -211,19 +194,16 @@ public class Tile {
         g.setColor(playerColors[playerTurn]);
         g.drawPolygon(idfk);
 
+        //Kinda scuffed bandaid solution
+        g.setStroke(new BasicStroke(1.9f));
+        g.drawPolygon(hitbox);
+
         //Fill
         g.setColor(new Color(playerColors[playerTurn].getRed(), playerColors[playerTurn].getGreen(), playerColors[playerTurn].getBlue(), 90));
         g.fillPolygon(idfk);
-
-        //Outline?
-        g.setColor(Color.BLACK);
-        g.setStroke(new BasicStroke(1.3f));
-        g.drawPolygon(hitbox);
     }
 
     public String toString() {
         return row + ", " + column + ". " + type;
     }
 }
-
-
