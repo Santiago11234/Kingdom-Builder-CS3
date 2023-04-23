@@ -73,25 +73,27 @@ public class Game {
         firstPlayer = (int)(Math.random()*4);
         turn = firstPlayer;
         settlementPlaying = 0;
-        powerupPlaying= 0;
+        powerupPlaying = 0;
         eligibleTiles.clear();
         settlementCount = 0;
         powerupCount = 0;
+        powerUpTurnCount = 0;
         powerupSelected = null;
         tileToRemove = null;
         gameOver = false;
-        System.out.println(terrainDeck);
+        //System.out.println(terrainDeck); //Richard: commented
+
+        for(Player p: players) {
+            p.setCard(terrainDeck.remove(0));
+        }
+
         board.createBoard();
     }
     
     public int turn(){
         return turn;
     }
-
-    public int turn() {
-        return turn;
-    }
-
+    
     public boolean firstPlayerPlaying() {
         if(turn == firstPlayer){
             return true;
@@ -116,58 +118,77 @@ public class Game {
     }
 
     public void mostMoves(int x, int y) {
-        //Checking power ups
-        boolean thingClicked = false;
-        boolean unusedPowerUp = false;
-        for(PowerUp p: players[turn].powerups.keySet()) {
-            if(p.clicked(x, y)) {
-                thingClicked = true;
-
-                if(players[turn].powerups.get(p)) {
+        //Richard: assuming that clicking an unused power up results in nothing
+        if(powerupPlaying == 0 || powerupPlaying == 1 && powerUpTurnCount == 0) {
+            for(PowerUp p: players[turn].powerups.keySet()) {
+                if(p.clicked(x, y)) {
                     powerupSelected = p;
-                    unusedPowerUp = true;
+
+                    if(settlementCount == 0) {
+                        settlementPlaying = 0;
+                        panel.setSettlementButton(true);
+                        eligibleTiles.clear();
+                    }
+
+                    if(players[turn].powerups.get(p)) {
+                        if(powerupPlaying == 0)   //Richard: doing this in the name of "performance"
+                            powerupPlaying = 1;
+                        
+                        powerUpMethod(null);
+                    }
+
+                    return;
                 }
-                
-                break;
             }
         }
 
-        if(unusedPowerUp) {
-            //Richard: testing purposes. Should never happen
-            if(powerupPlaying == 2) {
-                System.out.println("no");
-            }
-
-            if(settlementPlaying == 1 && settlementCount == 0) {
-                eligibleTiles.clear(); //Richard: unnecessary
-                settlementPlaying = 0;
-            }
-
-            if(powerupPlaying == 0) {
-                powerupPlaying = 1;
-            }
-
-            powerUpMethod(null);
-        }
-        if(thingClicked) {
+        //Richard: clicking on an occupied tile doesn't do anything
+        Tile t = board.tileClicked(x, y);        
+        if(t == null) {
             return;
         }
+        
+        //Richard: powerupCount = 0 already checked above
+        if(powerupPlaying == 1) {
+            powerUpMethod(t);
+        }
 
+        else if(settlementPlaying == 1) {
+            if(!addSettlement(t))
+                return;
 
-        //Eligible tiles
-        thingClicked = false; //Richard: should already be
-        Tile tileClicked;
-        for(Tile t: eligibleTiles) {
-            if(t.clicked(x, y)) {
-                thingClicked = true;
-                tileClicked = t;
-                break;
+            settlementCount++;
+            if(settlementCount == 3) {
+                settlementPlaying = 2;
+                settlementCount = 0;
+                panel.setSwitchTurnButton(true);
+            }
+            else {
+                findEligibleTiles(players[turn].getCard(), true);
             }
         }
+
+        //Richard: otherwise, nothing happens
     }
 
     private void findEligibleTiles(String terrain, boolean adjacent) {
+        if(adjacent) {
+            for(Tile t: players[turn].settlements) {
+                Tile[] neighbors = board.getNeighbors(t);
 
+                for(Tile t2: neighbors) {
+                    if(t2 != null && !t2.isOccupied() && t2.getType().equals(terrain)) {
+                        eligibleTiles.add(t2);
+                    }
+                }
+            }
+            
+            if(!eligibleTiles.isEmpty()) {
+                return;
+            }
+        }
+
+        eligibleTiles.addAll(board.unoccupiedTileOfTerrain(terrain));
     }
 
     private boolean addSettlement(Tile t) {
@@ -177,11 +198,14 @@ public class Game {
             score();
             addOrRemovePowerUps(t, true);
             enableOrDisablePowerUps();
+            eligibleTiles.clear();
 
             if(players[turn].getSettlementsLeft() == 0) {
                 settlementPlaying = 2;
                 gameOver = true;
             }
+
+            return true;
         }
         
         return false;
@@ -195,15 +219,15 @@ public class Game {
 
     }
 
-    private TreeSet<Tile> findTilesTavern() {
+    private HashSet<Tile> findTilesTavern() {
         return eligibleTiles;
     }
 
-    private TreeSet<Tile> findTilesPaddock() {
+    private HashSet<Tile> findTilesPaddock() {
         return eligibleTiles;
     }
 
-    private TreeSet<Tile> twoTilesAway(Tile t) { 
+    private HashSet<Tile> twoTilesAway(Tile t) { 
         return eligibleTiles;
     }
     
@@ -232,6 +256,8 @@ public class Game {
                 }
             }
         }
+
+        players[turn].setPersonalPoints(score);
     }
 
     private boolean neighborsInclude(Tile t, String terrain) {
@@ -263,13 +289,33 @@ public class Game {
     }
 
     public void switchTurn() {
+        eligibleTiles.clear();
+        settlementPlaying = powerupPlaying = 0;
+        
+        powerupSelected = null;
+        tileToRemove = null;
+
+        //Richard: switch turns here
+        discard.add(0, players[turn].getCard());
+        players[turn].setCard(terrainDeck.remove(0));
+
         turn = (turn + 1) % 4;
+
+        panel.setSettlementButton(true);
+        panel.setSwitchTurnButton(false);
     }
 
     public void drawAll(Graphics2D g) {
         board.drawBoard(g);
         c.draw(g);
+
+        players[turn].drawAll(turn, g);
+
+        for(Tile t: eligibleTiles) {
+            t.bold(turn, g);
+        }
     }
+
     //return terrain deck
     public ArrayList<String> getTerrainDeck(){
         return terrainDeck;
