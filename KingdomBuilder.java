@@ -10,7 +10,6 @@ public class KingdomBuilder extends JFrame {
     
     public KingdomBuilder() {
         super("Kingdom Builder"); 
-
         cardLayout = new CardLayout();
         setLayout(cardLayout);
 

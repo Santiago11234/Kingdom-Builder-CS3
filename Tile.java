@@ -119,7 +119,7 @@ public class Tile {
     public boolean clicked(int x, int y) {return hitbox.contains(x, y);}
 
 
-    public void placeHouse(String player) {
+    public void placeHouse(int player) {
         setType("water");
     }
 
