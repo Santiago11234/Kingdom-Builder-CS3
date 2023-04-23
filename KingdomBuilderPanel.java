@@ -13,7 +13,6 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
     private KingdomBuilder frame;
     private Game game;
     private JButton startButton;
-    private Board board;
 
     private BufferedImage blurBG, playerWood,mapWood, settlementWood, player1NameBlock, player2NameBlock, player3NameBlock, player4NameBlock, addSettlementButton,
             endTurnButton, terrainCardCanyon, terrainCardDesert, terrainCardFlowers, terrainCardForest, terrainCardGrass, terrainCardBack,
@@ -32,7 +31,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         startButton.setFocusable(false);
         startButton.addActionListener(this);
         add(startButton);
-        board = new Board();
+        
 
        try {
             blurBG = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/blurred BG.jpg"));
@@ -182,15 +181,14 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
     public void mousePressed(MouseEvent e) {}
     public void mouseReleased(MouseEvent e) {}
-    public void mouseEntered(MouseEvent e) {
-        int x = e.getX();
-        int y = e.getY();
-        board.tileClicked(x,y).setType("red");
-    }
+    public void mouseEntered(MouseEvent e) {}
     public void mouseExited(MouseEvent e) {}
 
     public void mouseClicked(MouseEvent e) {
-    
+        int x = e.getX();
+        int y = e.getY();
+        game.board.findTileClicked(x, y, game.turn());
+        repaint();
     }
 
     public void actionPerformed(ActionEvent e) {
