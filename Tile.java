@@ -66,12 +66,14 @@ public class Tile {
 
     public int getColumn() {return column;}
 
-    public Polygon getPolygon() {return hitbox;}
+    public int getX() {return x;}
+
+    public int getY() {return y;}
 
     public void setPosition(int x, int y) {
         this.x = x;
         this.y = y;
-
+        
         int[] xArray = new int[6];
         int[] yArray = new int[6];
 
@@ -83,15 +85,20 @@ public class Tile {
         hitbox = new Polygon(xArray, yArray, 6);
     }
 
-    public String getType() {
-        return type;
-    }
+    public String getType() {return type;}
 
     public void setType(String t) {
         type = t;
 
+        //Richard: awaiting Power Ups
         if(isPowerupTile()) {
             powerups = new LinkedList<PowerUp>();
+            for(int i = 0; i < 2; i++) {
+
+            }
+        }
+        else {
+            powerups = null;
         }
     }
 
@@ -112,6 +119,10 @@ public class Tile {
 
     public boolean isPowerupTile() {
         return isSpecialTile() && !type.equals("castle");
+    }
+
+    public PowerUp getPowerUp() {
+        return powerups.poll();
     }
 
     public boolean clicked(int x, int y) {return hitbox.contains(x, y);}
@@ -149,6 +160,10 @@ public class Tile {
             default:
                 System.out.println("Tile draw has a problem");
         }
+
+        if(powerups != null && !powerups.isEmpty()) {
+            powerups.peek().draw(true, g);
+        }
     }
 
     public void bold(int playerTurn, Graphics2D g) {
@@ -179,14 +194,13 @@ public class Tile {
         g.setColor(playerColors[playerTurn]);
         g.drawPolygon(idfk);
 
-        //Fill
-        g.setColor(new Color(playerColors[playerTurn].getRed(), playerColors[playerTurn].getGreen(), playerColors[playerTurn].getBlue(), 90));
-        g.fillPolygon(idfk);
-
-        //Outline?
-        g.setColor(Color.BLACK);
-        g.setStroke(new BasicStroke(1.3f));
+        //Kinda scuffed bandaid solution
+        g.setStroke(new BasicStroke(1.1f));
         g.drawPolygon(hitbox);
+
+        //Fill
+        g.setColor(new Color(playerColors[playerTurn].getRed(), playerColors[playerTurn].getGreen(), playerColors[playerTurn].getBlue(), 30));
+        g.fillPolygon(idfk);
     }
 
     public String toString() {
