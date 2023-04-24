@@ -1,4 +1,4 @@
-import java.util.TreeSet;
+import java.util.HashSet;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.awt.Graphics2D;
@@ -17,9 +17,9 @@ public class Game {
     private int turn;
     private int settlementPlaying;    //A state variable. 0 (not started), 1 (playing), 2 (finished)
     private int powerupPlaying;    //Another state variable. 0 (not started), 1 (starting to play but not committed), 2 (committed to playing), 3 (finished)
-    private TreeSet<Tile> eligibleTiles;
+    private HashSet<Tile> eligibleTiles;
     private int settlementCount;    //Stores number of settlements placed
-    private int powerupCount;    //Stores number of clicks a power up has been used for
+    private int powerUpTurnCount;    //Stores number of clicks a power up has been used for
     private PowerUp powerupSelected;
     private Tile tileToRemove;
     private boolean gameOver;
@@ -34,7 +34,7 @@ public class Game {
         terrainDeck = new ArrayList<>();
         discard = new ArrayList<>();
         objectiveDeck = new String[3];
-        eligibleTiles = new TreeSet<>();
+        eligibleTiles = new HashSet<>();
 
         c = new CardDrawer();
         init();
@@ -76,7 +76,7 @@ public class Game {
         powerupPlaying = 0;
         eligibleTiles.clear();
         settlementCount = 0;
-        powerupCount = 0;
+        powerUpTurnCount = 0;
         powerUpTurnCount = 0;
         powerupSelected = null;
         tileToRemove = null;
