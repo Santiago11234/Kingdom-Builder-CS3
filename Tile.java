@@ -195,11 +195,12 @@ public class Tile {
         g.drawPolygon(idfk);
 
         //Kinda scuffed bandaid solution
-        g.setStroke(new BasicStroke(1.9f));
+        g.setStroke(new BasicStroke(1.1f));
+
         g.drawPolygon(hitbox);
 
         //Fill
-        g.setColor(new Color(playerColors[playerTurn].getRed(), playerColors[playerTurn].getGreen(), playerColors[playerTurn].getBlue(), 90));
+        g.setColor(new Color(playerColors[playerTurn].getRed(), playerColors[playerTurn].getGreen(), playerColors[playerTurn].getBlue(), 30));
         g.fillPolygon(idfk);
     }
 

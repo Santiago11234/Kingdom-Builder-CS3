@@ -182,6 +182,10 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         game.drawAll(g);
     }
 
+    public void restart(){
+        game.init();
+    }
+
     public void mousePressed(MouseEvent e) {}
     public void mouseReleased(MouseEvent e) {}
     public void mouseEntered(MouseEvent e) {

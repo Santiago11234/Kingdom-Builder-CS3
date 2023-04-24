@@ -19,8 +19,8 @@ public class EndPanel extends JPanel implements ActionListener{
         viewBoardButton.setOpaque(false);
         viewBoardButton.setContentAreaFilled(false);
         viewBoardButton.setBorderPainted(false);
-        viewBoardButton.setSize(150, 50);
-        viewBoardButton.setLocation(1400, 800);
+        viewBoardButton.setSize(242, 93);
+        viewBoardButton.setLocation(1300, 760);
         viewBoardButton.setFocusable(false);
         viewBoardButton.addActionListener(this);
         add(viewBoardButton);
@@ -54,11 +54,15 @@ public class EndPanel extends JPanel implements ActionListener{
 
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==newGameButton){
-            frame.nextScreen();
+            //frame.nextScreen();
             //frame.restart();
+            frame.dispose();
+            new KingdomBuilder();
         }
         if(e.getSource()==viewBoardButton){
-            
+            //frame.nextScreen();
+            //frame.nextScreen();
+            frame.previousScreen();
         }
     }
 }
