@@ -1,6 +1,7 @@
 import java.util.HashSet;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.awt.Graphics2D;
 
 public class Game {
@@ -212,11 +213,46 @@ public class Game {
     }
 
     private void powerUpMethod(Tile t) {
+        switch(powerupSelected.getType()) {
+            case "oracle":
+                switch(powerUpTurnCount) {
+                    case 0:
+                        findEligibleTiles(players[turn].getCard(), true);
+                
+                    case 1:
+                        if(addSettlement(t))
+                            powerUpUsed();
+                }
 
+                break;
+
+            case "farm":
+            case "oasis":
+            case "tower":
+            case "tavern":
+            case "barn":
+            case "harbor":
+            case "paddock":
+        }
     }
 
     private void powerUpUsed() {
+        HashMap<PowerUp, Boolean> temp = players[turn].powerups;
+        temp.replace(powerupSelected, false);
+        powerupSelected = null;
+        powerUpTurnCount = 0;
+        tileToRemove = null;
 
+        boolean none = true;
+        for(PowerUp p: temp.keySet()) {
+            if(temp.get(p))
+                none = false;
+                break;        
+        }
+
+        if(none) {
+            powerupPlaying = 3;
+        }
     }
 
     private HashSet<Tile> findTilesTavern() {
