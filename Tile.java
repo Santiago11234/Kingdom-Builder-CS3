@@ -196,6 +196,7 @@ public class Tile {
 
         //Kinda scuffed bandaid solution
         g.setStroke(new BasicStroke(1.1f));
+
         g.drawPolygon(hitbox);
 
         //Fill

@@ -77,7 +77,6 @@ public class Game {
         eligibleTiles.clear();
         settlementCount = 0;
         powerUpTurnCount = 0;
-        powerUpTurnCount = 0;
         powerupSelected = null;
         tileToRemove = null;
         gameOver = false;
