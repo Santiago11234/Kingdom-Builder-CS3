@@ -92,6 +92,7 @@ public class Game {
     public int turn(){
         return turn;
     }
+
     
     public boolean firstPlayerPlaying() {
         if(turn == firstPlayer){
@@ -299,7 +300,7 @@ public class Game {
         players[turn].setCard(terrainDeck.remove(0));
 
         turn = (turn + 1) % 4;
-
+        System.out.println("Turn " + turn);
         panel.setSettlementButton(true);
         panel.setSwitchTurnButton(false);
     }
