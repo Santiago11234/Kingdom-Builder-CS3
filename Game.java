@@ -119,6 +119,9 @@ public class Game {
         return players[turn].getCard();
     }
 
+    public int turn(){
+        return turn;
+    }
 
     
     public boolean firstPlayerPlaying() {
@@ -302,11 +305,6 @@ public class Game {
 
         if(end)
             powerUpTurnCount = 0;
-    }
-
-    //return turn method
-    public int turn() {
-        return turn;
     }
 
     private void powerUpUsed() {
