@@ -119,9 +119,6 @@ public class Game {
         return players[turn].getCard();
     }
 
-    public int turn(){
-        return turn;
-    }
 
     
     public boolean firstPlayerPlaying() {
