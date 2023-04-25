@@ -12,7 +12,7 @@ public class StartPanel extends JPanel implements ActionListener {
 
     private JButton startButton;
     private BufferedImage startImage;
-
+ 
     public StartPanel(KingdomBuilder kb) {
         setLayout(null);
         setPreferredSize(new Dimension(KingdomBuilder.WIDTH, KingdomBuilder.HEIGHT));
@@ -32,11 +32,14 @@ public class StartPanel extends JPanel implements ActionListener {
             //All image stuff should occur here (tiles and power ups too)
             Tile.setImages();
             Player.setImages();
+            PowerUp.setImages();
+            CardDrawer.setImages();
             startImage = ImageIO.read(StartPanel.class.getResource("/Images/start.png"));
         } catch (Exception e) {
             System.out.println("Start panel error");
         }
     }
+    
     
     public void paintComponent(Graphics g) {
         g.drawImage(startImage, 0, 0, KingdomBuilder.WIDTH, KingdomBuilder.HEIGHT, null);

@@ -10,7 +10,6 @@ public class KingdomBuilder extends JFrame {
     
     public KingdomBuilder() {
         super("Kingdom Builder"); 
-
         cardLayout = new CardLayout();
         setLayout(cardLayout);
 
@@ -31,12 +30,17 @@ public class KingdomBuilder extends JFrame {
         cardLayout.next(getContentPane());
     }
 
+    public void previousScreen() {
+        cardLayout.previous(getContentPane());   
+    }
+    
     public void showBoard() {
 
     }
 
     public void restart() {
-
+        cardLayout.first(getContentPane());
+        gamePanel.start();
     }
 
     public static void main(String[] args) {

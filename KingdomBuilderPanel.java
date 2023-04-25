@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JButton;
@@ -15,14 +13,14 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
     private JButton startButton;
 
     private BufferedImage blurBG, playerWood,mapWood, settlementWood, player1NameBlock, player2NameBlock, player3NameBlock, player4NameBlock, addSettlementButton,
-            endTurnButton, terrainCardCanyon, terrainCardDesert, terrainCardFlowers, terrainCardForest, terrainCardGrass, terrainCardBack,
-            settlementCountBlock, deckTextBlock, discardTextBlock,purpleSettlement,yellowSettlement,blueSettlement,redSettlement,player1Small,player2Small,player3Small,player4Small; 
+            endTurnButton, settlementCountBlock, deckTextBlock, discardTextBlock,purpleSettlement,yellowSettlement,blueSettlement,redSettlement,player1Small,player2Small,player3Small,player4Small; 
 
     public KingdomBuilderPanel(KingdomBuilder kb) {
-       setSize(getPreferredSize());
-       setLayout(null);
-       frame = kb;
-       startButton = new JButton("skip to end button");
+        setSize(getPreferredSize());
+        setLayout(null);
+        frame = kb;
+
+        startButton = new JButton("skip to end button");
         startButton.setOpaque(false);
         startButton.setContentAreaFilled(true);
         startButton.setBorderPainted(false);
@@ -32,7 +30,12 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         startButton.addActionListener(this);
         add(startButton);
 
-       try {
+        addMouseListener(this);
+
+        game = new Game(this);
+        start();
+
+        try {
             blurBG = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/blurred BG.jpg"));
             playerWood = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/playerWood.png"));
             mapWood = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/mapWood.png"));
@@ -43,12 +46,6 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
             player4NameBlock = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/player4NameBlock.png"));
             addSettlementButton = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/addSettlementButton.png"));
             endTurnButton = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/endTurnButton.png"));
-            terrainCardCanyon = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Terrain Card Canyon.png"));
-            terrainCardDesert = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Terrain Card Desert.png"));
-            terrainCardFlowers = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Terrain Card Flowers.png"));
-            terrainCardForest = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Terrain Card Forest.png"));
-            terrainCardGrass = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Terrain Card Grass.png"));
-            terrainCardBack = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/Terrain Card Back.png"));
             settlementCountBlock = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/settlementCountBlock.png"));
             deckTextBlock = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/deckTextBlock.png"));
             discardTextBlock = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/discardTextBlock.png"));
@@ -63,14 +60,19 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
         } catch (Exception e) {
             System.out.println("Kingdom Builder panel error");
-       }
+        }
+    }
 
-       addMouseListener(this);
-
-       game = new Game(this);
+    public void start() {
+        game.init();
+        game.startSettlementPlay(); //Richard: testing. Remove later
     }
 
     public void setSettlementButton(boolean b) {
+
+    }
+
+    public void setSwitchTurnButton(boolean b) {
 
     }
 
@@ -92,7 +94,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         g.drawImage(addSettlementButton, 1409, 652, 114, 110, null);
         g.drawImage(endTurnButton, 1144, 840, 381, 49, null);
 
-        //Player 2, 3, 4 info
+        //Player not main people info
         int temp = game.turn();
         int height = 50;
         int width = 60;
@@ -164,27 +166,40 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         //g.drawImage(player3NameBlock, 1117, 71, 436, 75, null);
         //g.drawImage(player4NameBlock, 1117, 71, 436, 75, null);
         //Terrain Cards
-        g.drawImage(terrainCardCanyon, 1392, 379, 161, 248, null);
+        
         //g.drawImage(terrainCardDesert, 1392, 379, 161, 248, null);
         //g.drawImage(terrainCardFlowers, 1392, 379, 161, 248, null);
         //g.drawImage(terrainCardForest, 1392, 379, 161, 248, null);
         //g.drawImage(terrainCardGrass, 1392, 379, 161, 248, null);
         //g.drawImage(terrainCardBack, 1392, 379, 161, 248, null);
-        //Discard Pile
-        g.drawImage(terrainCardCanyon, 1267, 416, 106, 154, null);
-        //Deck Pile
-        g.drawImage(terrainCardBack, 1130, 416, 106, 154, null);
         
-        game.board.drawBoard(g);
+        game.drawAll(g);
+    }
+
+    public void restart(){
+        game.init();
     }
 
     public void mousePressed(MouseEvent e) {}
     public void mouseReleased(MouseEvent e) {}
-    public void mouseEntered(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {
+        //Richard: wtf?
+        /*int x = e.getX();
+        int y = e.getY();
+        board.tileClicked(x,y).setType("red");*/
+    }
     public void mouseExited(MouseEvent e) {}
 
     public void mouseClicked(MouseEvent e) {
+        //Check this...
+        int x = e.getX();
+        int y = e.getY();
+        game.mostMoves(x, y);
+        repaint();
     
+        if(x> 1144 && x < 1144+381 && y > 381 && y < 381+49) 
+            game.switchTurn();
+
     }
 
     public void actionPerformed(ActionEvent e) {

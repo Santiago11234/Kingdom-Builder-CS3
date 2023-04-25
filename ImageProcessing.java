@@ -54,11 +54,9 @@ public class ImageProcessing {
                     board.setTileType(x, y, "water");
                 }
 
-                System.out.println(board.board[x][y].getType());
-
+                //y dost though not workth
                 System.out.println(x + " " + y);
-                
-               
+  
             }
         }
 

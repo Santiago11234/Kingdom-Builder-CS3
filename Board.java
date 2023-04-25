@@ -1,5 +1,6 @@
+import java.util.HashSet;
+
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 
 public class Board {
     private static String[][][] smallBoards;    //Collection of 10-by-10 Tile arrays. All inputted manually
@@ -37,10 +38,41 @@ public class Board {
         for(int i = 0; i < board.length; i++) {
             for(int j = i % 2; j < board[i].length; j += 2) {
                 //Richard: placeholder
-                board[i][j].setType("forest");
+                int boing = (int)(Math.random() * 7);
+
+                switch(boing) {
+                    case 0:
+                        board[i][j].setType("canyon");
+                        break;
+
+                    case 1:
+                        board[i][j].setType("desert");
+                        break;
+
+                    case 2:
+                        board[i][j].setType("flowers");
+                        break;
+
+                    case 3:
+                        board[i][j].setType("forest");
+                        break;
+
+                    case 4:
+                        board[i][j].setType("grass");
+                        break;
+
+                    case 5:
+                        board[i][j].setType("mountain");
+                        break;
+
+                    case 6:
+                        board[i][j].setType("water");
+                        break;
+                }
             }
         }
     }
+
     public void setTileType(int i, int j, String type) {
         board[i][j].setType(type);
     }
@@ -110,6 +142,20 @@ public class Board {
             }
             if(j + 1 < board[0].length) {
                 ret[5] = board[i + 1][j + 1];
+            }
+        }
+
+        return ret;
+    }
+
+    public HashSet<Tile> unoccupiedTileOfTerrain(String terrain) {
+        HashSet<Tile> ret = new HashSet<Tile>();
+
+        for(int i = 0; i < board.length; i++) {
+            for(int j = i % 2; j < board[i].length; j += 2) {
+                if(board[i][j].getType().equals(terrain) && !board[i][j].isOccupied()) {
+                    ret.add(board[i][j]);
+                } 
             }
         }
 
