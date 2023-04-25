@@ -30,6 +30,10 @@ public class KingdomBuilder extends JFrame {
         cardLayout.next(getContentPane());
     }
 
+    public void previousScreen() {
+        cardLayout.previous(getContentPane());   
+    }
+    
     public void showBoard() {
 
     }
