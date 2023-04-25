@@ -12,10 +12,10 @@ public class Player {
     private static final int SETTLEMENT_Y_OFFSET = 9;
     private static final int SETTLEMENT_WIDTH = Tile.WIDTH - 2 * SETTLEMENT_X_OFFSET;
     private static final int SETTLEMENT_HEIGHT = Tile.HEIGHT - 2 * SETTLEMENT_Y_OFFSET;
-    private static final int POWERUP_X = 0;
-    private static final int POWERUP_Y = 0;
-    private static final int POWER_UP_X_OFFSET = 0;
-    private static final int POWER_UP_Y_OFFSET = 0;
+    private static final int POWERUP_X = 1126;
+    private static final int POWERUP_Y = 652;
+    private static final int POWER_UP_X_OFFSET = 10 + PowerUp.WIDTH;
+    private static final int POWER_UP_Y_OFFSET = 10 + PowerUp.HEIGHT;
 
     public HashSet<Tile> specialTiles;
     public HashSet<Tile> settlements;
@@ -75,6 +75,14 @@ public class Player {
         lordPoints = personalPoints = 0;
     }
 
+    public void updatePowerUpPositions() {
+        int counter = 0;
+        for(PowerUp p: powerups.keySet()) {
+            p.setPosition(POWERUP_X + counter % 4 * POWER_UP_X_OFFSET, POWERUP_Y + POWER_UP_Y_OFFSET * (counter / 4));
+            counter++;
+        }
+    }
+
     public void drawAll(int turn, Graphics g) {
         BufferedImage settlementImage = images[turn];
 
@@ -82,7 +90,7 @@ public class Player {
             g.drawImage(settlementImage, t.getX() + SETTLEMENT_X_OFFSET, t.getY() + SETTLEMENT_Y_OFFSET, SETTLEMENT_WIDTH, SETTLEMENT_HEIGHT, null);
         }
         for(PowerUp p: powerups.keySet()) {
-            
+            p.draw(powerups.get(p), g);
         }
     }
 }
