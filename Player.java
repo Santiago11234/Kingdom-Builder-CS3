@@ -81,8 +81,6 @@ public class Player {
         for(Tile t: settlements) {
             g.drawImage(settlementImage, t.getX() + SETTLEMENT_X_OFFSET, t.getY() + SETTLEMENT_Y_OFFSET, SETTLEMENT_WIDTH, SETTLEMENT_HEIGHT, null);
         }
-        System.out.println(settlements);
-        System.out.println(settlementImage);
         for(PowerUp p: powerups.keySet()) {
             
         }
