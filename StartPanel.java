@@ -12,7 +12,7 @@ public class StartPanel extends JPanel implements ActionListener {
 
     private JButton startButton;
     private BufferedImage startImage;
-
+ 
     public StartPanel(KingdomBuilder kb) {
         setLayout(null);
         setPreferredSize(new Dimension(KingdomBuilder.WIDTH, KingdomBuilder.HEIGHT));
@@ -39,6 +39,7 @@ public class StartPanel extends JPanel implements ActionListener {
             System.out.println("Start panel error");
         }
     }
+    
     
     public void paintComponent(Graphics g) {
         g.drawImage(startImage, 0, 0, KingdomBuilder.WIDTH, KingdomBuilder.HEIGHT, null);
