@@ -149,7 +149,7 @@ public class Game {
 
     public void mostMoves(int x, int y) {
         //Richard: assuming that clicking an unused power up results in nothing
-        if(powerupPlaying == 0 || (powerupPlaying == 1 || powerupPlaying == 2) && powerUpTurnCount == 0) {
+        if((powerupPlaying == 0 || ((powerupPlaying == 1 || powerupPlaying == 2) && powerUpTurnCount == 0)) && (settlementPlaying != 1 || settlementPlaying == 1 && settlementCount == 0)) {
             for(PowerUp p: players[turn].powerups.keySet()) {
                 if(p.clicked(x, y)) {
                     //Richard: clicking this just results in cancellation of settlement playing. Nothing else
@@ -305,11 +305,6 @@ public class Game {
 
         if(end)
             powerUpTurnCount = 0;
-    }
-
-    //return turn method
-    public int turn() {
-        return turn;
     }
 
     private void powerUpUsed() {
