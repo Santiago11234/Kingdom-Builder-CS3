@@ -192,8 +192,14 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
     public void mouseClicked(MouseEvent e) {
         //Check this...
-        game.mostMoves(e.getX(), e.getY());
+        int x = e.getX();
+        int y = e.getY();
+        game.mostMoves(x, y);
         repaint();
+    
+        if(x> 1144 && x < 1144+381 && y > 381 && y < 381+49) 
+            game.switchTurn();
+
     }
 
     public void actionPerformed(ActionEvent e) {

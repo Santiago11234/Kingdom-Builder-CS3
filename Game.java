@@ -122,6 +122,7 @@ public class Game {
     public int turn(){
         return turn;
     }
+
     
     public boolean firstPlayerPlaying() {
         if(turn == firstPlayer){
@@ -306,6 +307,11 @@ public class Game {
             powerUpTurnCount = 0;
     }
 
+    //return turn method
+    public int turn() {
+        return turn;
+    }
+
     private void powerUpUsed() {
         HashMap<PowerUp, Boolean> temp = players[turn].powerups;
         temp.replace(powerupSelected, false);
@@ -435,7 +441,7 @@ public class Game {
         players[turn].setCard(terrainDeck.remove(0));
 
         turn = (turn + 1) % 4;
-
+        System.out.println("Turn " + turn);
         panel.setSettlementButton(true);
         panel.setSwitchTurnButton(false);
     }
