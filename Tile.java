@@ -37,7 +37,8 @@ public class Tile {
 
     public static void setImages() {
         playerColors[0] = new Color(135, 57, 230); //Purple
-        playerColors[1] = new Color(237, 223, 19); //Yellow
+        playerColors[1] = new Color(252, 152, 3); //Yellow-orange color to make it not blend in with desert 
+        //playerColors[1] = new Color(237, 223, 19); //Yellow
         playerColors[2] = new Color(0, 11, 227); //Blue
         playerColors[3] = new Color(232, 32, 9); //Red
 
