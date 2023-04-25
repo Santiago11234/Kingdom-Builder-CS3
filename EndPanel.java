@@ -58,7 +58,7 @@ public class EndPanel extends JPanel implements ActionListener{
             frame.restart();
         }
         if(e.getSource()==viewBoardButton){
-            frame.previous();
+            frame.previousScreen();
         }
     }
 }
