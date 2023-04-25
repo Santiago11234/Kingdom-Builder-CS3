@@ -5,8 +5,8 @@ import java.awt.Graphics;
 import javax.imageio.ImageIO;
 
 public class PowerUp {
-    private static final int WIDTH = 40; //Richard: test this later
-    private static final int HEIGHT = (int)Math.round(WIDTH * 2 / Math.sqrt(3));
+    public static final int WIDTH = 56; //Richard: test this later
+    public static final int HEIGHT = (int)Math.round(WIDTH * 2 / Math.sqrt(3));
     private static final int SECOND_HIGHEST_POINT_Y = (int)Math.round(14.0 / 55 * HEIGHT);
 
     private static final Polygon sharedHitbox = new Polygon(new int[] {0, WIDTH / 2, WIDTH, WIDTH, WIDTH / 2, 0}, new int[] {SECOND_HIGHEST_POINT_Y, 0, SECOND_HIGHEST_POINT_Y, HEIGHT - SECOND_HIGHEST_POINT_Y, HEIGHT, HEIGHT - SECOND_HIGHEST_POINT_Y}, 6); 
@@ -34,6 +34,10 @@ public class PowerUp {
         }
     }
 
+    public PowerUp(String t) {
+        type = t;
+    }
+
     public void setPosition(int x, int y) {
         this.x = x;
         this.y = y;
@@ -49,9 +53,9 @@ public class PowerUp {
         hitbox = new Polygon(xArray, yArray, 6);
     }
 
-    public void setType(String t) {
-        type = t;
-    }
+    public String getType() {
+        return type;
+    }    
 
     public boolean clicked(int x, int y) {
         return hitbox.contains(x, y);
@@ -101,6 +105,6 @@ public class PowerUp {
                 System.out.println("Power up type invalid: " + type);
         }
 
-        g.drawPolygon(hitbox);
+        //g.drawPolygon(hitbox);
     }
 }
