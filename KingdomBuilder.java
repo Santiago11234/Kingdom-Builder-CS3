@@ -35,7 +35,8 @@ public class KingdomBuilder extends JFrame {
     }
 
     public void restart() {
-
+        cardLayout.first(getContentPane());
+        gamePanel.start();
     }
 
     public static void main(String[] args) {

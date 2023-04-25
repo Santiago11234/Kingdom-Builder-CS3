@@ -54,8 +54,8 @@ public class EndPanel extends JPanel implements ActionListener{
 
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==newGameButton){
-            frame.nextScreen();
-            //frame.restart();
+            //frame.nextScreen();
+            frame.restart();
         }
         if(e.getSource()==viewBoardButton){
             
