@@ -258,6 +258,9 @@ public class Game {
     }
 
     private void powerUpMethod(Tile t) {
+    	if(t == null && powerUpTurnCount != 0)
+    		return;
+    		
         boolean increment = false; //Richard: if true, increments powerupPlaying to 2
         boolean end = false;
 
@@ -298,6 +301,8 @@ public class Game {
             case "barn":
             case "harbor":
             case "paddock":
+            	
+            	
         }
         
         if(increment)
