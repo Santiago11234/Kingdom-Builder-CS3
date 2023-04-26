@@ -446,8 +446,9 @@ public class Game {
         c.draw(g);
 
         for(int i = 0; i < 4; i++) {
-            players[i].drawAll(i, g);
+            players[i].drawSettlements(i, g);
         }
+        players[turn].drawPowerUps(g);
 
         for(Tile t: eligibleTiles) {
             t.bold(turn, g);
