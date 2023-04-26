@@ -10,7 +10,7 @@ public class PowerUp {
     private static final int SECOND_HIGHEST_POINT_Y = (int)Math.round(14.0 / 55 * HEIGHT);
 
     private static final Polygon sharedHitbox = new Polygon(new int[] {0, WIDTH / 2, WIDTH, WIDTH, WIDTH / 2, 0}, new int[] {SECOND_HIGHEST_POINT_Y, 0, SECOND_HIGHEST_POINT_Y, HEIGHT - SECOND_HIGHEST_POINT_Y, HEIGHT, HEIGHT - SECOND_HIGHEST_POINT_Y}, 6); 
-    private static final BufferedImage[] images = new BufferedImage[9]; 
+    private static final BufferedImage[] images = new BufferedImage[10]; 
 
     private String type;
     private int x;
@@ -27,7 +27,8 @@ public class PowerUp {
             images[5] = ImageIO.read(PowerUp.class.getResource("/Images/Power Up Barn.png"));
             images[6] = ImageIO.read(PowerUp.class.getResource("/Images/Power Up Harbor.png"));
             images[7] = ImageIO.read(PowerUp.class.getResource("/Images/Power Up Paddock.png"));
-            images[8] = ImageIO.read(PowerUp.class.getResource("/Images/Power Up Oracle.png")); //Fix          
+            images[8] = ImageIO.read(PowerUp.class.getResource("/Images/PowerUpDisabled.png"));
+            images[9] = ImageIO.read(PowerUp.class.getResource("/Images/PowerUpDisabled2.png"));
         }
         catch(Exception e) {
             System.out.println("Power up error");

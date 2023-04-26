@@ -54,7 +54,7 @@ public class CardDrawer {
             objectiveCardImages[4] = ImageIO.read(CardDrawer.class.getResource("/Images/KnightsObjective.png"));
             objectiveCardImages[5] = ImageIO.read(CardDrawer.class.getResource("/Images/LordsObjective.png"));
             objectiveCardImages[6] = ImageIO.read(CardDrawer.class.getResource("/Images/FarmersObjective.png"));
-            //objectiveCardImages[7] = ImageIO.read(CardDrawer.class.getResource("/Images/.png"));
+            objectiveCardImages[7] = ImageIO.read(CardDrawer.class.getResource("/Images/MerchantsObjective.png"));
             objectiveCardImages[8] = ImageIO.read(CardDrawer.class.getResource("/Images/HermitsObjective.png"));
             objectiveCardImages[9] = ImageIO.read(CardDrawer.class.getResource("/Images/CitizensObjective.png"));
 
