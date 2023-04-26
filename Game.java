@@ -436,7 +436,7 @@ public class Game {
         players[turn].setCard(terrainDeck.remove(0));
 
         turn = (turn + 1) % 4;
-        System.out.println("Turn " + turn);
+        //System.out.println("Turn " + turn);
         panel.setSettlementButton(true);
         panel.setSwitchTurnButton(false);
     }
@@ -446,7 +446,7 @@ public class Game {
         c.draw(g);
 
         for(int i = 0; i < 4; i++) {
-            players[turn].drawAll(i, g);
+            players[i].drawAll(i, g);
         }
 
         for(Tile t: eligibleTiles) {
