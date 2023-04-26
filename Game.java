@@ -258,6 +258,9 @@ public class Game {
     }
 
     private void powerUpMethod(Tile t) {
+    	if(t == null && powerUpTurnCount != 0)
+    		return;
+    		
         boolean increment = false; //Richard: if true, increments powerupPlaying to 2
         boolean end = false;
 
@@ -298,6 +301,8 @@ public class Game {
             case "barn":
             case "harbor":
             case "paddock":
+            	
+            	
         }
         
         if(increment)
@@ -444,8 +449,10 @@ public class Game {
     public void drawAll(Graphics2D g) {
         board.drawBoard(g);
         c.draw(g);
-
-        players[turn].drawAll(turn, g);
+        
+        for(int i = 0;i < 4; i++) {
+            players[i].drawAll(i, g);
+        }
 
         for(Tile t: eligibleTiles) {
             t.bold(turn, g);
