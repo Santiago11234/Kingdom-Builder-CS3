@@ -113,7 +113,12 @@ public class CardDrawer {
         //Deck Pile
         if(!terrainDeck.isEmpty()) {
             for(int i = Math.min(terrainDeck.size() - 1, MAX_CARDS_DRAWN); i >= 0; i--) {
-                g.drawImage(getTerrainCardImage(terrainDeck.get(i)), 1130 - DECK_STAGGER_OFFSET_X * i, DECK_LOWER_Y - i * DECK_STAGGER_OFFSET_Y, TERRAIN_CARD_WIDTH, TERRAIN_CARD_HEIGHT, null);
+                //two options
+                
+                //draws the back of terrain card
+                g.drawImage(terrainCardImages[5], 1130 - DECK_STAGGER_OFFSET_X * i, DECK_LOWER_Y - i * DECK_STAGGER_OFFSET_Y, TERRAIN_CARD_WIDTH, TERRAIN_CARD_HEIGHT, null);
+                //draws the next card the current player will recieve
+                //g.drawImage(getTerrainCardImage(terrainDeck.get(i)), 1130 - DECK_STAGGER_OFFSET_X * i, DECK_LOWER_Y - i * DECK_STAGGER_OFFSET_Y, TERRAIN_CARD_WIDTH, TERRAIN_CARD_HEIGHT, null);
             }
         }
 
