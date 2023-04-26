@@ -14,6 +14,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
     private JButton obj1Button;
     private JButton obj2Button;
     private JButton obj3Button;
+    private boolean canPlaceSettlement;
 
     private BufferedImage blurBG, playerWood,mapWood, settlementWood, player1NameBlock, player2NameBlock, player3NameBlock, player4NameBlock, addSettlementButton,
             endTurnButton, settlementCountBlock, deckTextBlock, discardTextBlock,purpleSettlement,yellowSettlement,blueSettlement,redSettlement,player1Small,player2Small,player3Small,player4Small; 
@@ -22,6 +23,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         setSize(getPreferredSize());
         setLayout(null);
         frame = kb;
+        canPlaceSettlement = false;
 
         obj1Button = new JButton("OBJ 1"); 
         obj1Button.setBounds(1117, 168, 129, 189);
@@ -108,11 +110,10 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
     public void start() {
         game.init();
-        game.startSettlementPlay(); //Richard: testing. Remove later
     }
 
     public void setSettlementButton(boolean b) {
-
+    	canPlaceSettlement = b;
     }
 
     public void setSwitchTurnButton(boolean b) {
@@ -239,7 +240,9 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         int y = e.getY();
         game.mostMoves(x, y);
         repaint();
-    
+        
+        if(x > 1409 && x < 1409 + 114 && y > 625 && y < 625+110 && canPlaceSettlement)
+        	game.startSettlementPlay();
         if(x> 1144 && x < 1144+381 && y > 840 && y < 840+49) 
             game.switchTurn();
 

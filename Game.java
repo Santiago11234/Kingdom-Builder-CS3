@@ -149,7 +149,7 @@ public class Game {
 
     public void mostMoves(int x, int y) {
         //Richard: assuming that clicking an unused power up results in nothing
-        if(powerupPlaying == 0 || (powerupPlaying == 1 || powerupPlaying == 2) && powerUpTurnCount == 0) {
+        if((powerupPlaying == 0 || ((powerupPlaying == 1 || powerupPlaying == 2) && powerUpTurnCount == 0)) && (settlementPlaying != 1 || settlementPlaying == 1 && settlementCount == 0)) {
             for(PowerUp p: players[turn].powerups.keySet()) {
                 if(p.clicked(x, y)) {
                     //Richard: clicking this just results in cancellation of settlement playing. Nothing else
@@ -175,7 +175,7 @@ public class Game {
         
         //Richard: taking back actions
         if(t == null) {
-            if(powerUpTurnCount == 0) {
+            if((powerupPlaying == 1 || powerupPlaying == 2) && powerUpTurnCount == 0) {
                 eligibleTiles.clear();
                 powerupSelected = null;
                 return;
@@ -258,6 +258,9 @@ public class Game {
     }
 
     private void powerUpMethod(Tile t) {
+    	if(t == null && powerUpTurnCount != 0)
+    		return;
+    		
         boolean increment = false; //Richard: if true, increments powerupPlaying to 2
         boolean end = false;
 
@@ -298,6 +301,8 @@ public class Game {
             case "barn":
             case "harbor":
             case "paddock":
+            	
+            	
         }
         
         if(increment)
@@ -436,7 +441,7 @@ public class Game {
         players[turn].setCard(terrainDeck.remove(0));
 
         turn = (turn + 1) % 4;
-        System.out.println("Turn " + turn);
+        //System.out.println("Turn " + turn);
         panel.setSettlementButton(true);
         panel.setSwitchTurnButton(false);
     }
@@ -445,7 +450,10 @@ public class Game {
         board.drawBoard(g);
         c.draw(g);
 
-        players[turn].drawAll(turn, g);
+        for(int i = 0; i < 4; i++) {
+            players[i].drawSettlements(i, g);
+        }
+        players[turn].drawPowerUps(g);
 
         for(Tile t: eligibleTiles) {
             t.bold(turn, g);

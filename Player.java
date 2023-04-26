@@ -83,12 +83,15 @@ public class Player {
         }
     }
 
-    public void drawAll(int turn, Graphics g) {
+    public void drawSettlements(int turn, Graphics g) {
         BufferedImage settlementImage = images[turn];
 
         for(Tile t: settlements) {
             g.drawImage(settlementImage, t.getX() + SETTLEMENT_X_OFFSET, t.getY() + SETTLEMENT_Y_OFFSET, SETTLEMENT_WIDTH, SETTLEMENT_HEIGHT, null);
         }
+    }
+
+    public void drawPowerUps(Graphics g) {
         for(PowerUp p: powerups.keySet()) {
             p.draw(powerups.get(p), g);
         }
