@@ -2,6 +2,9 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.awt.event.*;  
+import javax.swing.*;  
+
 
 public class CardDrawer {
     public static final String[] objectiveCards = {"fishermen", "miners", "workers", "discoverers", "knights", "lords", "farmers", "merchants", "hermits", "citizens"};
@@ -30,11 +33,14 @@ public class CardDrawer {
 
     private Game game;
 
+
     public CardDrawer(Game g) {
         game = g;
         terrainDeck = g.getTerrainDeck();
         discard = g.getDiscard();
         objectiveDeck = g.getObjectives();
+        
+        
     }
 
     public static void setImages(){
@@ -123,9 +129,12 @@ public class CardDrawer {
                 g.drawImage(getObjectiveCardImage(objectiveDeck[i]), OBJECTIVE_CARD_XS[i], OBJECTIVE_CARD_Y, OBJECTIVE_CARD_WIDTH, OBJECTIVE_CARD_HEIGHT, null);
             }
         }
+    
+    
     }
 
     public boolean clickLogic(int x, int y) {
         return false;
     }
+
 }
