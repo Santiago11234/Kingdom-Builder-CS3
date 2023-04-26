@@ -197,7 +197,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         game.mostMoves(x, y);
         repaint();
     
-        if(x> 1144 && x < 1144+381 && y > 381 && y < 381+49) 
+        if(x> 1144 && x < 1144+381 && y > 840 && y < 840+49) 
             game.switchTurn();
 
     }
