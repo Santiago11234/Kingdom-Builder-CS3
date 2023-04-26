@@ -175,7 +175,7 @@ public class Game {
         
         //Richard: taking back actions
         if(t == null) {
-            if(powerUpTurnCount == 0) {
+            if((powerupPlaying == 1 || powerupPlaying == 2) && powerUpTurnCount == 0) {
                 eligibleTiles.clear();
                 powerupSelected = null;
                 return;
@@ -445,7 +445,9 @@ public class Game {
         board.drawBoard(g);
         c.draw(g);
 
-        players[turn].drawAll(turn, g);
+        for(int i = 0; i < 4; i++) {
+            players[turn].drawAll(i, g);
+        }
 
         for(Tile t: eligibleTiles) {
             t.bold(turn, g);
