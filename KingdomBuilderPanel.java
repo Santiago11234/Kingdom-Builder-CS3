@@ -4,6 +4,8 @@ import javax.swing.JButton;
 
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
@@ -11,6 +13,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
     private KingdomBuilder frame;
     private Game game;
     private JButton startButton;
+
     private JButton obj1Button;
     private JButton obj2Button;
     private JButton obj3Button;
@@ -63,7 +66,6 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
             }  
         });
         add(obj3Button);
-        
 
         startButton = new JButton("skip to end button");
         startButton.setOpaque(false);
@@ -139,6 +141,8 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         g.drawImage(endTurnButton, 1144, 840, 381, 49, null);
 
         //Player not main people info
+        g.setFont(new Font("Roboto", Font.BOLD, 12));
+        g.setColor(Color.black);
         int temp = game.turn();
         int height = 50;
         int width = 60;
@@ -156,6 +160,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
             //player's name on player board and the settlement ontop of the add settlement button
             g.drawImage(player1NameBlock, 1117, 71, 436, 75, null);
+            g.drawString("Settlements: " + game.players[temp].getSettlementsLeft(), 1425, 793);
             //idea to put settlement house ontop of addSettlement button
             //g.drawImage(purpleSettlement, 1436, 682, width, height, null);
         }
@@ -172,7 +177,9 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
             g.drawImage(player1Small,745,31,200,33,null);
             g.drawImage(purpleSettlement, 970, 23, width, height, null);
 
+
             g.drawImage(player2NameBlock, 1117, 71, 436, 75, null);
+            g.drawString("Settlements: " + game.players[temp].getSettlementsLeft(), 1425, 793);
         }
         if(temp == 2){
             g.drawImage(redSettlement, 350, 23, width, height, null);
@@ -188,6 +195,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
 
             g.drawImage(player3NameBlock, 1117, 71, 436, 75, null);
+            g.drawString("Settlements: " + game.players[temp].getSettlementsLeft(), 1425, 793);
         }
         if(temp == 3){
             g.drawImage(purpleSettlement, 350, 23, width, height, null);
@@ -202,6 +210,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
 
             g.drawImage(player4NameBlock, 1117, 71, 436, 75, null);
+            g.drawString("Settlements: " + game.players[temp].getSettlementsLeft(), 1425, 793);
         }
 
         //Main player name ------- blocks moved above
