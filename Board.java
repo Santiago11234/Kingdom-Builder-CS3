@@ -161,6 +161,39 @@ public class Board {
 
         return ret;
     }
+    
+    //Richard: assumes that no border tiles are special
+    public HashSet<Tile> unoccupiedBorderTiles() {
+        HashSet<Tile> ret = new HashSet<Tile>();
+        Tile temp;
+
+        for(int j = 0; j < board[0].length; j += 2) {
+            temp = board[0][j];
+            
+            if(Tile.isEligible(temp))
+                ret.add(temp);
+            
+            temp = board[board.length - 1][j + 1];
+
+            if(Tile.isEligible(temp)) {
+                ret.add(temp);
+            }
+        }
+
+        for(int i = 0; i < board.length; i++) {
+            temp = board[i][i % 2];
+
+            if(Tile.isEligible(temp))
+                ret.add(temp);
+
+            temp = board[i][board[0].length - (i + 1) % 2 - 1];
+
+            if(Tile.isEligible(temp))
+                ret.add(temp);
+        }
+
+        return ret;
+    }
 
     public void drawBoard(Graphics g) {
         for(int i = 0; i < board.length; i++) {

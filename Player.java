@@ -19,7 +19,7 @@ public class Player {
 
     public HashSet<Tile> specialTiles;
     public HashSet<Tile> settlements;
-    public HashMap<PowerUp, Boolean> powerups;
+    public HashMap<PowerUp, Integer> powerups; //Possible states: 0: unused. 1: disabled. 2: used
 
     private String card;
     private int lordPoints;
@@ -28,7 +28,7 @@ public class Player {
     public Player() {
         specialTiles = new HashSet<Tile>();
         settlements = new HashSet<Tile>();
-        powerups = new HashMap<PowerUp, Boolean>();
+        powerups = new HashMap<PowerUp, Integer>();
     }
 
     public static void setImages() {

@@ -14,7 +14,7 @@ import javax.imageio.ImageIO;
 public class Tile {
     private static final String[] terrainTypes = {"canyon", "desert", "flowers", "forest", "grass", "mountain", "water"};   
     private static final String[] specialTypes = {"castle", "oracle", "farm", "oasis", "tower", "tavern", "barn", "harbor", "paddock"};
-    private static final Color[] playerColors = new Color[4];
+    private static final Color[] playerColors = new Color[5];
     
     public static final int WIDTH = 46;
     public static final int HEIGHT = (int)Math.round(WIDTH * 2 / Math.sqrt(3));
@@ -41,6 +41,7 @@ public class Tile {
         //playerColors[1] = new Color(237, 223, 19); //Yellow
         playerColors[2] = new Color(0, 11, 227); //Blue
         playerColors[3] = new Color(232, 32, 9); //Red
+        playerColors[4] = new Color(18, 201, 67);
 
         try {
             //Richard: will this work with the school computers? For some reason, the school computers didn't work with getResource
@@ -56,6 +57,21 @@ public class Tile {
         catch(Exception e) {
             System.out.println("Tile has an image error");
         }
+    }
+
+    public static boolean isEligible(Tile t) {
+        if(t.isOccupied())
+            return false;
+        
+        String type = t.getType();
+
+        for(String s: specialTypes) {
+            if(s.equals(type)) {
+                return false;
+            }
+        }
+
+        return !type.equals("water") && !type.equals("mountain");
     }
 
     public Tile(int i, int j) {
@@ -122,6 +138,10 @@ public class Tile {
         return isSpecialTile() && !type.equals("castle");
     }
 
+    public boolean hasPowerUp() {
+        return powerups.peek() != null;
+    }
+
     public PowerUp getPowerUp() {
         return powerups.poll();
     }
@@ -163,7 +183,7 @@ public class Tile {
         }
 
         if(powerups != null && !powerups.isEmpty()) {
-            powerups.peek().draw(true, g);
+            powerups.peek().draw(0, g);
         }
     }
 
