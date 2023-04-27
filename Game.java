@@ -689,6 +689,13 @@ public class Game {
         powerupSelected = null;
 
         discard.add(0, players[turn].getCard());
+        if(terrainDeck.size()<1){
+            for(int i = 0; i < discard.size();i++){
+                terrainDeck.add(i, discard.get(i));
+            }
+            discard.clear();
+            Collections.shuffle(terrainDeck);
+        }
         players[turn].setCard(terrainDeck.remove(0));
 
         HashMap<PowerUp, Integer> powerups = players[turn].powerups;
