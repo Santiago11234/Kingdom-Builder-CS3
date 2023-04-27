@@ -103,9 +103,39 @@ public class Tile {
     }
 
     public String getType() {return type;}
-
+ 
     public void setType(String t) {
-        type = t;
+
+        switch(t){
+            case "d":
+                type = "desert";
+                break;
+            case "m":
+            type = "mountain";
+                break;
+            case "f":
+                type = "flowers";
+                break;
+            case "c":
+            type = "canyon";
+                break;
+            case "g":
+            type = "grass";
+                break;
+            case "w":
+                type = "water";
+                break;
+            case "b": //b is bush or forest
+                type = "forest";
+                break;
+            case "s":
+                //special
+                type = "water";
+                break;
+            
+        }
+        
+
 
         //Richard: awaiting Power Ups
         if(isPowerupTile()) {

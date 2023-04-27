@@ -124,6 +124,8 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
     public void paintComponent(Graphics l) {
         Graphics2D g = (Graphics2D)l;
+        g.setFont(new Font("Roboto", Font.BOLD, 12));
+        g.setColor(Color.black);
         
         g.clearRect(0, 0, getWidth(), getHeight());
 
@@ -131,18 +133,18 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         g.drawImage(playerWood, 1091, 42, 487, 882, null);
         g.drawImage(mapWood, 70, 90, 990, 858, null);
         g.drawImage(settlementWood, 70, 18, 990, 62, null);
-
+ 
         //TextBlocks on player section
         g.drawImage(settlementCountBlock, 1418, 772, 102, 32, null);
         g.drawImage(deckTextBlock, 1143, 581, 81, 32, null);
+        g.drawString("Cards: " + game.getTerrainDeck().size(), 1157, 602);
         g.drawImage(discardTextBlock, 1270, 581, 102, 32, null);
+        g.drawString("Discarded: " + game.getDiscard().size(), 1284, 602);
         //buttons on player section
         g.drawImage(addSettlementButton, 1409, 652, 114, 110, null);
         g.drawImage(endTurnButton, 1144, 840, 381, 49, null);
 
         //Player not main people info
-        g.setFont(new Font("Roboto", Font.BOLD, 12));
-        g.setColor(Color.black);
         int temp = game.turn();
         int height = 50;
         int width = 60;
