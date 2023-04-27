@@ -13,6 +13,10 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
     private KingdomBuilder frame;
     private Game game;
     private JButton startButton;
+
+    private JButton obj1Button;
+    private JButton obj2Button;
+    private JButton obj3Button;
     private boolean canPlaceSettlement;
 
     private BufferedImage blurBG, playerWood,mapWood, settlementWood, player1NameBlock, player2NameBlock, player3NameBlock, player4NameBlock, addSettlementButton,
@@ -23,6 +27,45 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         setLayout(null);
         frame = kb;
         canPlaceSettlement = false;
+
+        obj1Button = new JButton("OBJ 1"); 
+        obj1Button.setBounds(1117, 168, 129, 189);
+        obj1Button.setOpaque(false);
+        obj1Button.setContentAreaFilled(true);
+        obj1Button.setBorderPainted(false);
+        obj1Button.setFocusable(false);
+        obj1Button.addActionListener(new ActionListener(){  
+            public void actionPerformed(ActionEvent e){  
+                System.out.println("Objective 1 has been clicked");  
+            }  
+        });
+        add(obj1Button);
+
+        obj2Button = new JButton("OBJ 2");
+        obj2Button.setBounds(1270, 168, 129, 189);
+        obj2Button.setOpaque(false);
+        obj2Button.setContentAreaFilled(true);
+        obj2Button.setBorderPainted(false);
+        obj2Button.setFocusable(false);
+        obj2Button.addActionListener(new ActionListener(){  
+            public void actionPerformed(ActionEvent e){  
+                System.out.println("Objective 2 has been clicked");  
+            }  
+        });
+        add(obj2Button);
+
+        obj3Button = new JButton("OBJ 3");
+        obj3Button.setBounds(1423, 168, 129, 189);
+        obj3Button.setOpaque(false);
+        obj3Button.setContentAreaFilled(true);
+        obj3Button.setBorderPainted(false);
+        obj3Button.setFocusable(false);
+        obj3Button.addActionListener(new ActionListener(){  
+            public void actionPerformed(ActionEvent e){  
+                System.out.println("Objective 3 has been clicked");  
+            }  
+        });
+        add(obj3Button);
 
         startButton = new JButton("skip to end button");
         startButton.setOpaque(false);
