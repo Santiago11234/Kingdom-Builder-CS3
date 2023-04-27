@@ -188,7 +188,7 @@ public class Tile {
     }
 
     public void bold(int playerTurn, Graphics2D g) {
-        g.setStroke(new BasicStroke(5));
+        g.setStroke(new BasicStroke(6)); //Richard: originally 5
 
         //Richard: really scuffed infill way. Perhaps a bad place to put this
         int[] goddamnitX = new int[6];
@@ -215,10 +215,9 @@ public class Tile {
         g.setColor(playerColors[playerTurn]);
         g.drawPolygon(idfk);
 
-        //Kinda scuffed bandaid solution
-        g.setStroke(new BasicStroke(1.1f));
-
-        g.drawPolygon(hitbox);
+        //Richard: OG scuffed solution
+        //g.setStroke(new BasicStroke(1.1f));
+        //g.drawPolygon(hitbox);
 
         //Fill
         g.setColor(new Color(playerColors[playerTurn].getRed(), playerColors[playerTurn].getGreen(), playerColors[playerTurn].getBlue(), 30));
