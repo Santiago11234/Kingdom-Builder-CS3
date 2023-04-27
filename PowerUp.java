@@ -63,9 +63,14 @@ public class PowerUp {
     }
 
     //Richard: hitboxes now scuffed. If you want to, you can crop the images
-    public void draw(boolean up, Graphics g) {
-        if(!up) {
+    public void draw(int state, Graphics g) {
+        if(state == 1) {
             g.drawImage(images[8], x, y, WIDTH, HEIGHT, null);
+            return;
+        }
+
+        if(state == 2) {
+            g.drawImage(images[9], x, y, WIDTH, HEIGHT, null);
             return;
         }
         
