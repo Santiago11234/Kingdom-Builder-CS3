@@ -4,6 +4,8 @@ import javax.swing.JButton;
 
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
@@ -11,6 +13,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
     private KingdomBuilder frame;
     private Game game;
     private JButton startButton;
+    private boolean canPlaceSettlement;
 
     private BufferedImage blurBG, playerWood,mapWood, settlementWood, player1NameBlock, player2NameBlock, player3NameBlock, player4NameBlock, addSettlementButton,
             endTurnButton, settlementCountBlock, deckTextBlock, discardTextBlock,purpleSettlement,yellowSettlement,blueSettlement,redSettlement,player1Small,player2Small,player3Small,player4Small; 
@@ -19,6 +22,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         setSize(getPreferredSize());
         setLayout(null);
         frame = kb;
+        canPlaceSettlement = false;
 
         startButton = new JButton("skip to end button");
         startButton.setOpaque(false);
@@ -65,11 +69,10 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
     public void start() {
         game.init();
-        game.startSettlementPlay(); //Richard: testing. Remove later
     }
 
     public void setSettlementButton(boolean b) {
-
+    	canPlaceSettlement = b;
     }
 
     public void setSwitchTurnButton(boolean b) {
@@ -95,6 +98,8 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         g.drawImage(endTurnButton, 1144, 840, 381, 49, null);
 
         //Player not main people info
+        g.setFont(new Font("Roboto", Font.BOLD, 12));
+        g.setColor(Color.black);
         int temp = game.turn();
         int height = 50;
         int width = 60;
@@ -112,6 +117,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
             //player's name on player board and the settlement ontop of the add settlement button
             g.drawImage(player1NameBlock, 1117, 71, 436, 75, null);
+            g.drawString("Settlements: " + game.players[temp].getSettlementsLeft(), 1425, 793);
             //idea to put settlement house ontop of addSettlement button
             //g.drawImage(purpleSettlement, 1436, 682, width, height, null);
         }
@@ -128,7 +134,9 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
             g.drawImage(player1Small,745,31,200,33,null);
             g.drawImage(purpleSettlement, 970, 23, width, height, null);
 
+
             g.drawImage(player2NameBlock, 1117, 71, 436, 75, null);
+            g.drawString("Settlements: " + game.players[temp].getSettlementsLeft(), 1425, 793);
         }
         if(temp == 2){
             g.drawImage(redSettlement, 350, 23, width, height, null);
@@ -144,6 +152,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
 
             g.drawImage(player3NameBlock, 1117, 71, 436, 75, null);
+            g.drawString("Settlements: " + game.players[temp].getSettlementsLeft(), 1425, 793);
         }
         if(temp == 3){
             g.drawImage(purpleSettlement, 350, 23, width, height, null);
@@ -158,6 +167,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
 
             g.drawImage(player4NameBlock, 1117, 71, 436, 75, null);
+            g.drawString("Settlements: " + game.players[temp].getSettlementsLeft(), 1425, 793);
         }
 
         //Main player name ------- blocks moved above
@@ -196,8 +206,10 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         int y = e.getY();
         game.mostMoves(x, y);
         repaint();
-    
-        if(x> 1144 && x < 1144+381 && y > 381 && y < 381+49) 
+        
+        if(x > 1409 && x < 1409 + 114 && y > 625 && y < 625+110 && canPlaceSettlement)
+        	game.startSettlementPlay();
+        if(x> 1144 && x < 1144+381 && y > 840 && y < 840+49) 
             game.switchTurn();
 
     }
