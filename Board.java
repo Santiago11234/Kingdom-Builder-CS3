@@ -195,6 +195,57 @@ public class Board {
         return ret;
     }
 
+    //Richard: ultra-scuffed
+    public HashSet<Tile> unoccupiedTwoTilesAway(Tile t) {
+        HashSet<Tile> ret = new HashSet<Tile>();
+
+        int i = t.getRow();
+        int j = t.getColumn();
+
+        i -= 2;
+        addTile(ret, i, j);
+        j -= 2;
+        addTile(ret, i, j);
+        j += 4;
+        addTile(ret, i, j);
+
+        i += 4;
+        j -= 2;
+        
+        addTile(ret, i, j);
+        j -= 2;
+        addTile(ret, i, j);
+        j += 4;
+        addTile(ret, i, j);
+        
+        i -= 2;
+        j -= 6;
+        addTile(ret, i, j);
+        j += 8;
+        addTile(ret, i, j);
+
+        i -= 1;
+        j -= 7;
+        addTile(ret, i, j);
+        j += 6;
+        addTile(ret, i, j);
+
+        i += 2;
+        j -= 6;
+        addTile(ret, i, j);
+        j += 6;
+        addTile(ret, i, j);
+
+        return ret;
+    }
+
+    private void addTile(HashSet<Tile> set, int i, int j) {
+        if(i >= 0 && i < board.length && j >= 0 && j < board[0].length && j % 2 == i % 2) {
+            if(Tile.isEligible(board[i][j]))
+                set.add(board[i][j]);
+        }
+    }
+
     public void drawBoard(Graphics g) {
         for(int i = 0; i < board.length; i++) {
             for(int j = 0; j < board[i].length; j += 2) {
