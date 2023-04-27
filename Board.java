@@ -1,9 +1,13 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
-
+import java.util.List;
 import java.awt.Graphics;
+import java.lang.reflect.Array;
 
 public class Board {
-    private static String[][][] smallBoards;    //Collection of 10-by-10 Tile arrays. All inputted manually
+    private static SmallBoards sm;   //Collection of 10-by-10 Tile arrays. All inputted manually
     
     //Top left coordinate
     public static final int X = 90;
@@ -15,8 +19,10 @@ public class Board {
 
     public Board() {
         board = new Tile[20][40];
+        sm = new SmallBoards();
         
         setTilePositions();
+
     }
     
     public void setTilePositions() {
@@ -35,40 +41,16 @@ public class Board {
     }
     
     public void createBoard() {
-        for(int i = 0; i < board.length; i++) {
-            for(int j = i % 2; j < board[i].length; j += 2) {
-                //Richard: placeholder
-                int boing = (int)(Math.random() * 7);
-
-                switch(boing) {
-                    case 0:
-                        board[i][j].setType("canyon");
-                        break;
-
-                    case 1:
-                        board[i][j].setType("desert");
-                        break;
-
-                    case 2:
-                        board[i][j].setType("flowers");
-                        break;
-
-                    case 3:
-                        board[i][j].setType("forest");
-                        break;
-
-                    case 4:
-                        board[i][j].setType("grass");
-                        break;
-
-                    case 5:
-                        board[i][j].setType("mountain");
-                        break;
-
-                    case 6:
-                        board[i][j].setType("water");
-                        break;
-                }
+        Integer[] intArray = {0, 1, 2, 3,4,5,6};
+		List<Integer> l = Arrays.asList(intArray);
+		Collections.shuffle(l);
+       
+        for(int i = 0; i < 10; i++) {
+            for(int j = i % 2; j < 20; j += 2) {
+                board[i][j].setType(sm.getBoard(l.get(0))[i][j]);
+                board[i+10][j].setType(sm.getBoard(l.get(1))[i][j]);
+                board[i][j+20].setType(sm.getBoard(l.get(2))[i][j]);
+                board[i+10][j+20].setType(sm.getBoard(l.get(3))[i][j]);
             }
         }
     }
