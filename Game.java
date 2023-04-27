@@ -106,6 +106,7 @@ public class Game {
             p.powerups.put(new PowerUp("tavern"), 0);
             p.powerups.put(new PowerUp("barn"), 0);
             p.powerups.put(new PowerUp("harbor"), 0);
+            p.powerups.put(new PowerUp("paddock"), 0);
 
             p.updatePowerUpPositions();
         }
@@ -336,6 +337,26 @@ public class Game {
                 break;
 
             case "paddock":
+                switch(powerUpTurnCount) {
+                    case 0: 
+                        eligibleTiles = findTilesPaddock();
+                        powerUpTurnCount++;
+                        break;
+
+                    case 1:
+                        if(!eligibleTiles.contains(t))
+                            return;
+
+                        tileToRemove = t;
+                        eligibleTiles = board.unoccupiedTwoTilesAway(t);
+        
+                        powerUpTurnCount++;
+                        break;
+
+                    case 2:
+                        if(settlementMoving(t))
+                            end = true;  
+                }
         }
 
         if(powerUpTurnCount >= 2)
@@ -397,13 +418,19 @@ public class Game {
                 break;
 
             case 2:
-                if(eligibleTiles.contains(t)) {
-                    players[turn].settlements.remove(tileToRemove);
-                    addOrRemovePowerUps(t, false);
-                    addSettlement(t);
-                    tileToRemove = null;
-                    return true;
-                }
+                return settlementMoving(t);       
+        }
+
+        return false;
+    }
+
+    private boolean settlementMoving(Tile t) {
+        if(eligibleTiles.contains(t)) {
+            players[turn].settlements.remove(tileToRemove);
+            addOrRemovePowerUps(tileToRemove, false);
+            addSettlement(t);
+            tileToRemove = null;
+            return true;
         }
 
         return false;
@@ -477,11 +504,13 @@ public class Game {
     }
 
     private HashSet<Tile> findTilesPaddock() {
-        return eligibleTiles;
-    }
+        HashSet<Tile> ret = new HashSet<>();
+        
+        for(Tile t: players[turn].settlements)
+            if(!board.unoccupiedTwoTilesAway(t).isEmpty())    
+                ret.add(t);
 
-    private HashSet<Tile> twoTilesAway(Tile t) { 
-        return eligibleTiles;
+        return ret;
     }
     
     private void score() {
@@ -641,6 +670,8 @@ public class Game {
                     break;
 
                 case "paddock":
+                    if(findTilesPaddock().isEmpty())
+                        disable = true;
             }
 
             if(disable && player.powerups.get(p) != 1)
