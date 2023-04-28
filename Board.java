@@ -3,15 +3,25 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+
+import javax.imageio.ImageIO;
+
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.lang.reflect.Array;
 
 public class Board {
     private static SmallBoards sm;   //Collection of 10-by-10 Tile arrays. All inputted manually
-    
+    public BufferedImage board1, board2, board3, board4, board5, board6, board7;
+    public BufferedImage[] boards;
+    public Integer[] intArray ;
+    public List<Integer> l;
+    public static final int TILEWIDTH = 46;
+    public static final int TILEHEIGHT = (int)Math.round(TILEWIDTH * 2 / Math.sqrt(3));
     //Top left coordinate
     public static final int X = 90;
     public static final int Y = 112;
+
     
     public Tile[][] board; //20-by-40 array of Tiles
     
@@ -20,6 +30,22 @@ public class Board {
     public Board() {
         board = new Tile[20][40];
         sm = new SmallBoards();
+        intArray = new Integer[] {0, 1, 2, 3,4,5,6};
+        l = Arrays.asList(intArray);
+        boards = new BufferedImage[7];
+        try {
+            boards[0] = ImageIO.read(Board.class.getResource("/Images/Board1.png"));
+            boards[1] = ImageIO.read(Board.class.getResource("/Images/Board2.png"));
+            boards[2] = ImageIO.read(Board.class.getResource("/Images/Board3.png"));
+            boards[3] = ImageIO.read(Board.class.getResource("/Images/Board4.png"));
+            boards[4] = ImageIO.read(Board.class.getResource("/Images/Board5.png"));
+            boards[5] = ImageIO.read(Board.class.getResource("/Images/Board6.png"));
+            boards[6] = ImageIO.read(Board.class.getResource("/Images/Board7.png"));
+
+
+        } catch (Exception e) {
+            System.out.println("Kingdom Builder board error");
+        }
         
         setTilePositions();
 
@@ -41,18 +67,25 @@ public class Board {
     }
     
     public void createBoard() {
-        Integer[] intArray = {0, 1, 2, 3,4,5,6};
-		List<Integer> l = Arrays.asList(intArray);
-		Collections.shuffle(l);
-       
+        
+		shuffleBoards();
+        
         for(int i = 0; i < 10; i++) {
             for(int j = i % 2; j < 20; j += 2) {
-                board[i][j].setType(sm.getBoard(l.get(0))[i][j]);
-                board[i+10][j].setType(sm.getBoard(l.get(1))[i][j]);
-                board[i][j+20].setType(sm.getBoard(l.get(2))[i][j]);
-                board[i+10][j+20].setType(sm.getBoard(l.get(3))[i][j]);
+                board[i][j].setType(sm.getBoard(getBoards().get(0))[i][j]);
+                board[i+10][j].setType(sm.getBoard(getBoards().get(1))[i][j]);
+                board[i][j+20].setType(sm.getBoard(getBoards().get(2))[i][j]);
+                board[i+10][j+20].setType(sm.getBoard(getBoards().get(3))[i][j]);
             }
         }
+    }
+
+    public void shuffleBoards() {
+        Collections.shuffle(l);
+    }
+
+    public List<Integer> getBoards() {
+        return l;
     }
 
     public void setTileType(int i, int j, String type) {
@@ -229,15 +262,9 @@ public class Board {
     }
 
     public void drawBoard(Graphics g) {
-        for(int i = 0; i < board.length; i++) {
-            for(int j = 0; j < board[i].length; j += 2) {
-                if(i % 2 == 0) {
-                    board[i][j].draw(g);
-                }
-                else {
-                    board[i][j + 1].draw(g);
-                }
-            }
-        }
+        g.drawImage(boards[getBoards().get(0)], 90,112, 482, 413, null);
+        g.drawImage(boards[getBoards().get(1)], 90,98+413, 482, 413, null);
+        g.drawImage(boards[getBoards().get(2)], 68+482,112, 482, 413, null);
+        g.drawImage(boards[getBoards().get(3)], 68+482,98+413, 482, 413, null);
     }
 }
