@@ -26,6 +26,10 @@ public class Game {
     private Tile tileToRemove;
     private boolean gameOver;
 
+    private Boolean obj1ButtonTF;
+    private Boolean obj2ButtonTF;
+    private Boolean obj3ButtonTF;
+
     public Game(KingdomBuilderPanel p){
         panel = p;
         board = new Board();
@@ -39,6 +43,35 @@ public class Game {
         eligibleTiles = new HashSet<>();
 
         c = new CardDrawer(this);
+        obj1ButtonTF = false;
+        obj2ButtonTF = false;
+        obj3ButtonTF = false;
+    }
+
+    //return objtf
+    public Boolean getObj1ButtonTF(){
+        return obj1ButtonTF;
+    }
+
+    public Boolean getObj2ButtonTF(){
+        return obj2ButtonTF;
+    }
+
+    public Boolean getObj3ButtonTF(){
+        return obj3ButtonTF;
+    }
+
+    public void editTF(int x){
+        if(x == 1){
+            obj1ButtonTF = !obj1ButtonTF;
+            System.out.println("BUTTON ONE SWITCHED TO: " + obj1ButtonTF);
+        }else if(x == 2){
+            obj2ButtonTF = !obj2ButtonTF;
+            System.out.println("BUTTON TWO SWITCHED TO: " + obj2ButtonTF);
+        }else if(x == 3){
+            obj3ButtonTF = !obj3ButtonTF;
+            System.out.println("BUTTON THREE SWITCHED TO: " + obj3ButtonTF);
+        }
     }
 
     public void init() {
@@ -158,6 +191,9 @@ public class Game {
     }
 
     public void mostMoves(int x, int y) {
+
+        
+
         //Richard: assuming that clicking an unused power up results in nothing
         if((powerUpTurnCount == 0  || powerUpTurnCount == 1)&& (settlementPlaying != 1 || settlementPlaying == 1 && settlementCount == 0)) {
             for(PowerUp p: players[turn].powerups.keySet()) {
