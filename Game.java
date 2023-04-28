@@ -637,6 +637,35 @@ public class Game {
         return max;
     }
 
+    private int scoreLordsFarmers() {
+        boolean lords = objectivesContain("lords");
+        boolean farmers = objectivesContain("farmers");
+
+        if(!lords && !farmers)
+            return 0;
+
+        int score = 0;
+        //Richard: sectors
+        //0   1
+        //2   3
+        int[][] playersSettlementsInSectors = new int[4][4];
+        HashSet<Tile> settlements = players[turn].settlements;
+
+        for(Tile t: settlements) {
+            playersSettlementsInSectors[turn][2 * (t.getRow()) / 10 + (t.getColumn() / 20)]++;
+        }
+
+        if(lords) {
+            for(int i = 1; i <= 3; i++) {
+
+            }
+        }
+
+        return score;
+    }
+
+    private int
+
     private void scoreConnectedSpecialTiles() {
 
     }
