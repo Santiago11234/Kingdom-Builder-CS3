@@ -1,7 +1,10 @@
 import java.util.HashSet;
 import java.util.ArrayList;
+import java.util.Queue;
+import java.util.LinkedList;
 import java.util.Collections;
 import java.util.HashMap;
+
 import java.awt.Graphics2D;
 
 public class Game {
@@ -515,32 +518,61 @@ public class Game {
     }
     
     private void score() {
+        Player player = players[turn];
+        HashSet<Tile> settlements = player.settlements;
+
+        if(settlements.isEmpty())
+            return;
+
         int score = 0;
 
         if(objectivesContain("fishermen")) {
-            for(Tile t: players[turn].settlements) {
+            for(Tile t: settlements) {
                 //Richard: pretty sure things on water don't count
                 if(!t.getType().equals("water") && neighborsInclude(t, "water")) {
                     score++;
                 }
             }
         }
+
         if(objectivesContain("miners")) {
-            for(Tile t: players[turn].settlements){
+            for(Tile t: settlements){
                 if(neighborsInclude(t, "mountain")){
                     score++;
                 }
             }
         }
+
         if(objectivesContain("workers")) {
-            for(Tile t: players[turn].settlements){
+            for(Tile t: settlements){
                 if(neighborsInclude(t, "castle")||neighborsInclude(t, "oracle")||neighborsInclude(t, "farm")||neighborsInclude(t, "oasis")||neighborsInclude(t, "tower")||neighborsInclude(t, "tavern")||neighborsInclude(t, "barn")||neighborsInclude(t, "harbor")||neighborsInclude(t, "paddock")){
                     score++;
                 }
             }
         }
 
-        players[turn].setPersonalPoints(score);
+
+        score += scoreDiscoverersKnights();
+        
+        
+        if(objectivesContain("lords")) {
+
+        }
+        if(objectivesContain("farmers")) {
+
+        }
+
+        
+        if(objectivesContain("merchants")) {
+
+        }
+
+
+        score += scoreHermitsCitizens();
+
+
+        player.setPersonalPoints(score);
+        System.out.println(score + ", " + player.getTotalPoints());
     }
 
     private boolean neighborsInclude(Tile t, String terrain) {
@@ -555,12 +587,112 @@ public class Game {
         return false;
     }
 
+    private int scoreDiscoverersKnights() {
+        boolean discoverers = objectivesContain("discoverers");
+        boolean knights = objectivesContain("knights");
+
+        if(!discoverers && !knights)
+            return 0;
+
+        int score = 0;
+        HashSet<Integer> rowsSet = null;
+        int[] rowsArr = null;
+
+        if(discoverers)
+            rowsSet = new HashSet<Integer>();
+        
+        if(knights)
+            rowsArr = new int[20];
+
+        for(Tile t: players[turn].settlements) {
+            if(discoverers) {
+                rowsSet.add(t.getRow());
+
+                if(rowsSet.size() == 20 && !knights)
+                    break;
+            }
+
+            if(knights) {
+                rowsArr[t.getRow()]++;
+            }
+        }
+
+        if(discoverers)
+            score += rowsSet.size();
+
+        if(knights)
+            score += findMax(rowsArr) * 2;
+
+        return score;
+    }
+
+    private int findMax(int[] arr) {
+        int max = arr[0];
+
+        for(int i = 1; i < arr.length; i++) {
+            if(arr[i] > max)
+                max = arr[i];
+        }
+
+        return max;
+    }
+
     private void scoreConnectedSpecialTiles() {
 
     }
     
+    private int scoreHermitsCitizens() {
+        boolean hermits = objectivesContain("hermits");
+        boolean citizens = objectivesContain("citizens");
+
+        if(!hermits && !citizens)
+            return 0;
+
+        ArrayList<Integer> settlementAreas = settlementAreas();
+        int score = 0;
+
+        if(hermits)
+            score += settlementAreas.size();
+
+        if(citizens)
+            score += Collections.max(settlementAreas) / 2;
+
+        return score;
+    }
+
     private ArrayList<Integer> settlementAreas() {
-        return null;
+        ArrayList<Integer> ret = new ArrayList<Integer>();
+        Queue<Tile> toVisit = new LinkedList<Tile>();
+        HashSet<Tile> tilesVisited = new HashSet<Tile>();
+        HashSet<Tile> settlements = players[turn].settlements;
+        int settlementsInArea;
+
+        for(Tile t: settlements) {            
+            if(tilesVisited.contains(t))
+                continue;
+
+            settlementsInArea = 0;
+
+            toVisit.add(t);
+            tilesVisited.add(t);
+            settlementsInArea++;
+
+            while(!toVisit.isEmpty()) {
+                Tile queueAt = toVisit.poll();
+
+                Tile[] neighbors = board.getNeighbors(queueAt);
+                for(Tile nextTile: neighbors)
+                    if(settlements.contains(nextTile) && !tilesVisited.contains(nextTile)) {
+                        toVisit.add(nextTile);
+                        tilesVisited.add(nextTile);
+                        settlementsInArea++;
+                    }
+            }
+
+            ret.add(settlementsInArea);
+        }
+
+        return ret;
     }
     
     //Richard: untested but should be finished. Also adds or removes special tiles
