@@ -144,6 +144,10 @@ public class Game {
             p.updatePowerUpPositions();
         }
     }
+
+    public int getFirstPlayer(){
+        return firstPlayer;
+    }
     
     //return terrain deck
     public ArrayList<String> getTerrainDeck(){
@@ -463,7 +467,6 @@ public class Game {
     private boolean settlementMoving(Tile t) {
         if(eligibleTiles.contains(t)) {
             players[turn].settlements.remove(tileToRemove);
-            tileToRemove.setOccupied(false);
             addOrRemovePowerUps(tileToRemove, false);
             addSettlement(t);
             tileToRemove = null;
@@ -741,8 +744,6 @@ public class Game {
                 powerups.replace(p, 0);
 
         turn = (turn + 1) % 4;
-        enableOrDisablePowerUps();
-        
         //System.out.println("Turn " + turn);
         panel.setSettlementButton(true);
         panel.setSwitchTurnButton(false);
