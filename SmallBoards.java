@@ -88,7 +88,7 @@ public class SmallBoards {
             {null, "m", null, "m", null, "c", null,"d", null,"d", null,"w", null, "d", null, "d", null, "d", null, "d"},
             {"m", null, "m", null, "c", null, "m", null,"m", null,"w", null,"d", null, "d", null, "s", null, "f", null},
             {null, "m", null, "c", null, "m", null,"m", null,"w", null,"m", null, "d", null, "f", null, "f", null, "f"},
-            {"c", null, "c", null, "g", null, "g", null,"w", null,"m", null,"m", null, "c", null, "f", null, "f", null},
+            {"c", null, "c", null, "b", null, "b", null,"w", null,"m", null,"m", null, "c", null, "f", null, "f", null},
             {null, "c", null, "b", null, "b", null,"w", null,"c", null,"c", null, "c", null, "m", null, "f", null, "f"},
             {"c", null, "s", null, "b", null, "b", null,"w", null,"f", null,"f", null, "f", null, "f", null, "f", null},
             {null, "g", null, "g", null, "b", null,"w", null,"g", null,"s", null, "g", null, "f", null, "g", null, "b"},

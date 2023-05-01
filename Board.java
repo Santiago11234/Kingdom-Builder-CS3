@@ -264,7 +264,7 @@ public class Board {
     public void drawBoard(Graphics g) {
         g.drawImage(boards[getBoards().get(0)], 90,112, 482, 413, null);
         g.drawImage(boards[getBoards().get(1)], 90,98+413, 482, 413, null);
-        g.drawImage(boards[getBoards().get(2)], 68+482,112, 482, 413, null);
-        g.drawImage(boards[getBoards().get(3)], 68+482,98+413, 482, 413, null);
+        g.drawImage(boards[getBoards().get(2)], 68+481,112, 482, 413, null);
+        g.drawImage(boards[getBoards().get(3)], 68+481,98+413, 482, 413, null);
     }
 }
