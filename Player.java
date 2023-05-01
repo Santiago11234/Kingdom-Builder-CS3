@@ -22,8 +22,6 @@ public class Player {
     public HashMap<PowerUp, Integer> powerups; //Possible states: 0: unused. 1: disabled. 2: used
 
     private String card;
-    private int lordPoints;
-    private int personalPoints;
 
     public Player() {
         specialTiles = new HashSet<Tile>();
@@ -43,18 +41,6 @@ public class Player {
         }
     }
 
-    public int getTotalPoints() {
-        return lordPoints + personalPoints;
-    }
-
-    public void setLordPoints(int num) {
-        lordPoints = num;
-    }
-
-    public void setPersonalPoints(int num) {
-        personalPoints = num;
-    }
-
     public int getSettlementsLeft() {
         return 40 - settlements.size();
     }
@@ -72,7 +58,6 @@ public class Player {
         settlements.clear();
         powerups.clear();
         card = null;
-        lordPoints = personalPoints = 0;
     }
 
     public void updatePowerUpPositions() {

@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.Collections;
 import java.util.HashMap;
 
+import java.util.Arrays;
+
 import java.awt.Graphics2D;
 
 public class Game {
@@ -113,6 +115,8 @@ public class Game {
 
             p.updatePowerUpPositions();
         }
+
+        System.out.println(Arrays.toString(objectiveDeck));
     }
     
     //return terrain deck
@@ -517,69 +521,122 @@ public class Game {
         return ret;
     }
     
-    private void score() {
-        Player player = players[turn];
-        HashSet<Tile> settlements = player.settlements;
+    //Richard: despite horrible inefficiency, this game runs fast. Impressive
+    public HashMap<String, ArrayList<Integer>> score() {
+        HashMap<String, ArrayList<Integer>> playerScores = new HashMap<String, ArrayList<Integer>>();
+        playerScores.put("castle", new ArrayList<Integer>());
 
-        if(settlements.isEmpty())
-            return;
+        for(String obj: objectiveDeck) {
+            playerScores.put(obj, new ArrayList<Integer>());
+            
+            for(int turnToScore = 0; turnToScore < 4; turnToScore++) {
+                int score2 = 0;
+                HashSet<Tile> settlements = players[turnToScore].settlements;
 
+                switch(obj) {
+                    case "fishermen":
+                        for(Tile t: settlements) {
+                            //Richard: pretty sure things on water don't count
+                            if(!t.getType().equals("water") && neighborsInclude(t, "water")) {
+                                score2++;
+                            }
+                        }
+                        break;
+
+                    case "miners":
+                        for(Tile t: settlements){
+                            if(neighborsInclude(t, "mountain")){
+                                score2++;
+                            }
+                        }
+                        break;
+
+                    case "workers":
+                        for(Tile t: settlements){
+                            if(neighborsInclude(t, "castle")||neighborsInclude(t, "oracle")||neighborsInclude(t, "farm")||neighborsInclude(t, "oasis")||neighborsInclude(t, "tower")||neighborsInclude(t, "tavern")||neighborsInclude(t, "barn")||neighborsInclude(t, "harbor")||neighborsInclude(t, "paddock")){
+                                score2++;
+                            }
+                        }
+                        break;
+
+                    case "merchants":
+                        break;
+
+                    default:
+                        continue;
+                }
+
+                playerScores.get(obj).add(score2);
+            }
+        }
+
+        //Richard: at this point I'm just lazy. 1st element is 1st objective, 2nd is next
+        boolean scoreDiscoverers = objectivesContain("discoverers");
+        boolean scoreKnights = objectivesContain("knights");
+        boolean scoreLords = objectivesContain("lords");
+        boolean scoreFarmers = objectivesContain("farmers");
+        boolean scoreHermits = objectivesContain("hermits");
+        boolean scoreCitizens = objectivesContain("citizens");
+
+        for(int turnToScore = 0; turnToScore < 4; turnToScore++) {
+            int[] tempScores;
+
+            if(scoreDiscoverers || scoreKnights) {
+                tempScores = scoreDiscoverersKnights(scoreDiscoverers, scoreKnights, turnToScore);
+                
+                if(scoreDiscoverers)
+                    playerScores.get("discoverers").add(tempScores[0]);
+
+                if(scoreKnights)
+                    playerScores.get("knights").add(tempScores[1]);
+            }
+
+            if(scoreFarmers) 
+                playerScores.get("farmers").add(scoreFarmers(turnToScore));
+
+            if(scoreHermits || scoreCitizens) {
+                tempScores = scoreHermitsCitizens(turnToScore);
+                
+                if(scoreHermits)
+                    playerScores.get("hermits").add(tempScores[0]);
+
+                if(scoreCitizens)
+                    playerScores.get("citizens").add(tempScores[1]);
+            }
+
+            //Richard: castle scoring
+            int castleCount = 0;
+            for(Tile t: players[turnToScore].specialTiles)
+                if(t.getType().equals("castle"))
+                    castleCount++;
+
+            playerScores.get("castle").add(castleCount * 3);
+        }
+                 
+        if(scoreLords) {
+            int[] lordsScores = scoreLords();
+
+            for(int s: lordsScores)
+                playerScores.get("lords").add(s);
+        }
+        
         int score = 0;
 
-        if(objectivesContain("fishermen")) {
-            for(Tile t: settlements) {
-                //Richard: pretty sure things on water don't count
-                if(!t.getType().equals("water") && neighborsInclude(t, "water")) {
-                    score++;
-                }
-            }
-        }
+        for(String obj: playerScores.keySet())
+            score += playerScores.get(obj).get(turn);
 
-        if(objectivesContain("miners")) {
-            for(Tile t: settlements){
-                if(neighborsInclude(t, "mountain")){
-                    score++;
-                }
-            }
-        }
+        //player.setPersonalPoints(score);
+        System.out.println(turn + ": " + score);
+        System.out.println(playerScores);
 
-        if(objectivesContain("workers")) {
-            for(Tile t: settlements){
-                if(neighborsInclude(t, "castle")||neighborsInclude(t, "oracle")||neighborsInclude(t, "farm")||neighborsInclude(t, "oasis")||neighborsInclude(t, "tower")||neighborsInclude(t, "tavern")||neighborsInclude(t, "barn")||neighborsInclude(t, "harbor")||neighborsInclude(t, "paddock")){
-                    score++;
-                }
-            }
-        }
-
-
-        score += scoreDiscoverersKnights();
-        
-        
-        if(objectivesContain("lords")) {
-
-        }
-        if(objectivesContain("farmers")) {
-
-        }
-
-        
-        if(objectivesContain("merchants")) {
-
-        }
-
-
-        score += scoreHermitsCitizens();
-
-
-        player.setPersonalPoints(score);
-        System.out.println(score + ", " + player.getTotalPoints());
+        return playerScores;
     }
 
     private boolean neighborsInclude(Tile t, String terrain) {
         Tile[] arr = board.getNeighbors(t);
         
         for(Tile ti: arr) {
-            if(ti != null && t.getType().equals(terrain)) {
+            if(ti != null && ti.getType().equals(terrain)) {
                 return true;
             }
         }
@@ -587,14 +644,13 @@ public class Game {
         return false;
     }
 
-    private int scoreDiscoverersKnights() {
-        boolean discoverers = objectivesContain("discoverers");
-        boolean knights = objectivesContain("knights");
+    private int[] scoreDiscoverersKnights(boolean discoverers, boolean knights, int currentTurn) {
 
         if(!discoverers && !knights)
-            return 0;
+            return null;
 
-        int score = 0;
+        int[] scores = new int[2];
+
         HashSet<Integer> rowsSet = null;
         int[] rowsArr = null;
 
@@ -604,7 +660,7 @@ public class Game {
         if(knights)
             rowsArr = new int[20];
 
-        for(Tile t: players[turn].settlements) {
+        for(Tile t: players[currentTurn].settlements) {
             if(discoverers) {
                 rowsSet.add(t.getRow());
 
@@ -618,12 +674,12 @@ public class Game {
         }
 
         if(discoverers)
-            score += rowsSet.size();
+            scores[0] = rowsSet.size();
 
         if(knights)
-            score += findMax(rowsArr) * 2;
+            scores[1] = findMax(rowsArr) * 2;
 
-        return score;
+        return scores;
     }
 
     private int findMax(int[] arr) {
@@ -637,63 +693,124 @@ public class Game {
         return max;
     }
 
-    private int scoreLordsFarmers() {
-        boolean lords = objectivesContain("lords");
-        boolean farmers = objectivesContain("farmers");
-
-        if(!lords && !farmers)
-            return 0;
-
-        int score = 0;
-        //Richard: sectors
-        //0   1
-        //2   3
+    private int[] scoreLords() {
+        int scores[] = new int[4];
         int[][] playersSettlementsInSectors = new int[4][4];
-        HashSet<Tile> settlements = players[turn].settlements;
 
-        for(Tile t: settlements) {
-            playersSettlementsInSectors[turn][2 * (t.getRow()) / 10 + (t.getColumn() / 20)]++;
+        int[] numSectorsWon = new int[4];
+        int[] numSectors2nd = new int[4];
+
+        for(int i = 0; i < 4; i++) {
+            sortSettlementsIntoSectors(playersSettlementsInSectors[i % 4], players[i % 4].settlements);
         }
 
-        if(lords) {
-            for(int i = 1; i <= 3; i++) {
+        for(int sectorScored = 0; sectorScored < 4; sectorScored++) {
+            //Highest
+            int maxSettlements = 0;
+            int temp;
 
+            for(int i = 0; i < 4; i++) {
+                temp = playersSettlementsInSectors[i][sectorScored];
+
+                if(temp > maxSettlements)
+                    maxSettlements = temp;
             }
+            
+            if(maxSettlements == 0)
+                continue;
+
+            ifPlayerHasSettlementsInSector(playersSettlementsInSectors, numSectorsWon, sectorScored, maxSettlements);
+
+            //2nd highest
+            int secondMaxSettlements = 0;
+
+            for(int i = 0; i < 4; i++) {
+                temp = playersSettlementsInSectors[i][sectorScored];
+
+                if(temp > secondMaxSettlements && temp != maxSettlements)
+                    secondMaxSettlements = temp;
+            }
+
+            if(secondMaxSettlements != 0)
+                ifPlayerHasSettlementsInSector(playersSettlementsInSectors, numSectors2nd, sectorScored, secondMaxSettlements);
+        }
+
+        for(int i = 0; i < 4; i++) 
+            scores[i] = numSectorsWon[i] * 12 + numSectors2nd[i] * 6;
+
+        return scores;
+    }
+    
+    private void ifPlayerHasSettlementsInSector(int[][] playersSettlementsInSectors, int[]numSectorsWon, int sector, int numSettlements) {
+        for(int i = 0; i < 4; i++) {
+            if(playersSettlementsInSectors[i][sector] == numSettlements) {
+                numSectorsWon[i]++;
+            }
+        }
+    }
+
+    private int scoreFarmers(int currentTurn) {
+        int score = 0;
+        int[] settlementsInSectors = new int[4];
+        sortSettlementsIntoSectors(settlementsInSectors, players[currentTurn].settlements);
+
+        int minIndex = 0;
+
+        for(int i = 0; i < 4; i++) {
+            if(settlementsInSectors[i] == 0) {
+                minIndex = -1;
+                break;
+            }
+
+            if(settlementsInSectors[i] < settlementsInSectors[minIndex]) {
+                minIndex = i;
+            }
+        }
+
+        if(minIndex != -1) {
+            score += settlementsInSectors[minIndex] * 3;
         }
 
         return score;
     }
 
-    private int
+    private void sortSettlementsIntoSectors(int[] sectors, HashSet<Tile> settlements) {
+        for(Tile t: settlements) {
+            sectors[2 * (t.getRow() / 10) + (t.getColumn() / 20)]++;
+        }
+    }
 
     private void scoreConnectedSpecialTiles() {
 
     }
     
-    private int scoreHermitsCitizens() {
+    private int[] scoreHermitsCitizens(int currentTurn) {
         boolean hermits = objectivesContain("hermits");
         boolean citizens = objectivesContain("citizens");
 
         if(!hermits && !citizens)
-            return 0;
+            return null;
 
-        ArrayList<Integer> settlementAreas = settlementAreas();
-        int score = 0;
+        ArrayList<Integer> settlementAreas = settlementAreas(currentTurn);
+        int[] scores = new int[2];
 
         if(hermits)
-            score += settlementAreas.size();
+            scores[0] = settlementAreas.size();
 
-        if(citizens)
-            score += Collections.max(settlementAreas) / 2;
+        if(citizens) {
+            //Richard: condition not necessary if this were end of the game
+            if(!settlementAreas.isEmpty())
+                scores[1] = Collections.max(settlementAreas) / 2;
+        }
 
-        return score;
+        return scores;
     }
 
-    private ArrayList<Integer> settlementAreas() {
+    private ArrayList<Integer> settlementAreas(int currentTurn) {
         ArrayList<Integer> ret = new ArrayList<Integer>();
         Queue<Tile> toVisit = new LinkedList<Tile>();
         HashSet<Tile> tilesVisited = new HashSet<Tile>();
-        HashSet<Tile> settlements = players[turn].settlements;
+        HashSet<Tile> settlements = players[currentTurn].settlements;
         int settlementsInArea;
 
         for(Tile t: settlements) {            
@@ -872,7 +989,9 @@ public class Game {
         panel.setSettlementButton(true);
         panel.setSwitchTurnButton(false);
 
-        if(gameOver && turn == firstPlayer) {}
+        if(gameOver && turn == firstPlayer) {
+            panel.endGame();
+        }
     }
 
     public void drawAll(Graphics2D g) {
