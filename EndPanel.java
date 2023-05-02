@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import javax.swing.JPanel;
 import javax.swing.JButton;
 
@@ -10,6 +13,9 @@ public class EndPanel extends JPanel implements ActionListener{
     private KingdomBuilder frame;
     private BufferedImage woodBG, leaderboard, player1, player2, player3, player4, viewBoard, newGame;
     private JButton viewBoardButton, newGameButton;
+
+    private String[] objectives;
+    private HashMap<String, ArrayList<Integer>> scores;
 
     public EndPanel(KingdomBuilder kb) {
         setSize(getPreferredSize());
@@ -42,6 +48,11 @@ public class EndPanel extends JPanel implements ActionListener{
             // TODO: handle exception
             System.out.println("End panel error");
         }
+    }
+
+    public void setObjectivesAndScore(String[] obj, HashMap<String, ArrayList<Integer>> scores) {
+        objectives = obj;
+        this.scores = scores;
     }
 
     public void paintComponent(Graphics g) {

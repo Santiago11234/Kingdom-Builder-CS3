@@ -128,9 +128,16 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
             g.drawImage(blueSettlement, 660, 23, width, height, null);
             g.drawImage(player3Small,435,31,200,33,null);
+            if(game.getFirstPlayer()==2){
+                g.drawImage(blueSettlement, 605, 37, 20, 15, null);
+            }
 
             g.drawImage(redSettlement, 970, 23, width, height, null);
             g.drawImage(player4Small,745,31,200,33,null);
+
+            if(game.getFirstPlayer()==3){
+                g.drawImage(blueSettlement, 915, 37, 20, 15, null);
+            }
 
 
             //player's name on player board and the settlement ontop of the add settlement button
@@ -147,14 +154,25 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
             //player3
             g.drawImage(blueSettlement, 350, 23, width, height, null);
             g.drawImage(player3Small,125,31,200,33,null);
+            if(game.getFirstPlayer()==2){
+                g.drawImage(blueSettlement, 300, 37, 20, 15, null);
+            }
             //player4
             g.drawImage(redSettlement, 660, 23, width, height, null);
             g.drawImage(player4Small,435,31,200,33,null);
+
+            if(game.getFirstPlayer()==3){
+                g.drawImage(blueSettlement, 605, 37, 20, 15, null);
+            }
 
 
             //player1 stuff
             g.drawImage(player1Small,745,31,200,33,null);
             g.drawImage(purpleSettlement, 970, 23, width, height, null);
+
+            if(game.getFirstPlayer()==0){
+                g.drawImage(blueSettlement, 915, 37, 20, 15, null);
+            }
 
 
             g.drawImage(player2NameBlock, 1117, 71, 436, 75, null);
@@ -167,10 +185,16 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         if(temp == 2){
             g.drawImage(redSettlement, 350, 23, width, height, null);
             g.drawImage(player4Small,125,31,200,33,null);
+            if(game.getFirstPlayer()==3){
+                g.drawImage(blueSettlement, 300, 37, 20, 15, null);
+            }
 
 
             g.drawImage(purpleSettlement, 660, 23, width, height, null);
             g.drawImage(player1Small,435,31,200,33,null);
+            if(game.getFirstPlayer()==0){
+                g.drawImage(blueSettlement, 605, 37, 20, 15, null);
+            }
 
 
             g.drawImage(yellowSettlement, 970, 23, width, height, null);
@@ -191,6 +215,9 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         if(temp == 3){
             g.drawImage(purpleSettlement, 350, 23, width, height, null);
             g.drawImage(player1Small,125,31,200,33,null);
+            if(game.getFirstPlayer()==0){
+                g.drawImage(blueSettlement, 300, 37, 20, 15, null);
+            }
 
             g.drawImage(yellowSettlement, 660, 23, width, height, null);
             g.drawImage(player2Small,435,31,200,33,null);
@@ -202,6 +229,10 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
             g.drawImage(blueSettlement, 970, 23, width, height, null);
             g.drawImage(player3Small,745,31,200,33,null);
+
+            if(game.getFirstPlayer()==2){
+                g.drawImage(blueSettlement, 915, 37, 20, 15, null);
+            }
 
 
             g.drawImage(player4NameBlock, 1117, 71, 436, 75, null);
@@ -275,6 +306,10 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         game.drawAll(g);
     }
 
+    public void endGame() {
+        frame.endGame(game.getObjectives(), game.score());
+    }
+
     public void restart(){
         game.init();
     }
@@ -298,9 +333,8 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         
         if(x > 1409 && x < 1409 + 114 && y > 625 && y < 625+110 && canPlaceSettlement)
         	game.startSettlementPlay();
-        if(x> 1144 && x < 1144+381 && y > 840 && y < 840+49) 
+        if(x> 1144 && x < 1144+381 && y > 840 && y < 840+49 && !game.getNoMorePlease()) 
             game.switchTurn();
-
     }
 
     public void actionPerformed(ActionEvent e) {

@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import javax.swing.JFrame;
 import java.awt.CardLayout;
 
@@ -6,6 +9,7 @@ public class KingdomBuilder extends JFrame {
     public static final int HEIGHT = 960;
 
     private KingdomBuilderPanel gamePanel;
+    private EndPanel endPanel;
     private CardLayout cardLayout;
     
     public KingdomBuilder() {
@@ -16,7 +20,9 @@ public class KingdomBuilder extends JFrame {
         add(new StartPanel(this));
         gamePanel = new KingdomBuilderPanel(this);
         add(gamePanel);
-        add(new EndPanel(this));
+
+        endPanel = new EndPanel(this);
+        add(endPanel);
 
         pack();
 
@@ -28,6 +34,11 @@ public class KingdomBuilder extends JFrame {
     
     public void nextScreen() {
         cardLayout.next(getContentPane());
+    }
+
+    public void endGame(String[] obj, HashMap<String, ArrayList<Integer>> scores) {
+        endPanel.setObjectivesAndScore(obj, scores);
+        nextScreen();
     }
 
     public void previousScreen() {
