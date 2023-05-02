@@ -665,7 +665,6 @@ public class Game {
 
         for(String obj: playerScores.keySet())
             score += playerScores.get(obj).get(turn);
-
         //player.setPersonalPoints(score);
         System.out.println(turn + ": " + score);
         System.out.println(playerScores);
