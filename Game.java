@@ -30,6 +30,7 @@ public class Game {
     private PowerUp powerupSelected;
     private Tile tileToRemove;
     private boolean gameOver;
+    private boolean noMorePlease;
 
     private Boolean obj1ButtonTF;
     private Boolean obj2ButtonTF;
@@ -664,7 +665,6 @@ public class Game {
 
         for(String obj: playerScores.keySet())
             score += playerScores.get(obj).get(turn);
-
         //player.setPersonalPoints(score);
         System.out.println(turn + ": " + score);
         System.out.println(playerScores);
@@ -1030,8 +1030,13 @@ public class Game {
         panel.setSwitchTurnButton(false);
 
         if(gameOver && turn == firstPlayer) {
+            noMorePlease = true;
             panel.endGame();
         }
+    }
+
+    public boolean getNoMorePlease(){
+        return noMorePlease;
     }
 
     public void drawAll(Graphics2D g) {
