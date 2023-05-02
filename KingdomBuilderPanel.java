@@ -305,6 +305,10 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         game.drawAll(g);
     }
 
+    public void endGame() {
+        frame.endGame(game.getObjectives(), game.score());
+    }
+
     public void restart(){
         game.init();
     }
@@ -328,9 +332,8 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         
         if(x > 1409 && x < 1409 + 114 && y > 625 && y < 625+110 && canPlaceSettlement)
         	game.startSettlementPlay();
-        if(x> 1144 && x < 1144+381 && y > 840 && y < 840+49) 
+        if(x> 1144 && x < 1144+381 && y > 840 && y < 840+49 && !game.getNoMorePlease()) 
             game.switchTurn();
-
     }
 
     public void actionPerformed(ActionEvent e) {
