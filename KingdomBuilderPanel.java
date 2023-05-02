@@ -221,6 +221,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         obj1Button.addActionListener(new ActionListener(){  
             public void actionPerformed(ActionEvent e){  
                 game.editTF(1);
+                obj1Button.setBounds(1117, 168, 129, 189);
                 repaint();
                 System.out.println("Objective 1 has been clicked");  
             }  
