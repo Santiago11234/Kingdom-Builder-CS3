@@ -33,14 +33,20 @@ public class CardDrawer {
 
     private Game game;
 
+    private JButton obj1Button;
+    private JButton obj2Button;
+    private JButton obj3Button;
 
     public CardDrawer(Game g) {
         game = g;
         terrainDeck = g.getTerrainDeck();
         discard = g.getDiscard();
         objectiveDeck = g.getObjectives();
-        
-        
+    }
+
+    //return objectiveDeck
+    public String[] getObjectiveDeck(){
+        return objectiveDeck;
     }
 
     public static void setImages(){
@@ -105,6 +111,7 @@ public class CardDrawer {
     }
 
     public void draw(Graphics g) {
+
         if(game.getPlayerCard() != null)
             g.drawImage(getTerrainCardImage(game.getPlayerCard()), 1393, 379, 161, 248, null);
 
@@ -133,6 +140,16 @@ public class CardDrawer {
             if(objectiveCards[i] != null) {
                 g.drawImage(getObjectiveCardImage(objectiveDeck[i]), OBJECTIVE_CARD_XS[i], OBJECTIVE_CARD_Y, OBJECTIVE_CARD_WIDTH, OBJECTIVE_CARD_HEIGHT, null);
             }
+            
+        }
+        if(game.getObj1ButtonTF()){
+            g.drawImage(getObjectiveCardImage(objectiveDeck[0]), 1026, 35, OBJECTIVE_CARD_BIG_WIDTH, OBJECTIVE_CARD_BIG_HEIGHT, null);
+        }
+        if(game.getObj2ButtonTF()){
+            g.drawImage(getObjectiveCardImage(objectiveDeck[1]), OBJECTIVE_CARD_XS[1], OBJECTIVE_CARD_Y, OBJECTIVE_CARD_BIG_WIDTH, OBJECTIVE_CARD_BIG_HEIGHT, null);
+        }
+        if(game.getObj3ButtonTF()){
+            g.drawImage(getObjectiveCardImage(objectiveDeck[2]), OBJECTIVE_CARD_XS[2], OBJECTIVE_CARD_Y, OBJECTIVE_CARD_BIG_WIDTH, OBJECTIVE_CARD_BIG_HEIGHT, null);
         }
     
     
