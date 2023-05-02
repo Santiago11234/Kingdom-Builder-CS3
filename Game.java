@@ -248,12 +248,12 @@ public class Game {
                 return;
 
             settlementCount++;
-            if(settlementCount == 3) {
+            if(settlementCount == 3)
                 settlementPlaying = 2;
                 settlementCount = 0;
                 panel.setSwitchTurnButton(true);
-            }
-            else {
+
+            if(settlementPlaying != 2) {
                 eligibleTiles = findEligibleTiles(players[turn].settlements, players[turn].getCard(), true);
             }
         }
