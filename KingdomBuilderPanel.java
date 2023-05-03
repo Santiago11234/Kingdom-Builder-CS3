@@ -36,17 +36,18 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
         
 
-        startButton = new JButton("skip to end button");
+        /*startButton = new JButton("Return To Leaderboard");
         startButton.setOpaque(false);
         startButton.setContentAreaFilled(true);
         startButton.setBorderPainted(false);
-        startButton.setSize(200, 50);
-        startButton.setLocation(1117, 0);
+        startButton.setSize(200, 30);
+        startButton.setLocation(1237, 45);
         startButton.setFocusable(false);
         startButton.addActionListener(this);
         add(startButton);
-
+        */
         addMouseListener(this);
+        
 
         game = new Game(this);
         start();
@@ -241,6 +242,17 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
             if(temp==game.getFirstPlayer()){
                 g.drawImage(blueSettlement, 1500, 71, 25, 70, null);
             }
+        }
+        if(game.getNoMorePlease()){
+            startButton = new JButton("Return To Leaderboard");
+            startButton.setOpaque(false);
+            startButton.setContentAreaFilled(true);
+            startButton.setBorderPainted(false);
+            startButton.setSize(200, 30);
+            startButton.setLocation(1237, 45);
+            startButton.setFocusable(false);
+            startButton.addActionListener(this);
+            add(startButton);
         }
 
         obj1Button = new JButton(""); 
