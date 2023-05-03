@@ -377,7 +377,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         //	game.startSettlementPlay();
         //if(x> 1144 && x < 1144+381 && y > 840 && y < 840+49) 
         //    game.switchTurn();
-
+        }
     }
 
     public void actionPerformed(ActionEvent e) {
