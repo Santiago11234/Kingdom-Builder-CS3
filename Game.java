@@ -665,6 +665,7 @@ public class Game {
 
         for(String obj: playerScores.keySet())
             score += playerScores.get(obj).get(turn);
+
         //player.setPersonalPoints(score);
         System.out.println(turn + ": " + score);
         System.out.println(playerScores);
@@ -1037,6 +1038,9 @@ public class Game {
 
     public boolean getNoMorePlease(){
         return noMorePlease;
+    }
+    public void setNoMorePlease(boolean b){
+        noMorePlease = b;
     }
 
     public void drawAll(Graphics2D g) {
