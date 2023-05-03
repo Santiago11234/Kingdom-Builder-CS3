@@ -37,6 +37,7 @@ public class Game {
     private Boolean obj3ButtonTF;
 
     public Game(KingdomBuilderPanel p){
+        noMorePlease = false;
         panel = p;
         board = new Board();
         players = new Player[4];
@@ -84,7 +85,7 @@ public class Game {
         for(int i = 0; i < players.length; i++){
             players[i].clear();
         }
-
+        noMorePlease = false;
         terrainDeck.clear();
         for(int i =0; i < 25; i++){
             if(i%5==0){
