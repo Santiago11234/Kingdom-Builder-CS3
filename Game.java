@@ -30,12 +30,14 @@ public class Game {
     private PowerUp powerupSelected;
     private Tile tileToRemove;
     private boolean gameOver;
+    private boolean noMorePlease;
 
     private Boolean obj1ButtonTF;
     private Boolean obj2ButtonTF;
     private Boolean obj3ButtonTF;
 
     public Game(KingdomBuilderPanel p){
+        noMorePlease = false;
         panel = p;
         board = new Board();
         players = new Player[4];
@@ -83,7 +85,7 @@ public class Game {
         for(int i = 0; i < players.length; i++){
             players[i].clear();
         }
-
+        noMorePlease = false;
         terrainDeck.clear();
         for(int i =0; i < 25; i++){
             if(i%5==0){
@@ -1078,8 +1080,16 @@ public class Game {
         panel.setSwitchTurnButton(false);
 
         if(gameOver && turn == firstPlayer) {
+            noMorePlease = true;
             panel.endGame();
         }
+    }
+
+    public boolean getNoMorePlease(){
+        return noMorePlease;
+    }
+    public void setNoMorePlease(boolean b){
+        noMorePlease = b;
     }
 
     public void drawAll(Graphics2D g) {

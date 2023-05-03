@@ -52,6 +52,15 @@ public class Tile {
             images[4] = ImageIO.read(Tile.class.getResource("/Images/Grassland Tile.png"));
             images[5] = ImageIO.read(Tile.class.getResource("/Images/Mountain Tile.png"));
             images[6] = ImageIO.read(Tile.class.getResource("/Images/Water Tile.png"));
+            images[7] = ImageIO.read(Tile.class.getResource("/Images/Power Up Barn.png"));
+            images[8] = ImageIO.read(Tile.class.getResource("/Images/Power Up Farm.png"));
+            images[9] = ImageIO.read(Tile.class.getResource("/Images/Power Up Harbor.png"));
+            images[10] = ImageIO.read(Tile.class.getResource("/Images/Power Up Oasis.png"));
+            images[11] = ImageIO.read(Tile.class.getResource("/Images/Power Up Oracle.png"));
+            images[12] = ImageIO.read(Tile.class.getResource("/Images/Power Up Paddock.png"));
+            images[13] = ImageIO.read(Tile.class.getResource("/Images/Power Up Tavern.png"));
+            images[14] = ImageIO.read(Tile.class.getResource("/Images/Power Up Tower.png"));
+            images[15] = ImageIO.read(Tile.class.getResource("/Images/castleTile.png"));
 
         }
         catch(Exception e) {
@@ -111,16 +120,16 @@ public class Tile {
                 type = "desert";
                 break;
             case "m":
-            type = "mountain";
+                type = "mountain";
                 break;
             case "f":
                 type = "flowers";
                 break;
             case "c":
-            type = "canyon";
+                type = "canyon";
                 break;
             case "g":
-            type = "grass";
+                type = "grass";
                 break;
             case "w":
                 type = "water";
@@ -128,9 +137,36 @@ public class Tile {
             case "b": //b is bush or forest
                 type = "forest";
                 break;
+            //special tiles
             case "s":
-                //special
                 type = "water";
+                break;
+            case "sc":
+                type = "castle";
+                break;
+            case "so":
+                type = "oracle";
+                break;
+            case "sf": 
+                type = "farm";
+                break;
+            case "soa":
+                type = "oasis";
+                break;
+            case "st":  
+                type = "tower";
+                break; 
+            case "stv":
+                type = "tavern";
+                break;
+            case "sb":
+                type = "barn";
+                break; 
+            case "sh":
+                type = "harbor";
+                break;
+            case "sp":
+                type = "paddock";
                 break;
             
         }
@@ -141,7 +177,7 @@ public class Tile {
         if(isPowerupTile()) {
             powerups = new LinkedList<PowerUp>();
             for(int i = 0; i < 2; i++) {
-
+                powerups.add(new PowerUp(type));
             }
         }
         else {
@@ -180,36 +216,40 @@ public class Tile {
 
     public void draw(Graphics g) {
         switch(type) {
-            case "canyon":
-                g.drawImage(images[0], x, y, WIDTH, HEIGHT, null);
+            case "castle":
+                g.drawImage(images[15], x, y, WIDTH, HEIGHT, null);
+                break;
+            case "oracle":
+                g.drawImage(images[11], x, y, WIDTH, HEIGHT, null);
                 break;
 
-            case "desert":
-                g.drawImage(images[1], x, y, WIDTH, HEIGHT, null);
+            case "farm":
+                g.drawImage(images[8], x, y, WIDTH, HEIGHT, null);
                 break;
 
-            case "flowers":
-                g.drawImage(images[2], x, y, WIDTH, HEIGHT, null);
+            case "oasis":
+                g.drawImage(images[10], x, y, WIDTH, HEIGHT, null);
                 break;
 
-            case "forest":
-                g.drawImage(images[3], x, y, WIDTH, HEIGHT, null);
+            case "tavern":
+                g.drawImage(images[13], x, y, WIDTH, HEIGHT, null);
                 break;
 
-            case "grass":
-                g.drawImage(images[4], x, y, WIDTH, HEIGHT, null);
+            case "barn":
+                g.drawImage(images[7], x, y, WIDTH, HEIGHT, null);
                 break;
 
-            case "mountain":
-                g.drawImage(images[5], x, y, WIDTH, HEIGHT, null);
+            case "harbor":
+                g.drawImage(images[9], x, y, WIDTH, HEIGHT, null);
                 break;
-
-            case "water":
-                g.drawImage(images[6], x, y, WIDTH, HEIGHT, null);
+            case "paddock":
+                g.drawImage(images[12], x, y, WIDTH, HEIGHT, null);
                 break;
-
-            default:
-                System.out.println("Tile draw has a problem");
+            case "tower":
+                g.drawImage(images[14], x, y, WIDTH, HEIGHT, null);
+                break;
+            default: 
+                break;
         }
 
         if(powerups != null && !powerups.isEmpty()) {

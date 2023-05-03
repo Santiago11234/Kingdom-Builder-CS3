@@ -34,12 +34,12 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         setLayout(null);
         frame = kb;
 
-        startButton = new JButton("skip to end button");
+        startButton = new JButton("Skip to end :0");
         startButton.setOpaque(false);
         startButton.setContentAreaFilled(true);
         startButton.setBorderPainted(false);
-        startButton.setSize(200, 50);
-        startButton.setLocation(1117, 0);
+        startButton.setSize(200, 30);
+        startButton.setLocation(1237, 0);
         startButton.setFocusable(false);
         startButton.addActionListener(this);
         add(startButton);
@@ -59,6 +59,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         endTurnButtonButton.addActionListener(this);
 
         addMouseListener(this);
+        
 
         game = new Game(this);
         start();
@@ -271,6 +272,17 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
                 g.drawImage(blueSettlement, 1500, 71, 25, 70, null);
             }
         }
+        if(game.getNoMorePlease()){
+            startButton = new JButton("Return To Leaderboard");
+            startButton.setOpaque(false);
+            startButton.setContentAreaFilled(true);
+            startButton.setBorderPainted(false);
+            startButton.setSize(200, 30);
+            startButton.setLocation(1237, 45);
+            startButton.setFocusable(false);
+            startButton.addActionListener(this);
+            add(startButton);
+        }
 
         obj1Button = new JButton(""); 
         obj1Button.setBounds(1117, 168, 129, 189);
@@ -281,6 +293,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         obj1Button.addActionListener(new ActionListener(){  
             public void actionPerformed(ActionEvent e){  
                 game.editTF(1);
+                obj1Button.setBounds(1117, 168, 129, 189);
                 repaint();
                 System.out.println("Objective 1 has been clicked");  
             }  
@@ -354,11 +367,12 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
     public void mouseClicked(MouseEvent e) {
         //Check this...
+        if(!game.getNoMorePlease()){
         int x = e.getX();
         int y = e.getY();
         game.mostMoves(x, y);
         repaint();
-        
+
         //if(x > 1409 && x < 1409 + 114 && y > 625 && y < 625+110 && canPlaceSettlement)
         //	game.startSettlementPlay();
         //if(x> 1144 && x < 1144+381 && y > 840 && y < 840+49) 
