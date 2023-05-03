@@ -36,16 +36,16 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
         
 
-        /*startButton = new JButton("Return To Leaderboard");
+        startButton = new JButton("Skip to end :0");
         startButton.setOpaque(false);
         startButton.setContentAreaFilled(true);
         startButton.setBorderPainted(false);
         startButton.setSize(200, 30);
-        startButton.setLocation(1237, 45);
+        startButton.setLocation(1237, 0);
         startButton.setFocusable(false);
         startButton.addActionListener(this);
         add(startButton);
-        */
+        
         addMouseListener(this);
         
 
