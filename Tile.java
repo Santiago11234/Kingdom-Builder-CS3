@@ -177,7 +177,7 @@ public class Tile {
         if(isPowerupTile()) {
             powerups = new LinkedList<PowerUp>();
             for(int i = 0; i < 2; i++) {
-
+                powerups.add(new PowerUp(type));
             }
         }
         else {
