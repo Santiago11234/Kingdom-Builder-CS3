@@ -21,6 +21,9 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
     private Boolean obj1ButtonTF = false;
     private Boolean obj2ButtonTF = false;
     private Boolean obj3ButtonTF = false;
+    
+
+    private Boolean starter = true;
 
 
     private boolean canPlaceSettlement;
@@ -33,8 +36,31 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         setLayout(null);
         frame = kb;
         canPlaceSettlement = false;
-
         
+        obj1Button = new JButton(""); 
+        obj1Button.setBounds(1117, 168, 129, 189);
+        obj1Button.setOpaque(false);
+        obj1Button.setContentAreaFilled(false);
+        obj1Button.setBorderPainted(false);
+        obj1Button.setFocusable(false);
+
+        obj2Button = new JButton("");
+        obj2Button.setBounds(1270, 168, 129, 189);
+        obj2Button.setOpaque(false);
+        obj2Button.setContentAreaFilled(false);
+        obj2Button.setBorderPainted(false);
+        obj2Button.setFocusable(false);
+
+        obj3Button = new JButton("");
+        obj3Button.setBounds(1423, 168, 129, 189);
+        obj3Button.setOpaque(false);
+        obj3Button.setContentAreaFilled(false);
+        obj3Button.setBorderPainted(false);
+        obj3Button.setFocusable(false);
+
+        add(obj1Button);
+        add(obj2Button);
+        add(obj3Button);
 
         startButton = new JButton("skip to end button");
         startButton.setOpaque(false);
@@ -75,6 +101,47 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
             player4Small = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/player4NameBlockSmall.png"));
             //firstPlayer = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/"));
 
+            obj1Button.addActionListener(new ActionListener(){  
+                public void actionPerformed(ActionEvent e){  
+                    Boolean bS = game.editTF(1);
+                    if(bS == true){
+                        System.out.println("Obj 1 Made Bigger");
+                        obj1Button.setBounds(1015, 15, 235, 345);
+                    } else {
+                        System.out.println("Obj 1 Made Smaller");
+                        obj1Button.setBounds(1117, 168, 129, 189);
+                    }
+                    repaint();
+                }  
+            }); 
+            obj2Button.addActionListener(new ActionListener(){  
+                public void actionPerformed(ActionEvent e){  
+                    System.out.println("try");
+                    Boolean bS = game.editTF(2);
+                    if(bS == true){
+                        System.out.println(" Obj 2 Made Smaller");
+                        obj2Button.setBounds(1168, 15, 235, 345);
+                    } else {
+                        System.out.println("Obj 2 Made Bigger");
+                        obj2Button.setBounds(1270, 168, 129, 189);
+                    }
+                    repaint();
+                }  
+            });
+            obj3Button.addActionListener(new ActionListener(){  
+                public void actionPerformed(ActionEvent e){  
+                    Boolean bS = game.editTF(3);
+                    if(bS){
+                        System.out.println(" Obj 3 Made Smaller");
+                        obj3Button.setBounds(1321, 15, 235, 345);
+                    } else {
+                        System.out.println("Obj 3 Made Bigger");
+                        obj3Button.setBounds(1423, 168, 129, 189);
+                    }
+                    repaint();
+                }  
+            });
+
         } catch (Exception e) {
             System.out.println("Kingdom Builder panel error");
         }
@@ -82,6 +149,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
     public void start() {
         game.init();
+        
     }
 
     public void setSettlementButton(boolean b) {
@@ -242,53 +310,8 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
                 g.drawImage(blueSettlement, 1500, 71, 25, 70, null);
             }
         }
-
-        obj1Button = new JButton(""); 
-        obj1Button.setBounds(1117, 168, 129, 189);
-        obj1Button.setOpaque(false);
-        obj1Button.setContentAreaFilled(false);
-        obj1Button.setBorderPainted(false);
-        obj1Button.setFocusable(false);
-        obj1Button.addActionListener(new ActionListener(){  
-            public void actionPerformed(ActionEvent e){  
-                game.editTF(1);
-                obj1Button.setBounds(1117, 168, 129, 189);
-                repaint();
-                System.out.println("Objective 1 has been clicked");  
-            }  
-        });
-        add(obj1Button);
-
-        obj2Button = new JButton("");
-        obj2Button.setBounds(1270, 168, 129, 189);
-        obj2Button.setOpaque(false);
-        obj2Button.setContentAreaFilled(false);
-        obj2Button.setBorderPainted(false);
-        obj2Button.setFocusable(false);
-
-        obj2Button.addActionListener(new ActionListener(){  
-            public void actionPerformed(ActionEvent e){  
-                game.editTF(2);
-                repaint();
-                System.out.println("Objective 2 has been clicked");  
-            }  
-        });
-        add(obj2Button);
-
-        obj3Button = new JButton("");
-        obj3Button.setBounds(1423, 168, 129, 189);
-        obj3Button.setOpaque(false);
-        obj3Button.setContentAreaFilled(false);
-        obj3Button.setBorderPainted(false);
-        obj3Button.setFocusable(false);
-        obj3Button.addActionListener(new ActionListener(){  
-            public void actionPerformed(ActionEvent e){  
-                game.editTF(3);
-                repaint();
-                System.out.println("Objective 3 has been clicked");  
-            }  
-        });
-        add(obj3Button);
+        
+        
 
         //Main player name ------- blocks moved above
         //g.drawImage(player1NameBlock, 1117, 71, 436, 75, null);
@@ -305,6 +328,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         
         game.drawAll(g);
     }
+
 
     public void endGame() {
         frame.endGame(game.getObjectives(), game.score());

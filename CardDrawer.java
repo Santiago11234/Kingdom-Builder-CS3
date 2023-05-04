@@ -143,13 +143,13 @@ public class CardDrawer {
             
         }
         if(game.getObj1ButtonTF()){
-            g.drawImage(getObjectiveCardImage(objectiveDeck[0]), 1026, 35, OBJECTIVE_CARD_BIG_WIDTH, OBJECTIVE_CARD_BIG_HEIGHT, null);
+            g.drawImage(getObjectiveCardImage(objectiveDeck[0]), 1015, 15, OBJECTIVE_CARD_BIG_WIDTH, OBJECTIVE_CARD_BIG_HEIGHT, null);
         }
         if(game.getObj2ButtonTF()){
-            g.drawImage(getObjectiveCardImage(objectiveDeck[1]), OBJECTIVE_CARD_XS[1], OBJECTIVE_CARD_Y, OBJECTIVE_CARD_BIG_WIDTH, OBJECTIVE_CARD_BIG_HEIGHT, null);
+            g.drawImage(getObjectiveCardImage(objectiveDeck[1]), 1168, 15, OBJECTIVE_CARD_BIG_WIDTH, OBJECTIVE_CARD_BIG_HEIGHT, null);
         }
         if(game.getObj3ButtonTF()){
-            g.drawImage(getObjectiveCardImage(objectiveDeck[2]), OBJECTIVE_CARD_XS[2], OBJECTIVE_CARD_Y, OBJECTIVE_CARD_BIG_WIDTH, OBJECTIVE_CARD_BIG_HEIGHT, null);
+            g.drawImage(getObjectiveCardImage(objectiveDeck[2]), 1321, 15, OBJECTIVE_CARD_BIG_WIDTH, OBJECTIVE_CARD_BIG_HEIGHT, null);
         }
     
     
