@@ -4,8 +4,8 @@ import java.util.Queue;
 import java.util.LinkedList;
 import java.util.Collections;
 import java.util.HashMap;
-
-import java.util.Arrays;
+import java.util.Stack;
+//import java.util.Arrays;
 
 import java.awt.Graphics2D;
 
@@ -37,6 +37,7 @@ public class Game {
     private Boolean obj3ButtonTF;
 
     public Game(KingdomBuilderPanel p){
+        noMorePlease = false;
         panel = p;
         board = new Board();
         players = new Player[4];
@@ -87,7 +88,7 @@ public class Game {
         for(int i = 0; i < players.length; i++){
             players[i].clear();
         }
-
+        noMorePlease = false;
         terrainDeck.clear();
         for(int i =0; i < 25; i++){
             if(i%5==0){
@@ -152,8 +153,6 @@ public class Game {
 
             p.updatePowerUpPositions();
         }
-
-        System.out.println(Arrays.toString(objectiveDeck));
     }
 
     public int getFirstPlayer(){
@@ -257,7 +256,8 @@ public class Game {
                 settlementCount = 0;
                 panel.setSwitchTurnButton(true);
             }
-            else {
+
+            if(settlementPlaying != 2) {
                 eligibleTiles = findEligibleTiles(players[turn].settlements, players[turn].getCard(), true);
             }
         }
@@ -604,6 +604,7 @@ public class Game {
                         break;
 
                     case "merchants":
+                        score2 = scoreMerchants(turnToScore);
                         break;
 
                     default:
@@ -668,6 +669,7 @@ public class Game {
 
         for(String obj: playerScores.keySet())
             score += playerScores.get(obj).get(turn);
+
         //player.setPersonalPoints(score);
         System.out.println(turn + ": " + score);
         System.out.println(playerScores);
@@ -823,9 +825,57 @@ public class Game {
         }
     }
 
-    private void scoreConnectedSpecialTiles() {
+    private int scoreMerchants(int currentTurn) {
+        HashSet<Tile> settlements = players[currentTurn].settlements;
+        HashSet<Tile> specialTiles = players[currentTurn].specialTiles;
+        
+        Stack<Tile> toVisit = new Stack<Tile>();
+        HashSet<Tile> tilesVisited = new HashSet<Tile>();
 
-    }
+        int score = 0;
+        int allVisitedSpecialTiles = 0;
+
+        for(Tile t: specialTiles) {
+            if(tilesVisited.contains(t))
+                continue;
+
+            if(allVisitedSpecialTiles > specialTiles.size() - 2)
+                break;
+
+            int visitedSpecialTiles = 0;
+
+            toVisit.push(t);
+            tilesVisited.add(t);
+            visitedSpecialTiles++;
+
+            while(!toVisit.isEmpty()) {
+                Tile tileAt = toVisit.pop();
+
+                Tile[] neighbors = board.getNeighbors(tileAt);
+                for(Tile t2: neighbors) {
+                    if(t2 == null || tilesVisited.contains(t2))
+                        continue;
+
+                    if(specialTiles.contains(t2))
+                        visitedSpecialTiles++;
+
+                    else if(!settlements.contains(t2))
+                        continue;
+
+                    //Richard: this trickery should only occur if either the tile is in specialTiles or is contained in settlements
+                    toVisit.push(t2);
+                    tilesVisited.add(t2);
+                }
+            }
+            
+            allVisitedSpecialTiles += visitedSpecialTiles;
+            
+            if(visitedSpecialTiles > 1)
+                score += visitedSpecialTiles;
+        }
+
+        return score;
+    }  
     
     private int[] scoreHermitsCitizens(int currentTurn) {
         boolean hermits = objectivesContain("hermits");
@@ -1040,6 +1090,9 @@ public class Game {
 
     public boolean getNoMorePlease(){
         return noMorePlease;
+    }
+    public void setNoMorePlease(boolean b){
+        noMorePlease = b;
     }
 
     public void drawAll(Graphics2D g) {

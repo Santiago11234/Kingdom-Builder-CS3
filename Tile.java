@@ -60,6 +60,7 @@ public class Tile {
             images[12] = ImageIO.read(Tile.class.getResource("/Images/Power Up Paddock.png"));
             images[13] = ImageIO.read(Tile.class.getResource("/Images/Power Up Tavern.png"));
             images[14] = ImageIO.read(Tile.class.getResource("/Images/Power Up Tower.png"));
+            images[15] = ImageIO.read(Tile.class.getResource("/Images/castleTile.png"));
 
         }
         catch(Exception e) {
@@ -176,7 +177,7 @@ public class Tile {
         if(isPowerupTile()) {
             powerups = new LinkedList<PowerUp>();
             for(int i = 0; i < 2; i++) {
-
+                powerups.add(new PowerUp(type));
             }
         }
         else {
@@ -216,9 +217,8 @@ public class Tile {
     public void draw(Graphics g) {
         switch(type) {
             case "castle":
-                g.drawImage(images[14], x, y, WIDTH, HEIGHT, null);
+                g.drawImage(images[15], x, y, WIDTH, HEIGHT, null);
                 break;
-
             case "oracle":
                 g.drawImage(images[11], x, y, WIDTH, HEIGHT, null);
                 break;
@@ -244,6 +244,9 @@ public class Tile {
                 break;
             case "paddock":
                 g.drawImage(images[12], x, y, WIDTH, HEIGHT, null);
+                break;
+            case "tower":
+                g.drawImage(images[14], x, y, WIDTH, HEIGHT, null);
                 break;
             default: 
                 break;

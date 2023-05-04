@@ -1,5 +1,6 @@
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import java.awt.event.*;
@@ -12,7 +13,10 @@ import java.awt.Graphics2D;
 public class KingdomBuilderPanel extends JPanel implements ActionListener, MouseListener {
     private KingdomBuilder frame;
     private Game game;
+
     private JButton startButton;
+    private JButton settlementButton;
+    private JButton endTurnButtonButton;
 
     private JButton obj1Button;
     private JButton obj2Button;
@@ -25,16 +29,15 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
     private Boolean starter = true;
 
-
-    private boolean canPlaceSettlement;
-
-    private BufferedImage blurBG, playerWood,mapWood, settlementWood, player1NameBlock, player2NameBlock, player3NameBlock, player4NameBlock, addSettlementButton,
-            endTurnButton, settlementCountBlock, deckTextBlock, discardTextBlock,purpleSettlement,yellowSettlement,blueSettlement,redSettlement,player1Small,player2Small,player3Small,player4Small,firstPlayer; 
+    private BufferedImage blurBG, playerWood,mapWood, settlementWood, player1NameBlock, player2NameBlock, player3NameBlock, player4NameBlock, addSettlementButton, settlementButtonBlackened,
+            endTurnButton, endTurnBlackened, settlementCountBlock, deckTextBlock, discardTextBlock,purpleSettlement,yellowSettlement,blueSettlement,redSettlement,player1Small,player2Small,player3Small,player4Small,firstPlayer; 
 
     public KingdomBuilderPanel(KingdomBuilder kb) {
         setSize(getPreferredSize());
         setLayout(null);
         frame = kb;
+
+        startButton = new JButton("Skip to end :0");
         canPlaceSettlement = false;
         
         obj1Button = new JButton(""); 
@@ -66,13 +69,28 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         startButton.setOpaque(false);
         startButton.setContentAreaFilled(true);
         startButton.setBorderPainted(false);
-        startButton.setSize(200, 50);
-        startButton.setLocation(1117, 0);
+        startButton.setSize(200, 30);
+        startButton.setLocation(1237, 0);
         startButton.setFocusable(false);
         startButton.addActionListener(this);
         add(startButton);
 
+        settlementButton = new JButton();
+        settlementButton.setBounds(1409, 652, 114, 110);
+        settlementButton.setBorder(null);
+        settlementButton.setContentAreaFilled(false);
+        settlementButton.setFocusable(false);
+        settlementButton.addActionListener(this);
+
+        endTurnButtonButton = new JButton();
+        endTurnButtonButton.setBounds(1144, 840, 381, 49);
+        endTurnButtonButton.setBorder(null);
+        endTurnButtonButton.setContentAreaFilled(false);
+        endTurnButtonButton.setFocusable(false);
+        endTurnButtonButton.addActionListener(this);
+
         addMouseListener(this);
+        
 
         game = new Game(this);
         start();
@@ -100,6 +118,9 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
             player3Small = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/player3NameBlockSmall.png"));
             player4Small = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/player4NameBlockSmall.png"));
             //firstPlayer = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/"));
+
+            settlementButtonBlackened = ImageIO.read(KingdomBuilderPanel.class.getResource("Images/Add Settlement Button Blackened.png"));
+            endTurnBlackened = ImageIO.read(KingdomBuilderPanel.class.getResource("Images/End Turn Button Blackened.png"));
 
             obj1Button.addActionListener(new ActionListener(){  
                 public void actionPerformed(ActionEvent e){  
@@ -145,6 +166,19 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         } catch (Exception e) {
             System.out.println("Kingdom Builder panel error");
         }
+
+        //?????? Not doing this results in Java cropping it slightly.
+        int width = 114;
+        int height = 110;
+        settlementButton.setIcon(new ImageIcon(addSettlementButton.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH)));
+        settlementButton.setRolloverIcon(new ImageIcon(settlementButtonBlackened.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH)));
+        settlementButton.setDisabledIcon(settlementButton.getRolloverIcon());
+        add(settlementButton);
+
+        endTurnButtonButton.setIcon(new ImageIcon(endTurnButton));
+        endTurnButtonButton.setRolloverIcon(new ImageIcon(endTurnBlackened));
+        endTurnButtonButton.setDisabledIcon(endTurnButtonButton.getRolloverIcon());
+        add(endTurnButtonButton);
     }
 
     public void start() {
@@ -153,11 +187,12 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
     }
 
     public void setSettlementButton(boolean b) {
-    	canPlaceSettlement = b;
+    	//canPlaceSettlement = b;
+        settlementButton.setEnabled(b);
     }
 
     public void setSwitchTurnButton(boolean b) {
-
+        endTurnButtonButton.setEnabled(b);
     }
 
     public void paintComponent(Graphics l) {
@@ -179,8 +214,8 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         g.drawImage(discardTextBlock, 1270, 581, 102, 32, null);
         g.drawString("Discarded: " + game.getDiscard().size(), 1284, 602);
         //buttons on player section
-        g.drawImage(addSettlementButton, 1409, 652, 114, 110, null);
-        g.drawImage(endTurnButton, 1144, 840, 381, 49, null);
+        //g.drawImage(addSettlementButton, 1409, 652, 114, 110, null);
+        //g.drawImage(endTurnButton, 1144, 840, 381, 49, null);
 
         //Player not main people info
         int temp = game.turn();
@@ -310,6 +345,17 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
                 g.drawImage(blueSettlement, 1500, 71, 25, 70, null);
             }
         }
+        if(game.getNoMorePlease()){
+            startButton = new JButton("Return To Leaderboard");
+            startButton.setOpaque(false);
+            startButton.setContentAreaFilled(true);
+            startButton.setBorderPainted(false);
+            startButton.setSize(200, 30);
+            startButton.setLocation(1237, 45);
+            startButton.setFocusable(false);
+            startButton.addActionListener(this);
+            add(startButton);
+        }
         
         
 
@@ -350,18 +396,30 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
     public void mouseClicked(MouseEvent e) {
         //Check this...
+        if(!game.getNoMorePlease()){
         int x = e.getX();
         int y = e.getY();
         game.mostMoves(x, y);
         repaint();
-        
-        if(x > 1409 && x < 1409 + 114 && y > 625 && y < 625+110 && canPlaceSettlement)
-        	game.startSettlementPlay();
-        if(x> 1144 && x < 1144+381 && y > 840 && y < 840+49 && !game.getNoMorePlease()) 
-            game.switchTurn();
+
+        //if(x > 1409 && x < 1409 + 114 && y > 625 && y < 625+110 && canPlaceSettlement)
+        //	game.startSettlementPlay();
+        //if(x> 1144 && x < 1144+381 && y > 840 && y < 840+49) 
+        //    game.switchTurn();
+        }
     }
 
     public void actionPerformed(ActionEvent e) {
-        frame.nextScreen();
+        if(e.getSource() == settlementButton) {
+            game.startSettlementPlay();
+            repaint();
+        }
+        else if(e.getSource() == endTurnButtonButton) {
+            game.switchTurn();
+            repaint();
+        }
+
+        else
+            endGame();
     }
 }

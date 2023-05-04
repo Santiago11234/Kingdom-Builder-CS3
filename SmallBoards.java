@@ -13,14 +13,14 @@ public class SmallBoards {
             {"c", null, "c", null, "c", null, "m", null,"m", null,"w", null,"f", null, "f", null, "f", null, "c", null},
             {null, "g", null, "c", null, "c", null,"c", null,"m", null,"f", null, "f", null, "w", null, "b", null, "c"},
             {"g", null, "g", null, "sb", null, "b", null,"f", null,"f", null,"w", null, "f", null, "f", null, "b", null},
-            {null, "g", null, "g", null, "b", null,"b", null,"f", null,"f", null, "g", null, "sb", null, "b", null, "b"},
+            {null, "g", null, "g", null, "b", null,"b", null,"f", null,"f", null, "g", null, "sc", null, "b", null, "b"},
             {"g", null, "g", null, "g", null, "b", null,"b", null,"w", null,"g", null, "g", null, "b", null, "b", null},
             {null, "g", null, "g", null, "g", null,"b", null,"w", null,"g", null, "g", null, "b", null, "b", null, "b"},
         };
         //board2
         boards[1] = new String[][]{
             {"d", null, "d", null, "c", null, "w", null,"w", null,"b", null,"b", null, "b", null, "g", null, "g", null},
-            {null, "d", null, "sc", null, "c", null,"w", null,"b", null,"b", null, "b", null, "sf", null, "g", null, "g"},
+            {null, "d", null, "sc", null, "c", null,"w", null,"b", null,"b", null, "b", null, "sc", null, "g", null, "g"},
             {"c", null, "c", null, "c", null, "f", null,"f", null,"f", null,"b", null, "c", null, "f", null, "f", null},
             {null, "c", null, "c", null, "f", null,"f", null,"w", null,"d", null, "d", null, "c", null, "c", null, "f"},
             {"c", null, "g", null, "g", null, "w", null,"f", null,"f", null,"d", null, "d", null, "c", null, "c", null},
@@ -78,7 +78,7 @@ public class SmallBoards {
             {"w", null, "w", null, "w", null, "w", null,"g", null,"g", null,"g", null, "g", null, "f", null, "f", null},
             {null, "w", null, "b", null, "b", null,"w", null,"g", null,"g", null, "c", null, "c", null, "d", null, "c"},
             {"w", null, "b", null, "c", null, "b", null,"w", null,"g", null,"c", null, "c", null, "d", null, "c", null},
-            {null, "w", null, "s", null, "c", null,"f", null,"w", null,"sc", null, "d", null, "d", null, "c", null, "w"},
+            {null, "w", null, "sc", null, "c", null,"f", null,"w", null,"sc", null, "d", null, "d", null, "c", null, "w"},
             {"w", null, "w", null, "c", null, "f", null,"w", null,"w", null,"w", null, "d", null, "d", null, "w", null},
             {null, "w", null, "w", null, "w", null,"w", null,"w", null,"w", null, "w", null, "w", null, "w", null, "w"},
         };
