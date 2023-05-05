@@ -139,20 +139,6 @@ public class Game {
         }
 
         board.createBoard();
-
-        //Richard: testing
-        for(Player p: players) {
-            p.powerups.put(new PowerUp("farm"), 0);
-            p.powerups.put(new PowerUp("oracle"), 0);
-            p.powerups.put(new PowerUp("oasis"), 0);
-            p.powerups.put(new PowerUp("tower"), 0);
-            p.powerups.put(new PowerUp("tavern"), 0);
-            p.powerups.put(new PowerUp("barn"), 0);
-            p.powerups.put(new PowerUp("harbor"), 0);
-            p.powerups.put(new PowerUp("paddock"), 0);
-
-            p.updatePowerUpPositions();
-        }
     }
 
     public int getFirstPlayer(){
@@ -208,7 +194,7 @@ public class Game {
 
         
 
-        //Richard: assuming that clicking an unused power up results in nothing
+        //Richard: clicking an unused power up cancels the power up currently used
         if((powerUpTurnCount == 0  || powerUpTurnCount == 1)&& (settlementPlaying != 1 || settlementPlaying == 1 && settlementCount == 0)) {
             for(PowerUp p: players[turn].powerups.keySet()) {
                 if(p.clicked(x, y)) {
@@ -222,6 +208,7 @@ public class Game {
                             return;
 
                     temp = null;
+
                     powerupSelected = p;
                     if(players[turn].powerups.get(p) == 0) {
                         //Richard: if cancelPowerUpPlay is false, then no power ups are playing
@@ -237,8 +224,13 @@ public class Game {
         
         //Richard: taking back actions
         if(t == null) {
-            if(cancelPowerUpPlay() || cancelSettlementPlay())
-                 return;
+            //if(cancelPowerUpPlay() || cancelSettlementPlay())
+            //    return;
+
+            //Richard: try this
+            cancelPowerUpPlay();
+            cancelSettlementPlay();
+            return;
         }
         
         //Richard: powerupCount = 0 already checked above
@@ -310,8 +302,8 @@ public class Game {
         if(eligibleTiles.contains(t)) {
             players[turn].settlements.add(t);
             t.setOccupied(true);
-            score();
             addOrRemovePowerUps(t, true);
+            score();
             enableOrDisablePowerUps();
             eligibleTiles.clear();
 
@@ -410,9 +402,10 @@ public class Game {
                 }
         }
 
-        if(powerUpTurnCount >= 2)
+        if(powerUpTurnCount >= 2) {
             panel.setSettlementButton(false);
             panel.setSwitchTurnButton(false);
+        }
 
         if(end)
             powerUpUsed();
@@ -874,7 +867,7 @@ public class Game {
                 score += visitedSpecialTiles;
         }
 
-        return score;
+        return score * 4;
     }  
     
     private int[] scoreHermitsCitizens(int currentTurn) {
@@ -971,24 +964,33 @@ public class Game {
         if(!p.specialTiles.contains(t))
             return;
 
+        Tile[] neighbors = board.getNeighbors(t);
+        for(Tile ti: neighbors)
+            if(p.settlements.contains(ti))
+                return;
+        
         p.specialTiles.remove(t);
 
         if(!t.isPowerupTile())
             return;
 
         //Richard: assuming that removal of one tile will only affect one special tile
-        boolean powerUpRemoved = false;
+        PowerUp toRemove = null;
 
+        //Richard: removes used power up unless there is no choice
         for(PowerUp powerUp: p.powerups.keySet())
             if(powerUp.getType().equals(t.getType())) {
-                p.powerups.remove(powerUp);
-                powerUpRemoved = true;
-                break;
+                toRemove = powerUp;
+
+                if(p.powerups.get(toRemove) == 2)
+                    break;
             }
+
+        if(toRemove == null)
+            return;
         
-        if(powerUpRemoved) {
-            p.updatePowerUpPositions();
-        }
+        p.powerups.remove(toRemove);
+        p.updatePowerUpPositions();
     }
 
     private void enableOrDisablePowerUps() {
