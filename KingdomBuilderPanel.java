@@ -412,19 +412,21 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
     public void actionPerformed(ActionEvent e) {
         if(!game.getNoMorePlease()){
-        if(e.getSource() == settlementButton) {
-            game.startSettlementPlay();
-            repaint();
-        }
-        else if(e.getSource() == endTurnButtonButton) {
-            game.switchTurn();
-            repaint();
-        }
+            if(e.getSource() == settlementButton) {
+                game.startSettlementPlay();
+                repaint();
+            }
+            else if(e.getSource() == endTurnButtonButton) {
+                game.switchTurn();
+                repaint();
+            }
 
-        else{
-            endGame();
-            game.setNoMorePlease(true);
+            else{
+                endGame();
+                game.setNoMorePlease(true);
+            }
+        }else{
+            frame.nextScreen();
         }
-    }
     }
 }
