@@ -192,7 +192,7 @@ public class Game {
 
     public void mostMoves(int x, int y) {
 
-        
+        System.out.println(settlementPlaying);
 
         //Richard: clicking an unused power up cancels the power up currently used
         if((powerUpTurnCount == 0  || powerUpTurnCount == 1)&& (settlementPlaying != 1 || settlementPlaying == 1 && settlementCount == 0)) {
@@ -245,11 +245,13 @@ public class Game {
             settlementCount++;
             if(settlementCount == 3) {
                 settlementPlaying = 2;
+            }
+
+            if(settlementPlaying == 2) {
                 settlementCount = 0;
                 panel.setSwitchTurnButton(true);
             }
-
-            if(settlementPlaying != 2) {
+            else {
                 eligibleTiles = findEligibleTiles(players[turn].settlements, players[turn].getCard(), true);
             }
         }
@@ -308,7 +310,6 @@ public class Game {
             eligibleTiles.clear();
 
             if(players[turn].getSettlementsLeft() == 0) {
-                settlementPlaying = 2;
                 gameOver = true;
                 panel.setSettlementButton(false);
             }
@@ -1082,6 +1083,7 @@ public class Game {
         
         //System.out.println("Turn " + turn);
         panel.setSettlementButton(true);
+        //SANTIIIII UN THIS
         panel.setSwitchTurnButton(false);
 
         if(gameOver && turn == firstPlayer) {
