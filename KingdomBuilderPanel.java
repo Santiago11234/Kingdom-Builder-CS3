@@ -25,9 +25,6 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
     private Boolean obj1ButtonTF = false;
     private Boolean obj2ButtonTF = false;
     private Boolean obj3ButtonTF = false;
-    
-
-    private Boolean starter = true;
 
     private BufferedImage blurBG, playerWood,mapWood, settlementWood, player1NameBlock, player2NameBlock, player3NameBlock, player4NameBlock, addSettlementButton, settlementButtonBlackened,
             endTurnButton, endTurnBlackened, settlementCountBlock, deckTextBlock, discardTextBlock,purpleSettlement,yellowSettlement,blueSettlement,redSettlement,player1Small,player2Small,player3Small,player4Small,firstPlayer; 
@@ -87,10 +84,6 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         endTurnButtonButton.addActionListener(this);
 
         addMouseListener(this);
-        
-
-        game = new Game(this);
-        start();
 
         try {
             blurBG = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/blurred BG.jpg"));
@@ -176,11 +169,29 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         endTurnButtonButton.setRolloverIcon(new ImageIcon(endTurnBlackened));
         endTurnButtonButton.setDisabledIcon(endTurnButtonButton.getRolloverIcon());
         add(endTurnButtonButton);
+
+        returnButton = new JButton("Return To Leaderboard");
+        returnButton.setOpaque(false);
+        returnButton.setContentAreaFilled(true);
+        returnButton.setBorderPainted(false);
+        returnButton.setSize(200, 30);
+        returnButton.setLocation(1237, 45);
+        returnButton.setFocusable(false);
+        returnButton.addActionListener(this);
+        returnButton.setVisible(false);
+        add(returnButton);
+
+        game = new Game(this);
+        start();
     }
 
     public void start() {
         game.init();
-        
+    }
+
+    public void restart() {
+        returnButton.setVisible(false);
+        start();
     }
 
     public void setSettlementButton(boolean b) {
@@ -190,6 +201,10 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
     public void setSwitchTurnButton(boolean b) {
         endTurnButtonButton.setEnabled(b);
+    }
+
+    public void enableReturnButton() {
+        returnButton.setVisible(true);
     }
 
     public void paintComponent(Graphics l) {
@@ -358,20 +373,6 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
                 g.drawImage(firstPlayer, 1500, 95, 45, 39, null);
             }
         }
-        if(game.getNoMorePlease()){
-            returnButton = new JButton("Return To Leaderboard");
-            returnButton.setOpaque(false);
-            returnButton.setContentAreaFilled(true);
-            returnButton.setBorderPainted(false);
-            returnButton.setSize(200, 30);
-            returnButton.setLocation(1237, 45);
-            returnButton.setFocusable(false);
-            returnButton.addActionListener(this);
-            add(returnButton);
-        }
-        
-        
-
         //Main player name ------- blocks moved above
         //g.drawImage(player1NameBlock, 1117, 71, 436, 75, null);
         //g.drawImage(player2NameBlock, 1117, 71, 436, 75, null);
@@ -391,10 +392,6 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
     public void endGame() {
         frame.endGame(game.getObjectives(), game.score());
-    }
-
-    public void restart(){
-        game.init();
     }
 
     public void mousePressed(MouseEvent e) {}
