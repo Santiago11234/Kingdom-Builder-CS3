@@ -267,7 +267,7 @@ public class Tile {
             powerups.peek().draw(0, g);
 
             g.setFont(new Font("Roboto", Font.BOLD, 20));
-            g.drawString("" + powerups.size(), x + 17, y + 33);
+            g.drawString("" + powerups.size(), x + 17, y + 35);
         }
 
         g.setFont(old);
