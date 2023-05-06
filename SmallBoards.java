@@ -8,7 +8,7 @@ public class SmallBoards {
         boards[0] = new String[][]{
             {"c", null, "d", null, "d", null, "d", null,"d", null,"d", null,"d", null, "d", null, "d", null, "d", null},
             {null, "c", null, "c", null, "c", null,"d", null,"d", null,"d", null, "d", null, "d", null, "c", null, "d"},
-            {"m", null, "m", null, "m", null, "d", null,"m", null,"m", null,"sc", null, "d", null, "d", null, "c", null},
+            {"m", null, "m", null, "m", null, "d", null,"m", null,"m", null,"sb", null, "d", null, "d", null, "c", null},
             {null, "c", null, "m", null, "m", null,"m", null,"m", null,"m", null, "f", null, "f", null, "c", null, "c"},
             {"c", null, "c", null, "c", null, "m", null,"m", null,"w", null,"f", null, "f", null, "f", null, "c", null},
             {null, "g", null, "c", null, "c", null,"c", null,"m", null,"f", null, "f", null, "w", null, "b", null, "c"},
@@ -20,7 +20,7 @@ public class SmallBoards {
         //board2
         boards[1] = new String[][]{
             {"d", null, "d", null, "c", null, "w", null,"w", null,"b", null,"b", null, "b", null, "g", null, "g", null},
-            {null, "d", null, "sc", null, "c", null,"w", null,"b", null,"b", null, "b", null, "sc", null, "g", null, "g"},
+            {null, "d", null, "sc", null, "c", null,"w", null,"b", null,"b", null, "b", null, "sf", null, "g", null, "g"},
             {"c", null, "c", null, "c", null, "f", null,"f", null,"f", null,"b", null, "c", null, "f", null, "f", null},
             {null, "c", null, "c", null, "f", null,"f", null,"w", null,"d", null, "d", null, "c", null, "c", null, "f"},
             {"c", null, "g", null, "g", null, "w", null,"f", null,"f", null,"d", null, "d", null, "c", null, "c", null},
@@ -56,7 +56,7 @@ public class SmallBoards {
             {"w", null, "d", null, "sc", null, "g", null,"w", null,"m", null,"w", null, "c", null, "c", null, "c", null},
             {null, "w", null, "d", null, "d", null, "w", null,"w", null,"w", null, "w", null, "c", null, "c", null, "c"},
         };
-        //board5
+        //board5 done
         boards[4] = new String[][]{
             {"b", null, "b", null, "b", null, "b", null,"m", null,"m", null,"g", null, "m", null, "c", null, "c", null},
             {null, "b", null, "m", null, "b", null,"b", null,"f", null,"g", null, "m", null, "m", null, "m", null, "c"},
@@ -78,11 +78,11 @@ public class SmallBoards {
             {"w", null, "w", null, "w", null, "w", null,"g", null,"g", null,"g", null, "g", null, "f", null, "f", null},
             {null, "w", null, "b", null, "b", null,"w", null,"g", null,"g", null, "c", null, "c", null, "d", null, "c"},
             {"w", null, "b", null, "c", null, "b", null,"w", null,"g", null,"c", null, "c", null, "d", null, "c", null},
-            {null, "w", null, "sc", null, "c", null,"f", null,"w", null,"sc", null, "d", null, "d", null, "c", null, "w"},
+            {null, "w", null, "sc", null, "c", null,"f", null,"w", null,"sp", null, "d", null, "d", null, "c", null, "w"},
             {"w", null, "w", null, "c", null, "f", null,"w", null,"w", null,"w", null, "d", null, "d", null, "w", null},
             {null, "w", null, "w", null, "w", null,"w", null,"w", null,"w", null, "w", null, "w", null, "w", null, "w"},
         };
-        //board7
+        //board7 done
         boards[6] = new String[][]{
             {"c", null, "c", null, "c", null, "d", null,"d", null,"w", null,"d", null, "d", null, "d", null, "d", null},
             {null, "m", null, "m", null, "c", null,"d", null,"d", null,"w", null, "d", null, "d", null, "d", null, "d"},

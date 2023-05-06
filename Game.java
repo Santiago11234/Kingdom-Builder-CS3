@@ -68,16 +68,19 @@ public class Game {
         return obj3ButtonTF;
     }
 
-    public void editTF(int x){
+    public boolean editTF(int x){
         if(x == 1){
             obj1ButtonTF = !obj1ButtonTF;
             System.out.println("BUTTON ONE SWITCHED TO: " + obj1ButtonTF);
+            return obj1ButtonTF;
         }else if(x == 2){
             obj2ButtonTF = !obj2ButtonTF;
             System.out.println("BUTTON TWO SWITCHED TO: " + obj2ButtonTF);
-        }else if(x == 3){
+            return obj2ButtonTF;
+        }else{
             obj3ButtonTF = !obj3ButtonTF;
             System.out.println("BUTTON THREE SWITCHED TO: " + obj3ButtonTF);
+            return obj3ButtonTF;
         }
     }
 
@@ -189,7 +192,7 @@ public class Game {
 
     public void mostMoves(int x, int y) {
 
-        
+        System.out.println(settlementPlaying);
 
         //Richard: clicking an unused power up cancels the power up currently used
         if((powerUpTurnCount == 0  || powerUpTurnCount == 1)&& (settlementPlaying != 1 || settlementPlaying == 1 && settlementCount == 0)) {
@@ -242,11 +245,13 @@ public class Game {
             settlementCount++;
             if(settlementCount == 3) {
                 settlementPlaying = 2;
+            }
+
+            if(settlementPlaying == 2) {
                 settlementCount = 0;
                 panel.setSwitchTurnButton(true);
             }
-
-            if(settlementPlaying != 2) {
+            else {
                 eligibleTiles = findEligibleTiles(players[turn].settlements, players[turn].getCard(), true);
             }
         }
@@ -305,7 +310,6 @@ public class Game {
             eligibleTiles.clear();
 
             if(players[turn].getSettlementsLeft() == 0) {
-                settlementPlaying = 2;
                 gameOver = true;
                 panel.setSettlementButton(false);
             }
@@ -1079,6 +1083,7 @@ public class Game {
         
         //System.out.println("Turn " + turn);
         panel.setSettlementButton(true);
+        //SANTIIIII UN THIS
         panel.setSwitchTurnButton(false);
 
         if(gameOver && turn == firstPlayer) {

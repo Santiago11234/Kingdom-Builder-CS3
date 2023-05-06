@@ -14,7 +14,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
     private KingdomBuilder frame;
     private Game game;
 
-    private JButton startButton;
+    private JButton startButton, returnButton;
     private JButton settlementButton;
     private JButton endTurnButtonButton;
 
@@ -25,6 +25,9 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
     private Boolean obj1ButtonTF = false;
     private Boolean obj2ButtonTF = false;
     private Boolean obj3ButtonTF = false;
+    
+
+    private Boolean starter = true;
 
     private BufferedImage blurBG, playerWood,mapWood, settlementWood, player1NameBlock, player2NameBlock, player3NameBlock, player4NameBlock, addSettlementButton, settlementButtonBlackened,
             endTurnButton, endTurnBlackened, settlementCountBlock, deckTextBlock, discardTextBlock,purpleSettlement,yellowSettlement,blueSettlement,redSettlement,player1Small,player2Small,player3Small,player4Small,firstPlayer; 
@@ -33,8 +36,33 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         setSize(getPreferredSize());
         setLayout(null);
         frame = kb;
+        
+        obj1Button = new JButton(""); 
+        obj1Button.setBounds(1117, 168, 129, 189);
+        obj1Button.setOpaque(false);
+        obj1Button.setContentAreaFilled(false);
+        obj1Button.setBorderPainted(false);
+        obj1Button.setFocusable(false);
 
-        startButton = new JButton("Skip to end :0");
+        obj2Button = new JButton("");
+        obj2Button.setBounds(1270, 168, 129, 189);
+        obj2Button.setOpaque(false);
+        obj2Button.setContentAreaFilled(false);
+        obj2Button.setBorderPainted(false);
+        obj2Button.setFocusable(false);
+
+        obj3Button = new JButton("");
+        obj3Button.setBounds(1423, 168, 129, 189);
+        obj3Button.setOpaque(false);
+        obj3Button.setContentAreaFilled(false);
+        obj3Button.setBorderPainted(false);
+        obj3Button.setFocusable(false);
+
+        add(obj1Button);
+        add(obj2Button);
+        add(obj3Button);
+
+        startButton = new JButton("skip to end button");
         startButton.setOpaque(false);
         startButton.setContentAreaFilled(true);
         startButton.setBorderPainted(false);
@@ -86,10 +114,51 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
             player2Small = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/player2NameBlockSmall.png"));
             player3Small = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/player3NameBlockSmall.png"));
             player4Small = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/player4NameBlockSmall.png"));
-            //firstPlayer = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/"));
+            firstPlayer = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/FirstPlayerToken.PNG"));
 
             settlementButtonBlackened = ImageIO.read(KingdomBuilderPanel.class.getResource("Images/Add Settlement Button Blackened.png"));
             endTurnBlackened = ImageIO.read(KingdomBuilderPanel.class.getResource("Images/End Turn Button Blackened.png"));
+
+            obj1Button.addActionListener(new ActionListener(){  
+                public void actionPerformed(ActionEvent e){  
+                    Boolean bS = game.editTF(1);
+                    if(bS == true){
+                        System.out.println("Obj 1 Made Bigger");
+                        obj1Button.setBounds(1015, 15, 235, 345);
+                    } else {
+                        System.out.println("Obj 1 Made Smaller");
+                        obj1Button.setBounds(1117, 168, 129, 189);
+                    }
+                    repaint();
+                }  
+            }); 
+            obj2Button.addActionListener(new ActionListener(){  
+                public void actionPerformed(ActionEvent e){  
+                    System.out.println("try");
+                    Boolean bS = game.editTF(2);
+                    if(bS == true){
+                        System.out.println(" Obj 2 Made Smaller");
+                        obj2Button.setBounds(1168, 15, 235, 345);
+                    } else {
+                        System.out.println("Obj 2 Made Bigger");
+                        obj2Button.setBounds(1270, 168, 129, 189);
+                    }
+                    repaint();
+                }  
+            });
+            obj3Button.addActionListener(new ActionListener(){  
+                public void actionPerformed(ActionEvent e){  
+                    Boolean bS = game.editTF(3);
+                    if(bS){
+                        System.out.println(" Obj 3 Made Smaller");
+                        obj3Button.setBounds(1321, 15, 235, 345);
+                    } else {
+                        System.out.println("Obj 3 Made Bigger");
+                        obj3Button.setBounds(1423, 168, 129, 189);
+                    }
+                    repaint();
+                }  
+            });
 
         } catch (Exception e) {
             System.out.println("Kingdom Builder panel error");
@@ -111,6 +180,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
     public void start() {
         game.init();
+        
     }
 
     public void setSettlementButton(boolean b) {
@@ -153,31 +223,32 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
             g.drawImage(yellowSettlement, 350, 23, width, height, null);
             g.drawImage(player2Small,125,31,200,33,null);
             if(game.getFirstPlayer()==1){
-                g.drawImage(blueSettlement, 300, 37, 20, 15, null);
+                g.drawImage(firstPlayer, 300, 42, 20, 15, null);
             }
 
             g.drawImage(blueSettlement, 660, 23, width, height, null);
             g.drawImage(player3Small,435,31,200,33,null);
             if(game.getFirstPlayer()==2){
-                g.drawImage(blueSettlement, 605, 37, 20, 15, null);
+                g.drawImage(firstPlayer, 605, 42, 20, 15, null);
             }
 
             g.drawImage(redSettlement, 970, 23, width, height, null);
             g.drawImage(player4Small,745,31,200,33,null);
 
             if(game.getFirstPlayer()==3){
-                g.drawImage(blueSettlement, 915, 37, 20, 15, null);
+                g.drawImage(firstPlayer, 915, 42, 20, 15, null);
             }
 
 
             //player's name on player board and the settlement ontop of the add settlement button
             g.drawImage(player1NameBlock, 1117, 71, 436, 75, null);
             g.drawString("Settlements: " + game.players[temp].getSettlementsLeft(), 1425, 793);
+            g.drawImage(purpleSettlement, 1130, 95, 48, 40, null);
             //idea to put settlement house ontop of addSettlement button
             //g.drawImage(purpleSettlement, 1436, 682, width, height, null);
             //first player token
             if(temp==game.getFirstPlayer()){
-                g.drawImage(blueSettlement, 1500, 77, 37, 50, null);
+                g.drawImage(firstPlayer, 1500, 95, 45, 39, null);
             }
         }
         if(temp == 1){
@@ -185,14 +256,14 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
             g.drawImage(blueSettlement, 350, 23, width, height, null);
             g.drawImage(player3Small,125,31,200,33,null);
             if(game.getFirstPlayer()==2){
-                g.drawImage(blueSettlement, 300, 37, 20, 15, null);
+                g.drawImage(firstPlayer, 300, 42, 20, 15, null);
             }
             //player4
             g.drawImage(redSettlement, 660, 23, width, height, null);
             g.drawImage(player4Small,435,31,200,33,null);
 
             if(game.getFirstPlayer()==3){
-                g.drawImage(blueSettlement, 605, 37, 20, 15, null);
+                g.drawImage(firstPlayer, 605, 42, 20, 15, null);
             }
 
 
@@ -201,29 +272,30 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
             g.drawImage(purpleSettlement, 970, 23, width, height, null);
 
             if(game.getFirstPlayer()==0){
-                g.drawImage(blueSettlement, 915, 37, 20, 15, null);
+                g.drawImage(firstPlayer, 915, 42, 20, 15, null);
             }
 
 
             g.drawImage(player2NameBlock, 1117, 71, 436, 75, null);
             g.drawString("Settlements: " + game.players[temp].getSettlementsLeft(), 1425, 793);
+            g.drawImage(yellowSettlement, 1130, 95, 48, 40, null);
 
             if(temp==game.getFirstPlayer()){
-                g.drawImage(blueSettlement, 1500, 71, 25, 70, null);
+                g.drawImage(firstPlayer, 1500, 95, 45, 39, null);
             }
         }
         if(temp == 2){
             g.drawImage(redSettlement, 350, 23, width, height, null);
             g.drawImage(player4Small,125,31,200,33,null);
             if(game.getFirstPlayer()==3){
-                g.drawImage(blueSettlement, 300, 37, 20, 15, null);
+                g.drawImage(firstPlayer, 300, 42, 20, 15, null);
             }
 
 
             g.drawImage(purpleSettlement, 660, 23, width, height, null);
             g.drawImage(player1Small,435,31,200,33,null);
             if(game.getFirstPlayer()==0){
-                g.drawImage(blueSettlement, 605, 37, 20, 15, null);
+                g.drawImage(firstPlayer, 605, 42, 20, 15, null);
             }
 
 
@@ -231,29 +303,30 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
             g.drawImage(player2Small,745,31,200,33,null);
 
             if(game.getFirstPlayer()==1){
-                g.drawImage(blueSettlement, 915, 37, 20, 15, null);
+                g.drawImage(firstPlayer, 915, 42, 20, 15, null);
             }
 
 
             g.drawImage(player3NameBlock, 1117, 71, 436, 75, null);
             g.drawString("Settlements: " + game.players[temp].getSettlementsLeft(), 1425, 793);
+            g.drawImage(blueSettlement, 1130, 95, 48, 40, null);
 
             if(temp==game.getFirstPlayer()){
-                g.drawImage(blueSettlement, 1500, 71, 25, 70, null);
+                g.drawImage(firstPlayer, 1500, 95, 45, 39, null);
             }
         }
         if(temp == 3){
             g.drawImage(purpleSettlement, 350, 23, width, height, null);
             g.drawImage(player1Small,125,31,200,33,null);
             if(game.getFirstPlayer()==0){
-                g.drawImage(blueSettlement, 300, 37, 20, 15, null);
+                g.drawImage(firstPlayer, 300, 42, 20, 15, null);
             }
 
             g.drawImage(yellowSettlement, 660, 23, width, height, null);
             g.drawImage(player2Small,435,31,200,33,null);
 
             if(game.getFirstPlayer()==1){
-                g.drawImage(blueSettlement, 605, 37, 20, 15, null);
+                g.drawImage(firstPlayer, 605, 42, 20, 15, null);
             }
 
 
@@ -261,75 +334,31 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
             g.drawImage(player3Small,745,31,200,33,null);
 
             if(game.getFirstPlayer()==2){
-                g.drawImage(blueSettlement, 915, 37, 20, 15, null);
+                g.drawImage(firstPlayer, 915, 42, 20, 15, null);
             }
 
 
             g.drawImage(player4NameBlock, 1117, 71, 436, 75, null);
             g.drawString("Settlements: " + game.players[temp].getSettlementsLeft(), 1425, 793);
+            g.drawImage(redSettlement, 1130, 95, 48, 40, null);
 
             if(temp==game.getFirstPlayer()){
-                g.drawImage(blueSettlement, 1500, 71, 25, 70, null);
+                g.drawImage(firstPlayer, 1500, 95, 45, 39, null);
             }
         }
         if(game.getNoMorePlease()){
-            startButton = new JButton("Return To Leaderboard");
-            startButton.setOpaque(false);
-            startButton.setContentAreaFilled(true);
-            startButton.setBorderPainted(false);
-            startButton.setSize(200, 30);
-            startButton.setLocation(1237, 45);
-            startButton.setFocusable(false);
-            startButton.addActionListener(this);
-            add(startButton);
+            returnButton = new JButton("Return To Leaderboard");
+            returnButton.setOpaque(false);
+            returnButton.setContentAreaFilled(true);
+            returnButton.setBorderPainted(false);
+            returnButton.setSize(200, 30);
+            returnButton.setLocation(1237, 45);
+            returnButton.setFocusable(false);
+            returnButton.addActionListener(this);
+            add(returnButton);
         }
-
-        obj1Button = new JButton(""); 
-        obj1Button.setBounds(1117, 168, 129, 189);
-        obj1Button.setOpaque(false);
-        obj1Button.setContentAreaFilled(false);
-        obj1Button.setBorderPainted(false);
-        obj1Button.setFocusable(false);
-        obj1Button.addActionListener(new ActionListener(){  
-            public void actionPerformed(ActionEvent e){  
-                game.editTF(1);
-                obj1Button.setBounds(1117, 168, 129, 189);
-                repaint();
-                System.out.println("Objective 1 has been clicked");  
-            }  
-        });
-        add(obj1Button);
-
-        obj2Button = new JButton("");
-        obj2Button.setBounds(1270, 168, 129, 189);
-        obj2Button.setOpaque(false);
-        obj2Button.setContentAreaFilled(false);
-        obj2Button.setBorderPainted(false);
-        obj2Button.setFocusable(false);
-
-        obj2Button.addActionListener(new ActionListener(){  
-            public void actionPerformed(ActionEvent e){  
-                game.editTF(2);
-                repaint();
-                System.out.println("Objective 2 has been clicked");  
-            }  
-        });
-        add(obj2Button);
-
-        obj3Button = new JButton("");
-        obj3Button.setBounds(1423, 168, 129, 189);
-        obj3Button.setOpaque(false);
-        obj3Button.setContentAreaFilled(false);
-        obj3Button.setBorderPainted(false);
-        obj3Button.setFocusable(false);
-        obj3Button.addActionListener(new ActionListener(){  
-            public void actionPerformed(ActionEvent e){  
-                game.editTF(3);
-                repaint();
-                System.out.println("Objective 3 has been clicked");  
-            }  
-        });
-        add(obj3Button);
+        
+        
 
         //Main player name ------- blocks moved above
         //g.drawImage(player1NameBlock, 1117, 71, 436, 75, null);
@@ -346,6 +375,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         
         game.drawAll(g);
     }
+
 
     public void endGame() {
         frame.endGame(game.getObjectives(), game.score());
@@ -381,16 +411,22 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
     }
 
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == settlementButton) {
-            game.startSettlementPlay();
-            repaint();
-        }
-        else if(e.getSource() == endTurnButtonButton) {
-            game.switchTurn();
-            repaint();
-        }
+        if(!game.getNoMorePlease()){
+            if(e.getSource() == settlementButton) {
+                game.startSettlementPlay();
+                repaint();
+            }
+            else if(e.getSource() == endTurnButtonButton) {
+                game.switchTurn();
+                repaint();
+            }
 
-        else
-            endGame();
+            else{
+                endGame();
+                game.setNoMorePlease(true);
+            }
+        }else{
+            frame.nextScreen();
+        }
     }
 }

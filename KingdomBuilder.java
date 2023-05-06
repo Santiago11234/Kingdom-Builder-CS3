@@ -30,6 +30,8 @@ public class KingdomBuilder extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setVisible(true);
+
+    
     }
     
     public void nextScreen() {

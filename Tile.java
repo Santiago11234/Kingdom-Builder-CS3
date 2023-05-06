@@ -5,8 +5,10 @@ import java.awt.Polygon;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.lang.reflect.WildcardType;
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 
 import javax.imageio.ImageIO;
 //import javax.swing.text.html.HTMLDocument.HTMLReader.SpecialAction;
@@ -177,7 +179,9 @@ public class Tile {
         if(isPowerupTile()) {
             powerups = new LinkedList<PowerUp>();
             for(int i = 0; i < 2; i++) {
-                powerups.add(new PowerUp(type));
+                PowerUp p = new PowerUp(type);
+                p.setPosition(getX() + (WIDTH - PowerUp.WIDTH) / 2, getY() + (HEIGHT - PowerUp.HEIGHT) / 2);
+                powerups.add(p);
             }
         }
         else {
@@ -214,7 +218,10 @@ public class Tile {
 
     public boolean clicked(int x, int y) {return hitbox.contains(x, y);}
 
-    public void draw(Graphics g) {
+    public void drawIfSpecial(Graphics g) {
+        if(!isSpecialTile())
+            return;
+
         switch(type) {
             case "castle":
                 g.drawImage(images[15], x, y, WIDTH, HEIGHT, null);
@@ -242,19 +249,28 @@ public class Tile {
             case "harbor":
                 g.drawImage(images[9], x, y, WIDTH, HEIGHT, null);
                 break;
+
             case "paddock":
                 g.drawImage(images[12], x, y, WIDTH, HEIGHT, null);
                 break;
+
             case "tower":
                 g.drawImage(images[14], x, y, WIDTH, HEIGHT, null);
                 break;
+
             default: 
                 break;
         }
 
+        Font old = g.getFont();
         if(powerups != null && !powerups.isEmpty()) {
             powerups.peek().draw(0, g);
+
+            g.setFont(new Font("Roboto", Font.BOLD, 20));
+            g.drawString("" + powerups.size(), x + 17, y + 33);
         }
+
+        g.setFont(old);
     }
 
     public void bold(int playerTurn, Graphics2D g) {
