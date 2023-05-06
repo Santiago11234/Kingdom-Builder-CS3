@@ -59,15 +59,15 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         add(obj2Button);
         add(obj3Button);
 
-        startButton = new JButton("skip to end button");
-        startButton.setOpaque(false);
-        startButton.setContentAreaFilled(true);
-        startButton.setBorderPainted(false);
-        startButton.setSize(200, 30);
-        startButton.setLocation(1237, 0);
-        startButton.setFocusable(false);
-        startButton.addActionListener(this);
-        add(startButton);
+        // startButton = new JButton("skip to end button");
+        // startButton.setOpaque(false);
+        // startButton.setContentAreaFilled(true);
+        // startButton.setBorderPainted(false);
+        // startButton.setSize(200, 30);
+        // startButton.setLocation(1237, 0);
+        // startButton.setFocusable(false);
+        // startButton.addActionListener(this);
+        // add(startButton);
 
         settlementButton = new JButton();
         settlementButton.setBounds(1409, 652, 114, 110);
