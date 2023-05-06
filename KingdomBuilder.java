@@ -43,17 +43,14 @@ public class KingdomBuilder extends JFrame {
         nextScreen();
     }
 
-    public void previousScreen() {
+    public void viewBoard() {
         cardLayout.previous(getContentPane());   
-    }
-    
-    public void showBoard() {
-
+        gamePanel.enableReturnButton();
     }
 
     public void restart() {
         cardLayout.first(getContentPane());
-        gamePanel.start();
+        gamePanel.restart();
     }
 
     public static void main(String[] args) {
