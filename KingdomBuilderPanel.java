@@ -222,18 +222,21 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
             //settlements images that will go by player's name
             g.drawImage(yellowSettlement, 350, 23, width, height, null);
             g.drawImage(player2Small,125,31,200,33,null);
+            g.drawString("" +game.players[1].getSettlementsLeft(), 363, height+5);
             if(game.getFirstPlayer()==1){
                 g.drawImage(firstPlayer, 300, 42, 20, 15, null);
             }
 
             g.drawImage(blueSettlement, 660, 23, width, height, null);
             g.drawImage(player3Small,435,31,200,33,null);
+            g.drawString("" +game.players[2].getSettlementsLeft(), 676, height+5);
             if(game.getFirstPlayer()==2){
                 g.drawImage(firstPlayer, 605, 42, 20, 15, null);
             }
 
             g.drawImage(redSettlement, 970, 23, width, height, null);
             g.drawImage(player4Small,745,31,200,33,null);
+            g.drawString("" +game.players[3].getSettlementsLeft(), 983, height+5);
 
             if(game.getFirstPlayer()==3){
                 g.drawImage(firstPlayer, 915, 42, 20, 15, null);
@@ -242,7 +245,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
             //player's name on player board and the settlement ontop of the add settlement button
             g.drawImage(player1NameBlock, 1117, 71, 436, 75, null);
-            g.drawString("Settlements: " + game.players[temp].getSettlementsLeft(), 1425, 793);
+            g.drawString("Settlements: " + game.players[temp].getSettlementsLeft(), 1421, 793);
             g.drawImage(purpleSettlement, 1130, 95, 48, 40, null);
             //idea to put settlement house ontop of addSettlement button
             //g.drawImage(purpleSettlement, 1436, 682, width, height, null);
@@ -255,12 +258,14 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
             //player3
             g.drawImage(blueSettlement, 350, 23, width, height, null);
             g.drawImage(player3Small,125,31,200,33,null);
+            g.drawString("" +game.players[2].getSettlementsLeft(), 363, height+5);
             if(game.getFirstPlayer()==2){
                 g.drawImage(firstPlayer, 300, 42, 20, 15, null);
             }
             //player4
             g.drawImage(redSettlement, 660, 23, width, height, null);
             g.drawImage(player4Small,435,31,200,33,null);
+            g.drawString("" +game.players[3].getSettlementsLeft(), 673, height+5);
 
             if(game.getFirstPlayer()==3){
                 g.drawImage(firstPlayer, 605, 42, 20, 15, null);
@@ -270,6 +275,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
             //player1 stuff
             g.drawImage(player1Small,745,31,200,33,null);
             g.drawImage(purpleSettlement, 970, 23, width, height, null);
+            g.drawString("" +game.players[0].getSettlementsLeft(), 983, height+5);
 
             if(game.getFirstPlayer()==0){
                 g.drawImage(firstPlayer, 915, 42, 20, 15, null);
@@ -277,7 +283,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
 
             g.drawImage(player2NameBlock, 1117, 71, 436, 75, null);
-            g.drawString("Settlements: " + game.players[temp].getSettlementsLeft(), 1425, 793);
+            g.drawString("Settlements: " + game.players[temp].getSettlementsLeft(), 1421, 793);
             g.drawImage(yellowSettlement, 1130, 95, 48, 40, null);
 
             if(temp==game.getFirstPlayer()){
@@ -287,6 +293,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         if(temp == 2){
             g.drawImage(redSettlement, 350, 23, width, height, null);
             g.drawImage(player4Small,125,31,200,33,null);
+            g.drawString("" +game.players[3].getSettlementsLeft(), 363, height+5);
             if(game.getFirstPlayer()==3){
                 g.drawImage(firstPlayer, 300, 42, 20, 15, null);
             }
@@ -294,6 +301,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
             g.drawImage(purpleSettlement, 660, 23, width, height, null);
             g.drawImage(player1Small,435,31,200,33,null);
+            g.drawString("" +game.players[0].getSettlementsLeft(), 673, height+5);
             if(game.getFirstPlayer()==0){
                 g.drawImage(firstPlayer, 605, 42, 20, 15, null);
             }
@@ -301,6 +309,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
             g.drawImage(yellowSettlement, 970, 23, width, height, null);
             g.drawImage(player2Small,745,31,200,33,null);
+            g.drawString("" +game.players[1].getSettlementsLeft(), 983, height+5);
 
             if(game.getFirstPlayer()==1){
                 g.drawImage(firstPlayer, 915, 42, 20, 15, null);
@@ -308,7 +317,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
 
             g.drawImage(player3NameBlock, 1117, 71, 436, 75, null);
-            g.drawString("Settlements: " + game.players[temp].getSettlementsLeft(), 1425, 793);
+            g.drawString("Settlements: " + game.players[temp].getSettlementsLeft(), 1421, 793);
             g.drawImage(blueSettlement, 1130, 95, 48, 40, null);
 
             if(temp==game.getFirstPlayer()){
@@ -318,12 +327,14 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         if(temp == 3){
             g.drawImage(purpleSettlement, 350, 23, width, height, null);
             g.drawImage(player1Small,125,31,200,33,null);
+            g.drawString("" +game.players[0].getSettlementsLeft(), 363, height+5);
             if(game.getFirstPlayer()==0){
                 g.drawImage(firstPlayer, 300, 42, 20, 15, null);
             }
 
             g.drawImage(yellowSettlement, 660, 23, width, height, null);
             g.drawImage(player2Small,435,31,200,33,null);
+            g.drawString("" +game.players[1].getSettlementsLeft(), 673, height+5);
 
             if(game.getFirstPlayer()==1){
                 g.drawImage(firstPlayer, 605, 42, 20, 15, null);
@@ -332,6 +343,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
             g.drawImage(blueSettlement, 970, 23, width, height, null);
             g.drawImage(player3Small,745,31,200,33,null);
+            g.drawString("" +game.players[2].getSettlementsLeft(), 983, height+5);
 
             if(game.getFirstPlayer()==2){
                 g.drawImage(firstPlayer, 915, 42, 20, 15, null);
@@ -339,7 +351,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
 
             g.drawImage(player4NameBlock, 1117, 71, 436, 75, null);
-            g.drawString("Settlements: " + game.players[temp].getSettlementsLeft(), 1425, 793);
+            g.drawString("Settlements: " + game.players[temp].getSettlementsLeft(), 1421, 793);
             g.drawImage(redSettlement, 1130, 95, 48, 40, null);
 
             if(temp==game.getFirstPlayer()){
