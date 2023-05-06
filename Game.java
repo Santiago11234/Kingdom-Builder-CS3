@@ -191,9 +191,6 @@ public class Game {
     }
 
     public void mostMoves(int x, int y) {
-
-        System.out.println(settlementPlaying);
-
         //Richard: clicking an unused power up cancels the power up currently used
         if((powerUpTurnCount == 0  || powerUpTurnCount == 1)&& (settlementPlaying != 1 || settlementPlaying == 1 && settlementCount == 0)) {
             for(PowerUp p: players[turn].powerups.keySet()) {
