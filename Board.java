@@ -74,9 +74,17 @@ public class Board {
         for(int i = 0; i < 10; i++) {
             for(int j = i % 2; j < 20; j += 2) {
                 board[i][j].setType(sm.getBoard(getBoards().get(0))[i][j]);
+                board[i][j].setOccupied(false);
+
                 board[i+10][j].setType(sm.getBoard(getBoards().get(1))[i][j]);
+                board[i + 10][j].setOccupied(false);
+
                 board[i][j+20].setType(sm.getBoard(getBoards().get(2))[i][j]);
+                board[i][j + 20].setOccupied(false);
+
                 board[i+10][j+20].setType(sm.getBoard(getBoards().get(3))[i][j]);
+                board[i + 10][j + 20].setOccupied(false);
+
             }
         }
     }
