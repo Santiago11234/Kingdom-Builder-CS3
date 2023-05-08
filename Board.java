@@ -274,6 +274,8 @@ public class Board {
             for(int j = i % 2; j < board[i].length; j += 2) {
                 board[i][j].drawIfSpecial(g);
                 arrayOfSpecials.add(board[i][j]);
+                System.out.println(arrayOfSpecials.size());
+                System.out.println("YO WE STARTED");
             }
         }
     }

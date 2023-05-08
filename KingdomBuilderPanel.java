@@ -25,6 +25,17 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
     private JButton obj2Button;
     private JButton obj3Button;
 
+    private JButton pwr1;
+    private JButton pwr2;
+    private JButton pwr3;
+    private JButton pwr4;
+    private JButton pwr5;
+    private JButton pwr6;
+    private JButton pwr7;
+    private JButton pwr8;
+
+    //make an array of the pwr buttons
+
     private Boolean obj1ButtonTF = false;
     private Boolean obj2ButtonTF = false;
     private Boolean obj3ButtonTF = false;
@@ -64,7 +75,26 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         add(obj2Button);
         add(obj3Button);
 
-        arrayOfSpecials = game.getGameBoard().getArrayOfSpecials();
+        pwr1 = new JButton("HI");
+        pwr2 = new JButton("HI");
+        pwr3 = new JButton("HI");
+        pwr4 = new JButton("HI");
+        pwr5 = new JButton("HI");
+        pwr6 = new JButton("HI");
+        pwr7 = new JButton("HI");
+        pwr8 = new JButton("HI");
+
+        add(pwr1);
+        add(pwr2);
+        add(pwr3);
+        add(pwr4);
+        add(pwr5);
+        add(pwr6);
+        add(pwr7);
+        add(pwr8);
+
+        JButton[] pwrButtons = {pwr1,pwr2,pwr3,pwr4,pwr5,pwr6,pwr7,pwr8};
+
 
         // startButton = new JButton("skip to end button");
         // startButton.setOpaque(false);
@@ -197,6 +227,16 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
         game = new Game(this);
         start();
+        arrayOfSpecials = game.getGameBoard().getArrayOfSpecials();
+        //iterate through pwrButtons in a for loop and use the x and y properties of the array of specials to set the bounds of the buttons
+        System.out.println(arrayOfSpecials.size());
+        for (int i = 0; i < arrayOfSpecials.size()-1; i++) {
+            System.out.println("HELLOWORLD");
+            pwrButtons[i].setBounds(arrayOfSpecials.get(i).getX(), arrayOfSpecials.get(i).getY(), 50, 50);
+            System.out.println(arrayOfSpecials.get(i).getX());
+            pwrButtons[i].setContentAreaFilled(true);
+        }
+
     }
 
     public void start() {
