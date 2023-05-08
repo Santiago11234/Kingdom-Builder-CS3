@@ -10,6 +10,9 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
+import java.util.ArrayList;
+import java.util.TreeSet;
+
 public class KingdomBuilderPanel extends JPanel implements ActionListener, MouseListener {
     private KingdomBuilder frame;
     private Game game;
@@ -25,6 +28,8 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
     private Boolean obj1ButtonTF = false;
     private Boolean obj2ButtonTF = false;
     private Boolean obj3ButtonTF = false;
+
+    private ArrayList<Tile> arrayOfSpecials = new ArrayList<Tile>();
 
     private BufferedImage blurBG, playerWood,mapWood, settlementWood, player1NameBlock, player2NameBlock, player3NameBlock, player4NameBlock, addSettlementButton, settlementButtonBlackened,
             endTurnButton, endTurnBlackened, settlementCountBlock, deckTextBlock, discardTextBlock,purpleSettlement,yellowSettlement,blueSettlement,redSettlement,player1Small,player2Small,player3Small,player4Small,firstPlayer; 
@@ -58,6 +63,8 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         add(obj1Button);
         add(obj2Button);
         add(obj3Button);
+
+        arrayOfSpecials = game.getGameBoard().getArrayOfSpecials();
 
         // startButton = new JButton("skip to end button");
         // startButton.setOpaque(false);
@@ -112,46 +119,53 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
             settlementButtonBlackened = ImageIO.read(KingdomBuilderPanel.class.getResource("Images/Add Settlement Button Blackened.png"));
             endTurnBlackened = ImageIO.read(KingdomBuilderPanel.class.getResource("Images/End Turn Button Blackened.png"));
 
-            obj1Button.addActionListener(new ActionListener(){  
-                public void actionPerformed(ActionEvent e){  
-                    Boolean bS = game.editTF(1);
-                    if(bS == true){
-                        System.out.println("Obj 1 Made Bigger");
-                        obj1Button.setBounds(1015, 15, 235, 345);
-                    } else {
-                        System.out.println("Obj 1 Made Smaller");
-                        obj1Button.setBounds(1117, 168, 129, 189);
-                    }
-                    repaint();
-                }  
-            }); 
-            obj2Button.addActionListener(new ActionListener(){  
-                public void actionPerformed(ActionEvent e){  
-                    System.out.println("try");
-                    Boolean bS = game.editTF(2);
-                    if(bS == true){
-                        System.out.println(" Obj 2 Made Smaller");
-                        obj2Button.setBounds(1168, 15, 235, 345);
-                    } else {
-                        System.out.println("Obj 2 Made Bigger");
-                        obj2Button.setBounds(1270, 168, 129, 189);
-                    }
-                    repaint();
-                }  
+
+            obj1Button.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseEntered(java.awt.event.MouseEvent evt) {
+                    game.editTF(1);
+                    System.out.println("Mouse Entered");
+                    System.out.println(" Obj 1 Made Smaller");
+                    obj1Button.setBounds(1015, 15, 235, 345);
+                }
+                public void mouseExited(java.awt.event.MouseEvent evt) {
+                    game.editTF(1);
+                    System.out.println("Mouse EXITED");
+                    System.out.println("Obj 1 Made Bigger");
+                    obj1Button.setBounds(1117, 168, 129, 189);
+                }
             });
-            obj3Button.addActionListener(new ActionListener(){  
-                public void actionPerformed(ActionEvent e){  
-                    Boolean bS = game.editTF(3);
-                    if(bS){
-                        System.out.println(" Obj 3 Made Smaller");
-                        obj3Button.setBounds(1321, 15, 235, 345);
-                    } else {
-                        System.out.println("Obj 3 Made Bigger");
-                        obj3Button.setBounds(1423, 168, 129, 189);
-                    }
-                    repaint();
-                }  
+            obj2Button.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseEntered(java.awt.event.MouseEvent evt) {
+                    game.editTF(2);
+                    System.out.println("Mouse Entered");
+                    System.out.println(" Obj 2 Made Smaller");
+                    obj2Button.setBounds(1168, 15, 235, 345);
+                }
+                public void mouseExited(java.awt.event.MouseEvent evt) {
+                    game.editTF(2);
+                    System.out.println("Mouse EXITED");
+                    System.out.println("Obj 2 Made Bigger");
+                    obj2Button.setBounds(1270, 168, 129, 189);
+                }
             });
+            obj3Button.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseEntered(java.awt.event.MouseEvent evt) {
+                    game.editTF(3);
+                    System.out.println("Mouse Entered");
+                    System.out.println(" Obj 3 Made Smaller");
+                    obj3Button.setBounds(1321, 15, 235, 345);
+                }
+                public void mouseExited(java.awt.event.MouseEvent evt) {
+                    game.editTF(3);
+                    System.out.println("Mouse EXITED");
+                    System.out.println("Obj 3 Made Bigger");
+                    obj3Button.setBounds(1423, 168, 129, 189);
+                }
+            });
+
+            //replicate the code for button 3 for button 1 and 2
+
+            
 
         } catch (Exception e) {
             System.out.println("Kingdom Builder panel error");
@@ -225,6 +239,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         g.drawString("Cards: " + game.getTerrainDeck().size(), 1157, 602);
         g.drawImage(discardTextBlock, 1270, 581, 102, 32, null);
         g.drawString("Discarded: " + game.getDiscard().size(), 1284, 602);
+
         //buttons on player section
         //g.drawImage(addSettlementButton, 1409, 652, 114, 110, null);
         //g.drawImage(endTurnButton, 1144, 840, 381, 49, null);

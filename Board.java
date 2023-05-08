@@ -21,7 +21,8 @@ public class Board {
     //Top left coordinate
     public static final int X = 90;
     public static final int Y = 112;
-
+    //make arraylist called arrayofspecials
+    public ArrayList<Tile> arrayOfSpecials = new ArrayList<Tile>();
     
     public Tile[][] board; //20-by-40 array of Tiles
     
@@ -272,7 +273,12 @@ public class Board {
         for(int i = 0; i < board.length; i++) {
             for(int j = i % 2; j < board[i].length; j += 2) {
                 board[i][j].drawIfSpecial(g);
+                arrayOfSpecials.add(board[i][j]);
             }
         }
+    }
+    //return array of specials
+    public ArrayList<Tile> getArrayOfSpecials(){
+        return arrayOfSpecials;
     }
 }
