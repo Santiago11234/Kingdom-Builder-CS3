@@ -226,39 +226,12 @@ public class Board {
         int i = t.getRow();
         int j = t.getColumn();
 
-        i -= 2;
-        addTile(ret, i, j);
-        j -= 2;
-        addTile(ret, i, j);
-        j += 4;
-        addTile(ret, i, j);
-
-        i += 4;
-        j -= 2;
-        
-        addTile(ret, i, j);
-        j -= 2;
-        addTile(ret, i, j);
-        j += 4;
-        addTile(ret, i, j);
-        
-        i -= 2;
-        j -= 6;
-        addTile(ret, i, j);
-        j += 8;
-        addTile(ret, i, j);
-
-        i -= 1;
-        j -= 7;
-        addTile(ret, i, j);
-        j += 6;
-        addTile(ret, i, j);
-
-        i += 2;
-        j -= 6;
-        addTile(ret, i, j);
-        j += 6;
-        addTile(ret, i, j);
+        addTile(ret, i, j-4);
+        addTile(ret, i, j + 4);
+        addTile(ret, i-2, j + 2);
+        addTile(ret, i+2, j + 2);
+        addTile(ret, i-2, j - 2);
+        addTile(ret, i+2, j - 2);
 
         return ret;
     }
