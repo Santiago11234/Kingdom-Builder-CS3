@@ -310,6 +310,7 @@ public class Game {
             if(players[turn].getSettlementsLeft() == 0) {
                 gameOver = true;
                 panel.setSettlementButton(false);
+                settlementPlaying = 2;
             }
 
             return true;
