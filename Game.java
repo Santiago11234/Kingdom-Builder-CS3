@@ -36,6 +36,8 @@ public class Game {
     private Boolean obj2ButtonTF;
     private Boolean obj3ButtonTF;
 
+
+
     public Game(KingdomBuilderPanel p){
         noMorePlease = false;
         panel = p;
@@ -58,6 +60,10 @@ public class Game {
     //return objtf
     public Boolean getObj1ButtonTF(){
         return obj1ButtonTF;
+    }
+
+    public Board getGameBoard(){
+        return board;
     }
 
     public Boolean getObj2ButtonTF(){
