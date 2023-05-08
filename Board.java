@@ -84,7 +84,6 @@ public class Board {
 
                 board[i+10][j+20].setType(sm.getBoard(getBoards().get(3))[i][j]);
                 board[i + 10][j + 20].setOccupied(false);
-
             }
         }
     }
@@ -281,9 +280,9 @@ public class Board {
         for(int i = 0; i < board.length; i++) {
             for(int j = i % 2; j < board[i].length; j += 2) {
                 board[i][j].drawIfSpecial(g);
-                arrayOfSpecials.add(board[i][j]);
-                System.out.println(arrayOfSpecials.size());
-                System.out.println("YO WE STARTED");
+                //arrayOfSpecials.add(board[i][j]);
+                //System.out.println(arrayOfSpecials.size());
+                //System.out.println("YO WE STARTED");
             }
         }
     }

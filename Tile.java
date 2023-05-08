@@ -98,13 +98,9 @@ public class Tile {
 
     public int getY() {return y;}
 
-    public int getWidth() {return WIDTH;}
+    //public int getWidth() {return WIDTH;}
 
-    public int getHeight() {return HEIGHT;}
-
-   
-
-
+    //public int getHeight() {return HEIGHT;}
 
     public void setPosition(int x, int y) {
         this.x = x;
