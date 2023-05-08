@@ -185,6 +185,7 @@ public class Game {
     }
 
     public void startSettlementPlay() {
+        cancelPowerUpPlay();
         eligibleTiles = findEligibleTiles(players[turn].settlements, players[turn].getCard(), true);
         settlementPlaying = 1;
         panel.setSettlementButton(false);
