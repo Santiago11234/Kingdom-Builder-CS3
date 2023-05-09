@@ -77,15 +77,12 @@ public class Game {
     public boolean editTF(int x){
         if(x == 1){
             obj1ButtonTF = !obj1ButtonTF;
-            System.out.println("BUTTON ONE SWITCHED TO: " + obj1ButtonTF);
             return obj1ButtonTF;
         }else if(x == 2){
             obj2ButtonTF = !obj2ButtonTF;
-            System.out.println("BUTTON TWO SWITCHED TO: " + obj2ButtonTF);
             return obj2ButtonTF;
         }else{
             obj3ButtonTF = !obj3ButtonTF;
-            System.out.println("BUTTON THREE SWITCHED TO: " + obj3ButtonTF);
             return obj3ButtonTF;
         }
     }
