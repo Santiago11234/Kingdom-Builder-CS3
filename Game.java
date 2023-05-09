@@ -415,8 +415,11 @@ public class Game {
     }
 
     private void powerUpUsed() {
-        HashMap<PowerUp, Integer> temp = players[turn].powerups;
-        temp.replace(powerupSelected, 2);
+
+        //System.out.println(powerupSelected);
+        //System.out.println(players[turn].powerups.get(powerupSelected));
+
+        players[turn].powerups.replace(powerupSelected, 2);
         powerupSelected = null;
         powerUpTurnCount = 0;
         tileToRemove = null;
@@ -505,17 +508,20 @@ public class Game {
 
     private HashSet<Tile> findTilesTavern() {
         HashSet<Tile> eligible = new HashSet<Tile>();
-        HashSet<Tile> visited = new HashSet<Tile>();
+        HashMap<Tile, HashSet<Integer>> visited = new HashMap<Tile, HashSet<Integer>>();
         HashSet<Tile> settlements = players[turn].settlements;
 
         for(Tile t: settlements) {
-            if(!visited.add(t)) {
+            if(visited.get(t) == null)
+                visited.put(t, new HashSet<Integer>());
+
+            else if(visited.get(t).size() == 3)
                 continue;
-            }
 
             //Richard: 0 is up-left to down-right. 1 is up-right to down-left. 2 is left to right
             for(int i = 0; i < 3; i++) {
-                tavernOneDirection(i, board.getNeighbors(t), eligible, visited, settlements);
+                if(!visited.get(t).contains(i))
+                    tavernOneDirection(i, t, eligible, visited, settlements);
             }
         }
 
@@ -523,21 +529,28 @@ public class Game {
     }
 
     //Richard: probably not super efficient, but it works (I think)
-    private void tavernOneDirection(int direction, Tile[] neighbors, HashSet<Tile> eligible, HashSet<Tile> visited, HashSet<Tile> settlements) {
+    private void tavernOneDirection(int direction, Tile tile, HashSet<Tile> eligible, HashMap<Tile, HashSet<Integer>> visited, HashSet<Tile> settlements) {  
         int lineLength = 1;
         int oppDirection = 5 - direction;
+
+        Tile[] neighbors = board.getNeighbors(tile);
+        visited.get(tile).add(direction);
 
         Tile left = neighbors[direction];
         Tile right = neighbors[oppDirection];
 
         while(left != null && settlements.contains(left)) {
             lineLength++;
-            visited.add(left);
+            
+            addToVisited(visited, left, direction);
+
             left = board.getNeighbors(left)[direction];
         }
         while(right != null && settlements.contains(right)) {
             lineLength++;
-            visited.add(right);
+
+            addToVisited(visited, right, direction);
+
             right = board.getNeighbors(right)[oppDirection];
         }
 
@@ -549,6 +562,13 @@ public class Game {
 
         if(right != null && Tile.isEligible(right))
             eligible.add(right);
+    }
+
+    private void addToVisited(HashMap<Tile, HashSet<Integer>> visited, Tile t, int direction) {
+        if(visited.get(t) == null)
+            visited.put(t, new HashSet<Integer>());
+
+        visited.get(t).add(direction);
     }
 
     private HashSet<Tile> findTilesPaddock() {
@@ -1052,7 +1072,7 @@ public class Game {
                         disable = true;
             }
 
-            if(disable && player.powerups.get(p) != 1)
+            if(disable && player.powerups.get(p) == 0)
                 player.powerups.replace(p, 1);
 
             else if(!disable && player.powerups.get(p) == 1)
