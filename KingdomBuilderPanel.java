@@ -3,12 +3,16 @@ import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+import javax.swing.Icon;
+
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+
+
 
 import java.util.ArrayList;
 //import java.util.TreeSet;
@@ -33,6 +37,12 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
     private JButton pwr6;
     private JButton pwr7;
     private JButton pwr8;
+    private JButton pwr9;
+    private JButton pwr10;
+    private JButton pwr11;
+    private JButton pwr12;
+
+
 
     //make an array of the pwr buttons
 
@@ -40,16 +50,20 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
     private Boolean obj2ButtonTF = false;
     private Boolean obj3ButtonTF = false;
 
+    private int specialState = 0;
+
     private ArrayList<Tile> arrayOfSpecials = new ArrayList<Tile>();
 
     private BufferedImage blurBG, playerWood,mapWood, settlementWood, player1NameBlock, player2NameBlock, player3NameBlock, player4NameBlock, addSettlementButton, settlementButtonBlackened,
-            endTurnButton, endTurnBlackened, settlementCountBlock, deckTextBlock, discardTextBlock,purpleSettlement,yellowSettlement,blueSettlement,redSettlement,player1Small,player2Small,player3Small,player4Small,firstPlayer; 
+            endTurnButton, endTurnBlackened, settlementCountBlock, deckTextBlock, discardTextBlock,purpleSettlement,yellowSettlement,blueSettlement,redSettlement,player1Small,player2Small,player3Small,player4Small,firstPlayer,
+            barnExpanded, farmExpanded, harborExpanded, oasisExpanded, oracleExpanded, paddockExpanded, tavernExpanded, towerExpanded, blankImage; 
 
     public KingdomBuilderPanel(KingdomBuilder kb) {
         setSize(getPreferredSize());
         setLayout(null);
         frame = kb;
         
+
         obj1Button = new JButton(""); 
         obj1Button.setBounds(1117, 168, 129, 189);
         obj1Button.setOpaque(false);
@@ -75,14 +89,18 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         add(obj2Button);
         add(obj3Button);
 
-        pwr1 = new JButton("HI");
-        pwr2 = new JButton("HI");
-        pwr3 = new JButton("HI");
-        pwr4 = new JButton("HI");
-        pwr5 = new JButton("HI");
-        pwr6 = new JButton("HI");
-        pwr7 = new JButton("HI");
-        pwr8 = new JButton("HI");
+        pwr1 = new JButton("");
+        pwr2 = new JButton("");
+        pwr3 = new JButton("");
+        pwr4 = new JButton("");
+        pwr5 = new JButton("");
+        pwr6 = new JButton("");
+        pwr7 = new JButton("");
+        pwr8 = new JButton("");
+        pwr9 = new JButton("");
+        pwr10 = new JButton("");
+        pwr11 = new JButton("");
+        pwr12 = new JButton("");
 
         add(pwr1);
         add(pwr2);
@@ -92,9 +110,12 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         add(pwr6);
         add(pwr7);
         add(pwr8);
+        add(pwr9);
+        add(pwr10);
+        add(pwr11);
+        add(pwr12);
 
-        JButton[] pwrButtons = {pwr1,pwr2,pwr3,pwr4,pwr5,pwr6,pwr7,pwr8};
-
+        JButton[] pwrButtons = {pwr1,pwr2,pwr3,pwr4,pwr5,pwr6,pwr7,pwr8, pwr9, pwr10, pwr11, pwr12};
 
         // startButton = new JButton("skip to end button");
         // startButton.setOpaque(false);
@@ -145,6 +166,16 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
             player3Small = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/player3NameBlockSmall.png"));
             player4Small = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/player4NameBlockSmall.png"));
             firstPlayer = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/FirstPlayerToken.PNG"));
+            barnExpanded = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/barnExpanded.jpeg"));
+            farmExpanded = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/farmExpanded.jpeg"));
+            harborExpanded = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/harborExpanded.jpeg"));
+            oasisExpanded = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/oasisExpanded.jpeg"));
+            oracleExpanded = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/oracleExpanded.jpeg"));
+            paddockExpanded = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/paddockExpanded.jpeg"));
+            tavernExpanded = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/tavernExpanded.jpeg"));
+            towerExpanded = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/towerExpanded.jpeg"));
+            blankImage = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/blankImage.png"));
+
 
             settlementButtonBlackened = ImageIO.read(KingdomBuilderPanel.class.getResource("Images/Add Settlement Button Blackened.png"));
             endTurnBlackened = ImageIO.read(KingdomBuilderPanel.class.getResource("Images/End Turn Button Blackened.png"));
@@ -153,42 +184,30 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
             obj1Button.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseEntered(java.awt.event.MouseEvent evt) {
                     game.editTF(1);
-                    System.out.println("Mouse Entered");
-                    System.out.println(" Obj 1 Made Smaller");
                     obj1Button.setBounds(1015, 15, 235, 345);
                 }
                 public void mouseExited(java.awt.event.MouseEvent evt) {
                     game.editTF(1);
-                    System.out.println("Mouse EXITED");
-                    System.out.println("Obj 1 Made Bigger");
                     obj1Button.setBounds(1117, 168, 129, 189);
                 }
             });
             obj2Button.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseEntered(java.awt.event.MouseEvent evt) {
                     game.editTF(2);
-                    System.out.println("Mouse Entered");
-                    System.out.println(" Obj 2 Made Smaller");
                     obj2Button.setBounds(1168, 15, 235, 345);
                 }
                 public void mouseExited(java.awt.event.MouseEvent evt) {
                     game.editTF(2);
-                    System.out.println("Mouse EXITED");
-                    System.out.println("Obj 2 Made Bigger");
                     obj2Button.setBounds(1270, 168, 129, 189);
                 }
             });
             obj3Button.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseEntered(java.awt.event.MouseEvent evt) {
                     game.editTF(3);
-                    System.out.println("Mouse Entered");
-                    System.out.println(" Obj 3 Made Smaller");
                     obj3Button.setBounds(1321, 15, 235, 345);
                 }
                 public void mouseExited(java.awt.event.MouseEvent evt) {
                     game.editTF(3);
-                    System.out.println("Mouse EXITED");
-                    System.out.println("Obj 3 Made Bigger");
                     obj3Button.setBounds(1423, 168, 129, 189);
                 }
             });
@@ -229,13 +248,164 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         start();
         arrayOfSpecials = game.getGameBoard().getArrayOfSpecials();
         //iterate through pwrButtons in a for loop and use the x and y properties of the array of specials to set the bounds of the buttons
-        System.out.println(arrayOfSpecials.size());
-        for (int i = 0; i < arrayOfSpecials.size()-1; i++) {
-            System.out.println("HELLOWORLD");
-            pwrButtons[i].setBounds(arrayOfSpecials.get(i).getX(), arrayOfSpecials.get(i).getY(), 50, 50);
-            System.out.println(arrayOfSpecials.get(i).getX());
-            pwrButtons[i].setContentAreaFilled(true);
+        System.out.println(arrayOfSpecials.size() + "hi");
+        for (int i = 0; i < arrayOfSpecials.size(); i++) {
+            pwrButtons[i].setBounds(arrayOfSpecials.get(i).getX(), arrayOfSpecials.get(i).getY(), arrayOfSpecials.get(i).getWidth(), arrayOfSpecials.get(i).getHeight());
+            pwrButtons[i].setContentAreaFilled(false);
+            pwrButtons[i].setOpaque(false);
+            pwrButtons[i].setBorderPainted(false);
+
+
         }
+
+
+        pwr1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                specialState = 1;
+                repaint();
+
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                specialState = 0;
+                repaint();
+            }
+        });
+
+        pwr2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                specialState = 2;
+                repaint();
+
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                specialState = 0;
+                repaint();
+            }
+        });
+
+        pwr3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                specialState = 3;
+                repaint();
+
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                specialState = 0;
+                repaint();
+            }
+        });
+
+        pwr4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                specialState = 4;
+                repaint();
+
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                specialState = 0;
+                repaint();
+            }
+        });
+
+        pwr5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                specialState = 5;
+                repaint();
+
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                specialState = 0;
+                repaint();
+            }
+        });
+
+        pwr6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                specialState = 6;
+                repaint();
+
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                specialState = 0;
+                repaint();
+            }
+        });
+
+        pwr7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                specialState = 7;
+                repaint();
+
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                specialState = 0;
+                repaint();
+            }
+        });
+
+        pwr8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                specialState = 8;
+                repaint();
+
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                specialState = 0;
+                repaint();
+            }
+        });
+
+        pwr9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                specialState = 9;
+                repaint();
+
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                specialState = 0;
+                repaint();
+            }
+        });
+
+        pwr10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                specialState = 10;
+                repaint();
+
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                specialState = 0;
+                repaint();
+            }
+        });
+
+        pwr11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                specialState = 11;
+                repaint();
+
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                specialState = 0;
+                repaint();
+            }
+        });
+        
+
+        pwr12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                specialState = 12;
+                repaint();
+
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                specialState = 0;
+                repaint();
+            }
+        });
+
+
+
 
     }
 
@@ -441,7 +611,15 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         //g.drawImage(terrainCardGrass, 1392, 379, 161, 248, null);
         //g.drawImage(terrainCardBack, 1392, 379, 161, 248, null);
         
+            
+
+        
+
         game.drawAll(g);
+
+        if(specialState>0){
+            g.drawImage(switchNames(arrayOfSpecials.get(specialState-1)), arrayOfSpecials.get(specialState-1).getX()+25, arrayOfSpecials.get(specialState-1).getY()-75, 549, 90  , null);
+        }
     }
 
 
@@ -493,4 +671,35 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
             frame.nextScreen();
         }
     }
+
+    //write a method that translates the string property of tile to the corresponding image
+    public BufferedImage switchNames(Tile x){
+        if(x.getType() == "oracle"){
+            return oracleExpanded;
+        }
+        if(x.getType() == "farm"){
+            return farmExpanded;
+        }
+        if(x.getType() == "oasis"){
+            return oasisExpanded;
+        }
+        if(x.getType() == "tower"){
+            return towerExpanded;
+        }
+        if(x.getType() == "tavern"){
+            return tavernExpanded;
+        }
+        if(x.getType() == "barn"){
+            return barnExpanded;
+        }
+        if(x.getType() == "harbor"){
+            return harborExpanded;
+        }
+        if(x.getType() == "paddock"){
+            return paddockExpanded;
+        }
+        else{
+            return blankImage;
+        }
+    }   
 }

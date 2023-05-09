@@ -86,6 +86,7 @@ public class Board {
                 board[i + 10][j + 20].setOccupied(false);
             }
         }
+        findSpecials();
     }
 
     public void shuffleBoards() {
@@ -253,12 +254,23 @@ public class Board {
         for(int i = 0; i < board.length; i++) {
             for(int j = i % 2; j < board[i].length; j += 2) {
                 board[i][j].drawIfSpecial(g);
-                //arrayOfSpecials.add(board[i][j]);
-                //System.out.println(arrayOfSpecials.size());
-                //System.out.println("YO WE STARTED");
             }
         }
     }
+
+    //iterate through the board looking for tiles that are special
+    public void findSpecials(){
+        System.out.println("Process Started");
+        for(int i = 0; i < board.length; i++) {
+            for(int j = i % 2; j < board[i].length; j += 2) {
+                if(board[i][j].isSpecialTile()){
+                    arrayOfSpecials.add(board[i][j]);
+                    System.out.println(arrayOfSpecials.size());
+                }
+            }
+        }
+    }
+
     //return array of specials
     public ArrayList<Tile> getArrayOfSpecials(){
         return arrayOfSpecials;
