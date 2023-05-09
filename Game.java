@@ -1088,13 +1088,16 @@ public class Game {
         enableOrDisablePowerUps();
         
         //System.out.println("Turn " + turn);
-        panel.setSettlementButton(true);
+        
         //SANTIIIII UN THIS
         panel.setSwitchTurnButton(false);
 
         if(gameOver && turn == firstPlayer) {
             noMorePlease = true;
             panel.endGame();
+        }
+        else {
+            panel.setSettlementButton(true);
         }
     }
 
