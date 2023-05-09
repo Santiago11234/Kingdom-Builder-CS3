@@ -230,6 +230,7 @@ public class Tile {
             case "castle":
                 g.drawImage(images[15], x, y, WIDTH, HEIGHT, null);
                 break;
+                
             case "oracle":
                 g.drawImage(images[11], x, y, WIDTH, HEIGHT, null);
                 break;
