@@ -31,9 +31,9 @@ public class Board {
     public Board() {
         board = new Tile[20][40];
         sm = new SmallBoards();
-        intArray = new Integer[] {0, 1, 2, 3,4,5,6};
+        intArray = new Integer[] {0, 1, 2, 3,4,5,6,7};
         l = Arrays.asList(intArray);
-        boards = new BufferedImage[7];
+        boards = new BufferedImage[8];
         try {
             boards[0] = ImageIO.read(Board.class.getResource("/Images/Board1.png"));
             boards[1] = ImageIO.read(Board.class.getResource("/Images/Board2.png"));
@@ -42,7 +42,7 @@ public class Board {
             boards[4] = ImageIO.read(Board.class.getResource("/Images/Board5.png"));
             boards[5] = ImageIO.read(Board.class.getResource("/Images/Board6.png"));
             boards[6] = ImageIO.read(Board.class.getResource("/Images/Board7.png"));
-
+            boards[7] = ImageIO.read(Board.class.getResource("/Images/Board8.png"));
 
         } catch (Exception e) {
             System.out.println("Kingdom Builder board error");
@@ -73,7 +73,7 @@ public class Board {
         
         for(int i = 0; i < 10; i++) {
             for(int j = i % 2; j < 20; j += 2) {
-                board[i][j].setType(sm.getBoard(getBoards().get(0))[i][j]);
+                board[i][j].setType(sm.getBoard(7)[i][j]);
                 board[i][j].setOccupied(false);
 
                 board[i+10][j].setType(sm.getBoard(getBoards().get(1))[i][j]);
@@ -244,7 +244,7 @@ public class Board {
     }
 
     public void drawBoard(Graphics g) {
-        g.drawImage(boards[getBoards().get(0)], 90,112, 482, 413, null);
+        g.drawImage(boards[7], 90,112, 482, 413, null);
         g.drawImage(boards[getBoards().get(1)], 90,98+414, 482, 413, null);
 
         //Richard: moved them right. Looks better imo

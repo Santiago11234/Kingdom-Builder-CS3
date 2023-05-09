@@ -2,9 +2,10 @@ public class SmallBoards {
    
     public String[][][] boards;
 
+    //no oasis boards or tavern
     public SmallBoards() {
-        boards = new String[7][][];
-        //board1
+        boards = new String[8][][];
+        //board1 barn
         boards[0] = new String[][]{
             {"c", null, "d", null, "d", null, "d", null,"d", null,"d", null,"d", null, "d", null, "d", null, "d", null},
             {null, "c", null, "c", null, "c", null,"d", null,"d", null,"d", null, "d", null, "d", null, "c", null, "d"},
@@ -17,7 +18,7 @@ public class SmallBoards {
             {"g", null, "g", null, "g", null, "b", null,"b", null,"w", null,"g", null, "g", null, "b", null, "b", null},
             {null, "g", null, "g", null, "g", null,"b", null,"w", null,"g", null, "g", null, "b", null, "b", null, "b"},
         };
-        //board2
+        //board2 farm
         boards[1] = new String[][]{
             {"d", null, "d", null, "c", null, "w", null,"w", null,"b", null,"b", null, "b", null, "g", null, "g", null},
             {null, "d", null, "sc", null, "c", null,"w", null,"b", null,"b", null, "b", null, "sf", null, "g", null, "g"},
@@ -30,7 +31,7 @@ public class SmallBoards {
             {"g", null, "m", null, "b", null, "b", null,"w", null,"w", null,"w", null, "w", null, "w", null, "w", null},
             {null, "b", null, "b", null, "b", null,"w", null,"w", null,"w", null, "w", null, "w", null, "w", null, "w"},
         };
-        //board3
+        //board3 1 oracle
         boards[2] = new String[][]{
             {"g", null, "g", null, "g", null, "b", null,"b", null,"w", null,"g", null, "b", null, "b", null, "b", null},
             {null, "g", null, "g", null, "g", null,"sc", null,"b", null,"w", null, "g", null, "b", null, "b", null, "b"},
@@ -43,7 +44,7 @@ public class SmallBoards {
             {"w", null, "w", null, "w", null, "d", null,"d", null,"d", null,"d", null, "m", null, "c", null, "c", null},
             {null, "w", null, "w", null, "w", null,"w", null,"d", null,"d", null, "d", null, "d", null, "d", null, "c"},
         };
-        //board4
+        //board4 1 harbor
         boards[3] = new String[][]{
             {"g", null, "g", null, "b", null, "b", null,"b", null,"w", null,"g", null, "b", null, "b", null, "f", null},
             {null, "g", null, "f", null, "b", null,"b", null,"w", null,"g", null, "b", null, "b", null, "f", null, "f"},
@@ -56,7 +57,7 @@ public class SmallBoards {
             {"w", null, "d", null, "sc", null, "g", null,"w", null,"m", null,"w", null, "c", null, "c", null, "c", null},
             {null, "w", null, "d", null, "d", null, "w", null,"w", null,"w", null, "w", null, "c", null, "c", null, "c"},
         };
-        //board5 done
+        //board5 done tower
         boards[4] = new String[][]{
             {"b", null, "b", null, "b", null, "b", null,"m", null,"m", null,"g", null, "m", null, "c", null, "c", null},
             {null, "b", null, "m", null, "b", null,"b", null,"f", null,"g", null, "m", null, "m", null, "m", null, "c"},
@@ -69,20 +70,20 @@ public class SmallBoards {
             {"d", null, "c", null, "w", null, "w", null,"w", null,"b", null,"b", null, "f", null, "g", null, "g", null},
             {null, "d", null, "c", null, "c", null,"w", null,"b", null,"b", null, "b", null, "g", null, "g", null, "g"},
         };
-        //board6
+        //board6 paddock
         boards[5] = new String[][]{
             {"d", null, "d", null, "c", null, "w", null,"w", null,"b", null,"b", null, "g", null, "g", null, "g", null},
             {null, "d", null, "c", null, "w", null,"f", null,"f", null,"b", null, "b", null, "b", null, "g", null, "g"},
-            {"d", null, "d", null, "w", null, "f", null,"f", null,"b", null,"b", null, "sp", null, "f", null, "g", null},
+            {"d", null, "d", null, "w", null, "f", null,"f", null,"b", null,"b", null, "soa", null, "f", null, "g", null},
             {null, "w", null, "w", null, "w", null,"f", null,"g", null,"b", null, "f", null, "f", null, "f", null, "f"},
             {"w", null, "w", null, "w", null, "w", null,"g", null,"g", null,"g", null, "g", null, "f", null, "f", null},
             {null, "w", null, "b", null, "b", null,"w", null,"g", null,"g", null, "c", null, "c", null, "d", null, "c"},
             {"w", null, "b", null, "c", null, "b", null,"w", null,"g", null,"c", null, "c", null, "d", null, "c", null},
-            {null, "w", null, "sc", null, "c", null,"f", null,"w", null,"sp", null, "d", null, "d", null, "c", null, "w"},
+            {null, "w", null, "sc", null, "c", null,"f", null,"w", null,"soa", null, "d", null, "d", null, "c", null, "w"},
             {"w", null, "w", null, "c", null, "f", null,"w", null,"w", null,"w", null, "d", null, "d", null, "w", null},
             {null, "w", null, "w", null, "w", null,"w", null,"w", null,"w", null, "w", null, "w", null, "w", null, "w"},
         };
-        //board7 done
+        //board7 done paddock
         boards[6] = new String[][]{
             {"c", null, "c", null, "c", null, "d", null,"d", null,"w", null,"d", null, "d", null, "d", null, "d", null},
             {null, "m", null, "m", null, "c", null,"d", null,"d", null,"w", null, "d", null, "d", null, "d", null, "d"},
@@ -94,6 +95,19 @@ public class SmallBoards {
             {null, "g", null, "g", null, "b", null,"w", null,"g", null,"sc", null, "g", null, "f", null, "g", null, "b"},
             {"g", null, "g", null, "b", null, "b", null,"w", null,"g", null,"g", null, "g", null, "g", null, "b", null},
             {null, "g", null, "g", null, "b", null,"b", null,"w", null,"g", null, "g", null, "g", null, "b", null, "b"},
+        };
+        //board 8 done tavern
+        boards[7] = new String[][]{
+            {"f", null, "d", null, "d", null, "m", null,"m", null,"d", null,"d", null, "c", null, "c", null, "c", null},
+            {null, "f", null, "f", null, "d", null,"d", null,"d", null,"m", null, "m", null, "c", null, "c", null, "c"},
+            {"f", null, "f", null, "f", null, "f", null,"f", null,"f", null,"f", null, "m", null, "m", null, "m", null},
+            {null, "w", null, "w", null, "f", null,"sc", null,"g", null,"g", null, "b", null, "b", null, "m", null, "m"},
+            {"f", null, "f", null, "w", null, "w", null,"g", null,"g", null,"g", null, "b", null, "b", null, "c", null},
+            {null, "f", null, "c", null, "c", null,"w", null,"g", null,"b", null, "b", null, "c", null, "c", null, "c"},
+            {"d", null, "f", null, "stv", null, "c", null,"w", null,"b", null,"b", null, "stv", null, "c", null, "g", null},
+            {null, "d", null, "d", null, "c", null,"w", null,"b", null,"b", null, "g", null, "g", null, "g", null, "g"},
+            {"d", null, "d", null, "d", null, "w", null,"b", null,"b", null,"b", null, "g", null, "g", null, "g", null},
+            {null, "d", null, "d", null, "w", null,"w", null,"b", null,"b", null, "b", null, "g", null, "g", null, "g"},
         };
 
         
