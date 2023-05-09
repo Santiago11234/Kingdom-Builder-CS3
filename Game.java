@@ -981,7 +981,7 @@ public class Game {
             return;
 
         //Richard: assuming that removal of one tile will only affect one special tile
-        PowerUp toRemove = null;
+        /*PowerUp toRemove = null;
 
         //Richard: removes used power up unless there is no choice
         for(PowerUp powerUp: p.powerups.keySet())
@@ -995,7 +995,8 @@ public class Game {
         if(toRemove == null)
             return;
         
-        p.powerups.remove(toRemove);
+        p.powerups.remove(toRemove);*/
+        p.powerups.remove(powerupSelected);
         p.updatePowerUpPositions();
     }
 
@@ -1087,13 +1088,16 @@ public class Game {
         enableOrDisablePowerUps();
         
         //System.out.println("Turn " + turn);
-        panel.setSettlementButton(true);
+        
         //SANTIIIII UN THIS
         panel.setSwitchTurnButton(false);
 
         if(gameOver && turn == firstPlayer) {
             noMorePlease = true;
             panel.endGame();
+        }
+        else {
+            panel.setSettlementButton(true);
         }
     }
 

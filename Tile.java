@@ -5,7 +5,7 @@ import java.awt.Polygon;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.lang.reflect.WildcardType;
+//import java.lang.reflect.WildcardType;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -98,13 +98,9 @@ public class Tile {
 
     public int getY() {return y;}
 
-    public int getWidth() {return WIDTH;}
+    //public int getWidth() {return WIDTH;}
 
-    public int getHeight() {return HEIGHT;}
-
-   
-
-
+    //public int getHeight() {return HEIGHT;}
 
     public void setPosition(int x, int y) {
         this.x = x;
