@@ -30,9 +30,7 @@ public class PowerUp {
             images[8] = ImageIO.read(PowerUp.class.getResource("/Images/PowerUpDisabled.png"));
             images[9] = ImageIO.read(PowerUp.class.getResource("/Images/PowerUpDisabled2.png"));
             images[10] = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/darkHexOverlay.png"));
-            images[11] = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/darkHexOverLayWX.png"));
-
-
+            images[11] = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/darkHexOverlayWX.png"));
         }
         catch(Exception e) {
             System.out.println("Power up error");
