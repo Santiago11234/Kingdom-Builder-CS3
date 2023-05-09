@@ -1,15 +1,16 @@
-import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
-import java.awt.Graphics;
-import java.util.ArrayList;
-import java.awt.event.*;  
-import javax.swing.*;  
+import javax.swing.JButton;
 
+import java.awt.image.BufferedImage;
+import java.awt.Graphics;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CardDrawer {
     public static final String[] objectiveCards = {"fishermen", "miners", "workers", "discoverers", "knights", "lords", "farmers", "merchants", "hermits", "citizens"};
     private static final BufferedImage[] terrainCardImages = new BufferedImage[10];
-    private static final BufferedImage[] objectiveCardImages = new BufferedImage[10];
+    private static final HashMap<String, BufferedImage> OBJECTIVE_CARD_IMAGES =  new HashMap<String, BufferedImage>();
 
     private static final int TERRAIN_CARD_WIDTH = 106;
     private static final int TERRAIN_CARD_HEIGHT = 154;
@@ -37,6 +38,17 @@ public class CardDrawer {
     private JButton obj2Button;
     private JButton obj3Button;
 
+
+    public static BufferedImage getObjectiveCardImage(String card) {
+        if(!OBJECTIVE_CARD_IMAGES.containsKey(card)) {
+            System.out.println("Faulty objective card: " + card);
+            return null;
+        }
+                
+        return OBJECTIVE_CARD_IMAGES.get(card);
+    }
+
+
     public CardDrawer(Game g) {
         game = g;
         terrainDeck = g.getTerrainDeck();
@@ -59,16 +71,16 @@ public class CardDrawer {
             terrainCardImages[4] = ImageIO.read(CardDrawer.class.getResource("/Images/Terrain Card Grass.png"));
             terrainCardImages[5] = ImageIO.read(CardDrawer.class.getResource("/Images/Terrain Card Back.png"));
 
-            objectiveCardImages[0] = ImageIO.read(CardDrawer.class.getResource("/Images/FishermenObjective.png"));
-            objectiveCardImages[1] = ImageIO.read(CardDrawer.class.getResource("/Images/MinersObjective.png"));
-            objectiveCardImages[2] = ImageIO.read(CardDrawer.class.getResource("/Images/WorkersObjective.png"));
-            objectiveCardImages[3] = ImageIO.read(CardDrawer.class.getResource("/Images/DiscoverersObjective.png"));
-            objectiveCardImages[4] = ImageIO.read(CardDrawer.class.getResource("/Images/KnightsObjective.png"));
-            objectiveCardImages[5] = ImageIO.read(CardDrawer.class.getResource("/Images/LordsObjective.png"));
-            objectiveCardImages[6] = ImageIO.read(CardDrawer.class.getResource("/Images/FarmersObjective.png"));
-            objectiveCardImages[7] = ImageIO.read(CardDrawer.class.getResource("/Images/MerchantsObjective.png"));
-            objectiveCardImages[8] = ImageIO.read(CardDrawer.class.getResource("/Images/HermitsObjective.png"));
-            objectiveCardImages[9] = ImageIO.read(CardDrawer.class.getResource("/Images/CitizensObjective.png"));
+            OBJECTIVE_CARD_IMAGES.put("fishermen", ImageIO.read(CardDrawer.class.getResource("/Images/FishermenObjective.png")));
+            OBJECTIVE_CARD_IMAGES.put("miners", ImageIO.read(CardDrawer.class.getResource("/Images/MinersObjective.png")));
+            OBJECTIVE_CARD_IMAGES.put("workers", ImageIO.read(CardDrawer.class.getResource("/Images/WorkersObjective.png")));
+            OBJECTIVE_CARD_IMAGES.put("discoverers", ImageIO.read(CardDrawer.class.getResource("/Images/DiscoverersObjective.png")));
+            OBJECTIVE_CARD_IMAGES.put("knights", ImageIO.read(CardDrawer.class.getResource("/Images/KnightsObjective.png")));
+            OBJECTIVE_CARD_IMAGES.put("lords", ImageIO.read(CardDrawer.class.getResource("/Images/LordsObjective.png")));
+            OBJECTIVE_CARD_IMAGES.put("farmers", ImageIO.read(CardDrawer.class.getResource("/Images/FarmersObjective.png")));
+            OBJECTIVE_CARD_IMAGES.put("merchants", ImageIO.read(CardDrawer.class.getResource("/Images/MerchantsObjective.png")));
+            OBJECTIVE_CARD_IMAGES.put("hermits", ImageIO.read(CardDrawer.class.getResource("/Images/HermitsObjective.png")));
+            OBJECTIVE_CARD_IMAGES.put("citizens", ImageIO.read(CardDrawer.class.getResource("/Images/CitizensObjective.png")));
 
         } catch (Exception e) {
             // TODO: handle exception
@@ -99,16 +111,7 @@ public class CardDrawer {
         }
     }
 
-    private BufferedImage getObjectiveCardImage(String card) {
-        for(int i = 0; i < objectiveCards.length; i++) {
-            if(objectiveCards[i].equals(card)) {
-                return objectiveCardImages[i];
-            }
-        } 
-
-        System.out.println("Faulty objective card: " + card);
-        return null;
-    }
+    
 
     public void draw(Graphics g) {
 
