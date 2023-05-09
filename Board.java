@@ -73,7 +73,8 @@ public class Board {
         
         for(int i = 0; i < 10; i++) {
             for(int j = i % 2; j < 20; j += 2) {
-                board[i][j].setType(sm.getBoard(7)[i][j]);
+                //board[i][j].setType(sm.getBoard(7)[i][j]);
+                board[i][j].setType(sm.getBoard(getBoards().get(0))[i][j]);
                 board[i][j].setOccupied(false);
 
                 board[i+10][j].setType(sm.getBoard(getBoards().get(1))[i][j]);
@@ -244,8 +245,9 @@ public class Board {
     }
 
     public void drawBoard(Graphics g) {
-        g.drawImage(boards[7], 90,112, 482, 413, null);
-        g.drawImage(boards[getBoards().get(1)], 90,98+414, 482, 413, null);
+        //g.drawImage(boards[7], 90,112, 482, 413, null);
+        g.drawImage(boards[getBoards().get(0)], 90, 112, 482, 413, null);
+        g.drawImage(boards[getBoards().get(1)], 90, 98+414, 482, 413, null);
 
         //Richard: moved them right. Looks better imo
         g.drawImage(boards[getBoards().get(2)], 68+481 + 2,112, 482, 413, null);
