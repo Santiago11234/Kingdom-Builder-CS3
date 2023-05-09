@@ -997,7 +997,7 @@ public class Game {
         if(!t.isPowerupTile())
             return;
 
-        if(!t.getType().equals(powerupSelected.getType()) {
+        if(!t.getType().equals(powerupSelected.getType())) {
             //Richard: assuming that removal of one tile will only affect one special tile
             PowerUp toRemove = null;
 
