@@ -14,7 +14,7 @@ import java.awt.image.BufferedImage;
 import java.awt.Font;
 import java.awt.Color;
 
-import javax.imageio.*;
+import javax.imageio.ImageIO;
 
 public class EndPanel extends JPanel implements ActionListener{
     private KingdomBuilder frame;

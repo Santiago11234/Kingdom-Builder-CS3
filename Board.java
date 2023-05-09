@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.lang.reflect.Array;
+//import java.lang.reflect.Array;
 
 public class Board {
     private static SmallBoards sm;   //Collection of 10-by-10 Tile arrays. All inputted manually
