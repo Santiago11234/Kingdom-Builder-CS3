@@ -45,7 +45,7 @@ public class Board {
             boards[7] = ImageIO.read(Board.class.getResource("/Images/Board8.png"));
 
         } catch (Exception e) {
-            System.out.println("Kingdom Builder board error");
+            System.out.println("Board error");
         }
         
         setTilePositions();
