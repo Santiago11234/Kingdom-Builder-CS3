@@ -1055,7 +1055,7 @@ public class Game {
                         disable = true;
             }
 
-            if(disable && player.powerups.get(p) != 1)
+            if(disable && player.powerups.get(p) == 0)
                 player.powerups.replace(p, 1);
 
             else if(!disable && player.powerups.get(p) == 1)
