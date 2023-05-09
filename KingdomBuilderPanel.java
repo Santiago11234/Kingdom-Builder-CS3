@@ -248,7 +248,6 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         start();
         arrayOfSpecials = game.getGameBoard().getArrayOfSpecials();
         //iterate through pwrButtons in a for loop and use the x and y properties of the array of specials to set the bounds of the buttons
-        System.out.println(arrayOfSpecials.size() + "hi");
         for (int i = 0; i < arrayOfSpecials.size(); i++) {
             pwrButtons[i].setBounds(arrayOfSpecials.get(i).getX(), arrayOfSpecials.get(i).getY(), Tile.WIDTH, Tile.HEIGHT);
             pwrButtons[i].setContentAreaFilled(false);

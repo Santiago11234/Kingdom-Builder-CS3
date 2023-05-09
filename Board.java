@@ -260,12 +260,10 @@ public class Board {
 
     //iterate through the board looking for tiles that are special
     public void findSpecials(){
-        System.out.println("Process Started");
         for(int i = 0; i < board.length; i++) {
             for(int j = i % 2; j < board[i].length; j += 2) {
                 if(board[i][j].isSpecialTile()){
                     arrayOfSpecials.add(board[i][j]);
-                    System.out.println(arrayOfSpecials.size());
                 }
             }
         }
