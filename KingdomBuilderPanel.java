@@ -181,12 +181,12 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
             tavernExpanded = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/tavernExpanded.jpeg"));
             towerExpanded = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/towerExpanded.jpeg"));
             blankImage = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/blankImage.png"));
-            darkHexOverlay = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/darkHexOverlay.png"));
-            darkHexOverlayWX = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/darkHexOverlayWX.png"));
 
             settlementButtonBlackened = ImageIO.read(KingdomBuilderPanel.class.getResource("Images/Add Settlement Button Blackened.png"));
             endTurnBlackened = ImageIO.read(KingdomBuilderPanel.class.getResource("Images/End Turn Button Blackened.png"));
-
+        } catch (Exception e) {
+            System.out.println("Kingdom Builder panel error");
+        }
 
             obj1Button.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -223,9 +223,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
             
 
-        } catch (Exception e) {
-            System.out.println("Kingdom Builder panel error");
-        }
+        
 
         //?????? Not doing this results in Java cropping it slightly.
         int width = 114;
@@ -262,6 +260,17 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
             pwrButtons[i].setBorderPainted(false);
         }
 
+        /*MouseAdapter test = new MouseAdapter() {
+            public void mouseEntered(MouseEvent e) {
+                specialState = 1;
+                repaint();
+            }
+
+            public void mouseExited(MouseEvent e) {
+                specialState = 0;
+                repaint();
+            }
+        };*/
 
         pwr1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -407,10 +416,6 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
                 repaint();
             }
         });
-
-
-
-
     }
 
     public void start() {
@@ -638,6 +643,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         /*int x = e.getX();
         int y = e.getY();
         board.tileClicked(x,y).setType("red");*/
+
     }
     public void mouseExited(MouseEvent e) {}
 
