@@ -10,7 +10,7 @@ public class PowerUp {
     private static final int SECOND_HIGHEST_POINT_Y = (int)Math.round(14.0 / 55 * HEIGHT);
 
     private static final Polygon sharedHitbox = new Polygon(new int[] {0, WIDTH / 2, WIDTH, WIDTH, WIDTH / 2, 0}, new int[] {SECOND_HIGHEST_POINT_Y, 0, SECOND_HIGHEST_POINT_Y, HEIGHT - SECOND_HIGHEST_POINT_Y, HEIGHT, HEIGHT - SECOND_HIGHEST_POINT_Y}, 6); 
-    private static final BufferedImage[] images = new BufferedImage[10]; 
+    private static final BufferedImage[] images = new BufferedImage[12]; 
 
     private String type;
     private int x;
@@ -29,6 +29,10 @@ public class PowerUp {
             images[7] = ImageIO.read(PowerUp.class.getResource("/Images/Power Up Paddock.png"));
             images[8] = ImageIO.read(PowerUp.class.getResource("/Images/PowerUpDisabled.png"));
             images[9] = ImageIO.read(PowerUp.class.getResource("/Images/PowerUpDisabled2.png"));
+            images[10] = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/darkHexOverlay.png"));
+            images[11] = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/darkHexOverlayWX.png"));
+
+
         }
         catch(Exception e) {
             System.out.println("Power up error");
@@ -64,15 +68,7 @@ public class PowerUp {
 
     //Richard: hitboxes now scuffed. If you want to, you can crop the images
     public void draw(int state, Graphics g) {
-        if(state == 1) {
-            g.drawImage(images[8], x, y, WIDTH, HEIGHT, null);
-            return;
-        }
-
-        if(state == 2) {
-            g.drawImage(images[9], x, y, WIDTH, HEIGHT, null);
-            return;
-        }
+        
         
         switch(type) {
             case "oracle":
@@ -109,6 +105,15 @@ public class PowerUp {
 
             default:
                 System.out.println("Power up type invalid: " + type);
+        }
+        if(state == 1) {
+            g.drawImage(images[11], x, y, WIDTH+50, HEIGHT+50, null);
+            return;
+        }
+
+        if(state == 2) {
+            g.drawImage(images[11], x-25, y-18, WIDTH+47, HEIGHT+36, null);
+            return;
         }
 
         //g.drawPolygon(hitbox);

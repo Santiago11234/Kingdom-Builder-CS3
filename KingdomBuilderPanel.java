@@ -12,6 +12,11 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
+import java.util.concurrent.TimeUnit;
+
+import java.util.Date; 
+
+
 
 
 import java.util.ArrayList;
@@ -56,7 +61,8 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
 
     private BufferedImage blurBG, playerWood,mapWood, settlementWood, player1NameBlock, player2NameBlock, player3NameBlock, player4NameBlock, addSettlementButton, settlementButtonBlackened,
             endTurnButton, endTurnBlackened, settlementCountBlock, deckTextBlock, discardTextBlock,purpleSettlement,yellowSettlement,blueSettlement,redSettlement,player1Small,player2Small,player3Small,player4Small,firstPlayer,
-            barnExpanded, farmExpanded, harborExpanded, oasisExpanded, oracleExpanded, paddockExpanded, tavernExpanded, towerExpanded, blankImage; 
+            barnExpanded, farmExpanded, harborExpanded, oasisExpanded, oracleExpanded, paddockExpanded, tavernExpanded, towerExpanded, blankImage,
+            darkHexOverlay, darkHexOverlayWX; 
 
     public KingdomBuilderPanel(KingdomBuilder kb) {
         setSize(getPreferredSize());
@@ -175,7 +181,8 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
             tavernExpanded = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/tavernExpanded.jpeg"));
             towerExpanded = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/towerExpanded.jpeg"));
             blankImage = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/blankImage.png"));
-
+            darkHexOverlay = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/darkHexOverlay.png"));
+            darkHexOverlayWX = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/darkHexOverlayWX.png"));
 
             settlementButtonBlackened = ImageIO.read(KingdomBuilderPanel.class.getResource("Images/Add Settlement Button Blackened.png"));
             endTurnBlackened = ImageIO.read(KingdomBuilderPanel.class.getResource("Images/End Turn Button Blackened.png"));
@@ -253,8 +260,6 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
             pwrButtons[i].setContentAreaFilled(false);
             pwrButtons[i].setOpaque(false);
             pwrButtons[i].setBorderPainted(false);
-
-
         }
 
 
