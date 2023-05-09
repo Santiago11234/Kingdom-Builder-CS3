@@ -196,7 +196,7 @@ public class Game {
 
     public void mostMoves(int x, int y) {
         //Richard: clicking an unused power up cancels the power up currently used
-        if((powerUpTurnCount == 0  || powerUpTurnCount == 1)&& (settlementPlaying != 1 || settlementPlaying == 1 && settlementCount == 0)) {
+        if((powerUpTurnCount != 3) && (settlementPlaying != 1 || settlementPlaying == 1 && settlementCount == 0)) {
             for(PowerUp p: players[turn].powerups.keySet()) {
                 if(p.clicked(x, y)) {
                     //Richard: clicking this just results in cancellation of settlement playing. Nothing else
@@ -259,9 +259,10 @@ public class Game {
     }
 
     private boolean cancelPowerUpPlay() {
-        if(powerUpTurnCount == 1) {
+        if(powerUpTurnCount == 1 || powerUpTurnCount == 2) {
             powerUpTurnCount = 0;
             powerupSelected = null;
+            tileToRemove = null;
             eligibleTiles.clear();
             return true;
         }
@@ -405,7 +406,7 @@ public class Game {
                 }
         }
 
-        if(powerUpTurnCount >= 2) {
+        if(powerUpTurnCount > 2) {
             panel.setSettlementButton(false);
             panel.setSwitchTurnButton(false);
         }
