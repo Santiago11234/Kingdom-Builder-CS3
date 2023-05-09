@@ -107,12 +107,12 @@ public class PowerUp {
                 System.out.println("Power up type invalid: " + type);
         }
         if(state == 1) {
-            g.drawImage(images[11], x, y, WIDTH+50, HEIGHT+50, null);
+            g.drawImage(images[11], x - 25, y - 18, WIDTH + 47, HEIGHT + 36, null);
             return;
         }
 
         if(state == 2) {
-            g.drawImage(images[11], x-25, y-18, WIDTH+47, HEIGHT+36, null);
+            g.drawImage(images[10], x-25, y-18, WIDTH + 47, HEIGHT + 36, null);
             return;
         }
 
