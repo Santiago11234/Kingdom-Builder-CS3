@@ -250,8 +250,8 @@ public class Board {
         g.drawImage(boards[getBoards().get(1)], 90, 98+414, 482, 413, null);
 
         //Richard: moved them right. Looks better imo
-        g.drawImage(boards[getBoards().get(2)], 68+481 + 2,112, 482, 413, null);
-        g.drawImage(boards[getBoards().get(3)], 68+481 + 2, 98+414, 482, 413, null);
+        g.drawImage(boards[getBoards().get(2)], 68+481 + 0,112, 482, 413, null);
+        g.drawImage(boards[getBoards().get(3)], 68+481 + 0, 98+414, 482, 413, null);
 
         for(int i = 0; i < board.length; i++) {
             for(int j = i % 2; j < board[i].length; j += 2) {
