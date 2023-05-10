@@ -997,23 +997,28 @@ public class Game {
         if(!t.isPowerupTile())
             return;
 
-        //Richard: assuming that removal of one tile will only affect one special tile
-        /*PowerUp toRemove = null;
+        if(!t.getType().equals(powerupSelected.getType())) {
+            //Richard: assuming that removal of one tile will only affect one special tile
+            PowerUp toRemove = null;
 
-        //Richard: removes used power up unless there is no choice
-        for(PowerUp powerUp: p.powerups.keySet())
-            if(powerUp.getType().equals(t.getType())) {
-                toRemove = powerUp;
+            //Richard: removes used power up unless there is no choice
+            for(PowerUp powerUp: p.powerups.keySet())
+                if(powerUp.getType().equals(t.getType())) {
+                    toRemove = powerUp;
 
-                if(p.powerups.get(toRemove) == 2)
-                    break;
-            }
+                    if(p.powerups.get(toRemove) == 2)
+                        break;
+                }
 
-        if(toRemove == null)
-            return;
-        
-        p.powerups.remove(toRemove);*/
-        p.powerups.remove(powerupSelected);
+            if(toRemove == null)
+                return;
+
+            p.powerups.remove(toRemove);
+        }
+        else {
+            p.powerups.remove(powerupSelected);
+        }
+           
         p.updatePowerUpPositions();
     }
 

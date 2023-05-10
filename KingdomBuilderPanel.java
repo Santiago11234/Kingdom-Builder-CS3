@@ -258,6 +258,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
             pwrButtons[i].setContentAreaFilled(false);
             pwrButtons[i].setOpaque(false);
             pwrButtons[i].setBorderPainted(false);
+            pwrButtons[i].setFocusable(false);
         }
 
         /*MouseAdapter test = new MouseAdapter() {
