@@ -11,7 +11,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
+import java.awt.Image;
 import java.util.concurrent.TimeUnit;
 
 import java.util.Date; 
@@ -47,6 +47,8 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
     private JButton pwr11;
     private JButton pwr12;
 
+    JButton returnButtonButton;
+
 
 
     //make an array of the pwr buttons
@@ -62,7 +64,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
     private BufferedImage blurBG, playerWood,mapWood, settlementWood, player1NameBlock, player2NameBlock, player3NameBlock, player4NameBlock, addSettlementButton, settlementButtonBlackened,
             endTurnButton, endTurnBlackened, settlementCountBlock, deckTextBlock, discardTextBlock,purpleSettlement,yellowSettlement,blueSettlement,redSettlement,player1Small,player2Small,player3Small,player4Small,firstPlayer,
             barnExpanded, farmExpanded, harborExpanded, oasisExpanded, oracleExpanded, paddockExpanded, tavernExpanded, towerExpanded, blankImage,
-            darkHexOverlay, darkHexOverlayWX; 
+            darkHexOverlay, darkHexOverlayWX, backToLeaderBoardButton, backToLeaderBoardButtonDark; 
 
     public KingdomBuilderPanel(KingdomBuilder kb) {
         setSize(getPreferredSize());
@@ -147,6 +149,15 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         endTurnButtonButton.setFocusable(false);
         endTurnButtonButton.addActionListener(this);
 
+        returnButtonButton = new JButton("");
+        returnButtonButton.setOpaque(false);
+        returnButtonButton.setContentAreaFilled(false);
+        returnButtonButton.setBorderPainted(false);
+        returnButtonButton.setSize(240, 81);
+        returnButtonButton.setLocation(1220, 2);
+        returnButtonButton.setFocusable(false);
+        returnButtonButton.addActionListener(this);
+
         addMouseListener(this);
 
         try {
@@ -181,6 +192,8 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
             tavernExpanded = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/tavernExpanded.jpeg"));
             towerExpanded = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/towerExpanded.jpeg"));
             blankImage = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/blankImage.png"));
+            backToLeaderBoardButton = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/returnToLeaderBoard.png"));
+            backToLeaderBoardButtonDark = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/returnToLeaderBoardDark.png"));
 
             settlementButtonBlackened = ImageIO.read(KingdomBuilderPanel.class.getResource("Images/Add Settlement Button Blackened.png"));
             endTurnBlackened = ImageIO.read(KingdomBuilderPanel.class.getResource("Images/End Turn Button Blackened.png"));
@@ -238,16 +251,11 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
         endTurnButtonButton.setDisabledIcon(endTurnButtonButton.getRolloverIcon());
         add(endTurnButtonButton);
 
-        returnButton = new JButton("Return To Leaderboard");
-        returnButton.setOpaque(false);
-        returnButton.setContentAreaFilled(true);
-        returnButton.setBorderPainted(false);
-        returnButton.setSize(200, 30);
-        returnButton.setLocation(1237, 45);
-        returnButton.setFocusable(false);
-        returnButton.addActionListener(this);
-        returnButton.setVisible(false);
-        add(returnButton);
+        returnButtonButton.setIcon(new ImageIcon(backToLeaderBoardButton.getScaledInstance(240, 81, Image.SCALE_SMOOTH)));
+        returnButtonButton.setRolloverIcon(new ImageIcon(backToLeaderBoardButtonDark.getScaledInstance(240,81, Image.SCALE_SMOOTH)));
+        returnButtonButton.setVisible(false);
+        add(returnButtonButton);
+        
 
         game = new Game(this);
         start();
@@ -424,7 +432,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
     }
 
     public void restart() {
-        returnButton.setVisible(false);
+        returnButtonButton.setVisible(false);
         start();
     }
 
@@ -438,7 +446,7 @@ public class KingdomBuilderPanel extends JPanel implements ActionListener, Mouse
     }
 
     public void enableReturnButton() {
-        returnButton.setVisible(true);
+        returnButtonButton.setVisible(true);
     }
 
     public void paintComponent(Graphics l) {
